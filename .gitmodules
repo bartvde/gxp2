@@ -1,0 +1,6 @@
+[submodule "externals/geoext2"]
+	path = externals/geoext2
+	url = https://github.com/geoext/geoext2.git
+[submodule "externals/openlayers"]
+	path = externals/openlayers
+	url = https://github.com/openlayers/openlayers.git
