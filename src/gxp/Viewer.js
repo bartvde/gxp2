@@ -164,13 +164,6 @@ Ext.define('gxp.Viewer', {
             }
         }
 
-        // temp for testing
-        var wms = new OpenLayers.Layer.WMS(
-            "OpenLayers WMS",
-            "http://vmap0.tiles.osgeo.org/wms/vmap0?",
-            {layers: 'basic'}
-        );
-
         this.mapPanel = Ext.create('GeoExt.panel.Map', Ext.applyIf({
             map: Ext.applyIf({
                 theme: mapConfig.theme || null,
@@ -190,7 +183,7 @@ Ext.define('gxp.Viewer', {
             center: config.center && new OpenLayers.LonLat(config.center[0], config.center[1]),
             resolutions: config.resolutions,
             forceInitialExtent: true,
-            layers: [new OpenLayers.Layer(null, baseLayerConfig)/*, wms*/],
+            layers: [new OpenLayers.Layer(null, baseLayerConfig)],
             items: this.mapItems,
             plugins: this.mapPlugins,
             tbar: config.tbar || Ext.create('Ext.Toolbar', {

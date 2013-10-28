@@ -18,7 +18,6 @@ Ext.application({
                     source: "ol",
                     type: "OpenLayers.Layer.WMS",
                     args: ["OpenLayers WMS", "http://vmap0.tiles.osgeo.org/wms/vmap0?", {layers: 'basic'}],
-                    visibility: false,
                     group: "background"
                 }]
             }
