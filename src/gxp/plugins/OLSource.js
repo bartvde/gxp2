@@ -37,22 +37,21 @@ Ext.define('gxp.plugins.OLSource', {
                 layer.visibility = config.visibility;
             }
 
-            // create a layer model for this layer
-            Ext.define('gxp.data.OLLayer', {
+            Ext.define('gxp.data.OLLayerModel',{
                 extend: 'GeoExt.data.LayerModel',
                 fields: [
-                    {name: "name", type: "string"},
-                    {name: "source", type: "string"},
-                    {name: "group", type: "string"},
-                    {name: "fixed", type: "boolean"},
-                    {name: "selected", type: "boolean"},
-                    {name: "type", type: "string"},
-                    {name: "args"}
-                ]
+                    {name: "name", type: "string", mapping: 'metadata.name'},
+                    {name: "source", type: "string", mapping: 'metadata.source'},
+                    {name: "group", type: "string", mapping: 'metadata.group'},
+                    {name: "fixed", type: "boolean", mapping: 'metadata.fixed'},
+                    {name: "selected", type: "boolean", mapping: 'metadata.selected'},
+                    {name: "type", type: "string", mapping: 'metadata.type'},
+                    {name: "args", type: "array", mapping: 'metadata.args'},
+                    {name: "properties", type: "string", mapping: 'metadata.properties'}
+               ]
             });
-            var data = {
-                layer: layer,
-                title: layer.name,
+
+            Ext.apply(layer.metadata, {
                 name: config.name || layer.name,
                 source: config.source,
                 group: config.group,
@@ -61,9 +60,8 @@ Ext.define('gxp.plugins.OLSource', {
                 type: config.type,
                 args: config.args,
                 properties: ("properties" in config) ? config.properties : undefined
-            };
-            // TODO other fields
-            record = Ext.create('GeoExt.data.LayerModel', layer);
+            });
+            record = gxp.data.OLLayerModel.createFromLayer(layer);
         } else {
             throw new Error("Cannot construct OpenLayers layer from given type: " + config.type);
         }
