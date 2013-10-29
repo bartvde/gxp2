@@ -2,10 +2,6 @@ Ext.define('gxp.plugins.OLSource', {
     extend: 'gxp.plugins.LayerSource',
     requires: ['GeoExt.data.LayerModel'],
     alias: 'plugin.gxp_olsource',
-    constructor: function(config) {
-        this.mixins.observable.constructor.call(this, config);
-        this.addEvents('ready', 'failure');
-    },
     createLayerRecord: function(config) {
 
         var record;

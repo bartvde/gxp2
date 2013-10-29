@@ -273,5 +273,22 @@ Ext.define('gxp.Viewer', {
             }
         }
         this.createLayerRecordQueue = remaining;
+    },
+    selectLayer: function(record) {
+        record = record || null;
+        var changed = false;
+        var allow = this.fireEvent("beforelayerselectionchange", record);
+        if (allow !== false) {
+            changed = true;
+            if (this.selectedLayer) {
+                this.selectedLayer.set("selected", false);
+            }
+            this.selectedLayer = record;
+            if (this.selectedLayer) {
+                this.selectedLayer.set("selected", true);
+            }
+            this.fireEvent("layerselectionchange", record);
+        }
+        return changed;
     }
 });
