@@ -297,12 +297,16 @@ Ext.define('gxp.Viewer', {
         if (this.initialConfig.tools && this.initialConfig.tools.length > 0) {
             var tool;
             for (var i=0, len=this.initialConfig.tools.length; i<len; i++) {
+                var msg = "Could not create tool plugin with ptype: " + this.initialConfig.tools[i].ptype;
                 try {
                     tool = Ext.PluginManager.create(
                         this.initialConfig.tools[i], this.defaultToolType
                     );
                 } catch (err) {
-                    throw new Error("Could not create tool plugin with ptype: " + this.initialConfig.tools[i].ptype);
+                    throw new Error(msg);
+                }
+                if (tool === null) {
+                    throw new Error(msg);
                 }
                 tool.init(this);
             }
