@@ -59,6 +59,7 @@ Ext.define('gxp.plugins.LayerTree', {
         // TODO restore all of the old functionality
         return {
             xtype: 'treepanel',
+            rootVisible: false,
             store: this.store
         };
     }
