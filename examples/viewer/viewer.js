@@ -2,13 +2,22 @@ Ext.require([
     'Ext.container.Viewport',
     'gxp.Viewer',
     'gxp.plugins.OLSource',
-    'gxp.plugins.WMSSource'
+    'gxp.plugins.WMSSource',
+    'gxp.plugins.WMSGetFeatureInfo'
 ]);
 
 Ext.application({
     name: 'Viewer',
     launch: function() {
         Ext.create('gxp.Viewer', {
+            tools: [{
+                ptype: "gxp_wmsgetfeatureinfo",
+                outputConfig: {
+                    width: 400,
+                    height: 200
+                },
+                toggleGroup: "layertools"
+            }],
             sources: {
                 ol: {
                     ptype: "gxp_olsource"

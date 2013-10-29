@@ -63,12 +63,6 @@ Ext.define('gxp.plugins.OLSource', {
         }
         return record;
     },
-    /** api: method[getConfigForRecord]
-     *  :arg record: :class:`GeoExt.data.LayerRecord`
-     *  :returns: ``Object``
-     *
-     *  Create a config object that can be used to recreate the given record.
-     */
     getConfigForRecord: function(record) {
         // get general config
         var config = this.callParent(arguments);

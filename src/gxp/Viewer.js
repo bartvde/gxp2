@@ -70,6 +70,7 @@ Ext.define('gxp.Viewer', {
     },
     load: function() {
         this.initMapPanel();
+        this.initTools();
         // initialize all layer source plugins
         var config, queue = [];
         for (var key in this.sources) {
@@ -290,5 +291,21 @@ Ext.define('gxp.Viewer', {
             this.fireEvent("layerselectionchange", record);
         }
         return changed;
+    },
+    initTools: function() {
+        this.tools = {};
+        if (this.initialConfig.tools && this.initialConfig.tools.length > 0) {
+            var tool;
+            for (var i=0, len=this.initialConfig.tools.length; i<len; i++) {
+                try {
+                    tool = Ext.PluginManager.create(
+                        this.initialConfig.tools[i], this.defaultToolType
+                    );
+                } catch (err) {
+                    throw new Error("Could not create tool plugin with ptype: " + this.initialConfig.tools[i].ptype);
+                }
+                tool.init(this);
+            }
+        }
     }
 });
