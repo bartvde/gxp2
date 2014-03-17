@@ -63,14 +63,14 @@ Ext.application({
                 layers: [{
                     source: "ol",
                     type: "OpenLayers.Layer.WMS",
-                    args: ["OpenLayers WMS", "http://vmap0.tiles.osgeo.org/wms/vmap0?", {layers: 'basic'}],
+                    args: ["Blue marble", "http://maps.opengeo.org/geowebcache/service/wms", {layers: 'bluemarble'}],
                     group: "background"
                 }, {
                     source: "local",
-                    name: "google:googleflutrends",
-                    title: "Google flu trends",
+                    name: "opengeo:ne_10m_admin_1_states_provinces",
+                    title: "Countries",
+                    bbox: [-20037508.34, -20037508.34, 20037508.34, 20037508.34],
                     queryable: true,
-                    bbox: [-13884991.404203, 2870341.1822503, -7455066.2973878, 6338219.3590349],
                     selected: true
                 }]
             }
