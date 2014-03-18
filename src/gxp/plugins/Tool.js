@@ -91,7 +91,6 @@ Ext.define('gxp.plugins.Tool', {
                   if (!this.target.menus[menuTarget]) {
                       this.target.menus[menuTarget] = Ext.create('Ext.menu.Menu');
                   }
-                  //this.target.menus[menuTarget].add(actions[0]);
                   Ext.getCmp(menuTarget).on('itemcontextmenu', function(view, record, item, index, event, options) {
                       event.preventDefault();
                       this.target.menus[menuTarget].showAt(event.getXY());
@@ -131,10 +130,7 @@ Ext.define('gxp.plugins.Tool', {
                             group: action.initialConfig.toggleGroup,
                             groupClass: null
                         });
-                    } else if (!(ct instanceof Ext.Toolbar)) {
-                        // only Ext.menu.Menu and Ext.Toolbar containers
-                        // support the Action interface. So if our container is
-                        // something else, we create a button with the action.
+                    } else {
                         action = new Ext.Button(action);
                     }
                     var addedAction = (index === null) ? ct.add(action) : ct.insert(index, action);
