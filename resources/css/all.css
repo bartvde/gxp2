@@ -27,3 +27,10 @@
 .x-btn .gxp-icon-pan, .x-tree-node .gxp-icon-pan {
     background-image: url(../img/geosilk/pan.png);
 }
+/* gxp_navigationhistory */
+.x-btn .gxp-icon-zoom-previous, .x-tree-node .gxp-icon-zoom-previous {
+    background-image: url(../img/silk/arrow_left.png);
+}
+.x-btn .gxp-icon-zoom-next, .x-tree-node .gxp-icon-zoom-next {
+    background-image: url(../img/silk/arrow_right.png);
+}

@@ -8,6 +8,7 @@ Ext.require([
     'gxp.plugins.LayerTree',
     'gxp.plugins.ZoomToLayerExtent',
     'gxp.plugins.Navigation',
+    'gxp.plugins.NavigationHistory',
     'gxp.plugins.Zoom'
 ]);
 
@@ -53,6 +54,8 @@ Ext.application({
                 toggleGroup: "navigation",
                 showZoomBoxAction: true,
                 controlOptions: {zoomOnClick: false}
+            }, {
+                ptype: "gxp_navigationhistory"
             }],
             sources: {
                 ol: {
