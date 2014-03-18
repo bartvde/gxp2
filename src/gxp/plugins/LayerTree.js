@@ -1,7 +1,7 @@
 Ext.define('gxp.plugins.LayerTree', {
     extend: 'gxp.plugins.Tool',
     requires: [
-        'Ext.tree.TreePanel',
+        'GeoExt.tree.Panel',
         'Ext.data.TreeStore',
         'GeoExt.data.LayerTreeModel',
         'GeoExt.tree.OverlayLayerContainer',
@@ -12,20 +12,6 @@ Ext.define('gxp.plugins.LayerTree', {
     rootNodeText: "Layers",
     overlayNodeText: "Overlays",
     baseNodeText: "Base Layers",
-    groups: null,
-    defaultGroup: "default",
-    constructor: function(config) {
-        this.callParent(arguments);
-        if (!this.groups) {
-            this.groups = {
-                "default": this.overlayNodeText,
-                "background": {
-                    title: this.baseNodeText,
-                    exclusive: true
-                }
-            };
-        }
-    },
     init: function(target) {
         this.callParent(arguments);
         this.store = Ext.create('Ext.data.TreeStore', {
@@ -34,8 +20,20 @@ Ext.define('gxp.plugins.LayerTree', {
                 expanded: true,
                 text: this.rootNodeText,
                 children: [{
-                    plugins: ['gx_baselayercontainer'],
+                    plugins: [{
+                        ptype: 'gx_layercontainer',
+                        loader: {
+                            baseAttrs: {
+                                checkedGroup: "background"
+                            },
+                            filter: function(record) {
+                                var layer = record.getLayer();
+                                return layer.displayInLayerSwitcher && record.get('group') === 'background';
+                            }
+                        }
+                    }],
                     expanded: true,
+                    filter: 'x',
                     text: this.baseNodeText
                 }, {
                     plugins: ['gx_overlaylayercontainer'],
@@ -45,10 +43,21 @@ Ext.define('gxp.plugins.LayerTree', {
             }
         });
     },
+    handleSelectionChange: function(sm, selected) {
+        var record = selected[0];
+        if (record) {
+            this.target.mapPanel.layers.each(function(rec) {
+                if (rec.getLayer() === record.get('layer')) {
+                    this.target.selectLayer(rec);
+                }
+            }, this);
+        }
+    },
     addOutput: function(config) {
         config = Ext.apply(this.createOutputConfig(), config || {});
         var output = this.callParent([config]);
         output.on({
+            selectionchange: {fn: this.handleSelectionChange},
             itemcontextmenu: {fn: this.handleTreeContextMenu},
             beforemovenode: {fn: this.handleBeforeMoveNode},
             scope: this
@@ -58,7 +67,7 @@ Ext.define('gxp.plugins.LayerTree', {
     createOutputConfig: function() {
         // TODO restore all of the old functionality
         return {
-            xtype: 'treepanel',
+            xtype: 'gx_treepanel',
             rootVisible: false,
             store: this.store
         };

@@ -85,6 +85,12 @@ Ext.define('gxp.plugins.Tool', {
                     index = actionTarget.index;
                     actionTarget = actionTarget.target;
                 }
+                if (actionTarget.indexOf('contextMenu') !== -1) {
+                  Ext.getCmp(actionTarget.split('.')[0]).on('itemcontextmenu', function(view, record, item, index, event, options) {
+                    event.preventDefault();
+                    Ext.create('Ext.menu.Menu', {items: [actions[0]]}).showAt(event.getXY());
+                  });
+                } 
                 ct = this.getContainer(actionTarget);
             }
             for (j=0, jj=a.length; j<jj; ++j) {

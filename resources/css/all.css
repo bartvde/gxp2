@@ -1,4 +1,11 @@
+.gx-tree-radio {
+    background-image: url('http://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/form/radio.png');
+}
 /* gxp_wmsgetfeatureinfo */
 .x-btn .gxp-icon-getfeatureinfo, .x-menu-item .gxp-icon-getfeatureinfo, .x-tree-node .gxp-icon-getfeatureinfo {
     background-image: url(../img/silk/information.png);
+}
+/* gxp_removelayer */
+.x-btn .gxp-icon-removelayers, .x-menu-item .gxp-icon-removelayers, .x-tree-node .gxp-icon-removelayers {
+    background-image: url(../img/silk/delete.png);
 }

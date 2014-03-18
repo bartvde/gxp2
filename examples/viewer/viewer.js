@@ -4,6 +4,7 @@ Ext.require([
     'gxp.plugins.OLSource',
     'gxp.plugins.WMSSource',
     'gxp.plugins.WMSGetFeatureInfo',
+    'gxp.plugins.RemoveLayer',
     'gxp.plugins.LayerTree'
 ]);
 
@@ -35,6 +36,9 @@ Ext.application({
                     tbar: [] // we will add buttons to "tree.bbar" later
                 },
                 outputTarget: "west"
+            }, {
+                ptype: "gxp_removelayer",
+                actionTarget: ["tree.tbar", "tree.contextMenu"]
             }],
             sources: {
                 ol: {
@@ -66,6 +70,11 @@ Ext.application({
                     args: ["Blue marble", "http://maps.opengeo.org/geowebcache/service/wms", {layers: 'bluemarble'}],
                     group: "background"
                 }, {
+                    source: "ol",
+                    type: "OpenLayers.Layer.WMS",
+                    args: ["OpenStreetMap", "http://maps.opengeo.org/geowebcache/service/wms", {layers: 'openstreetmap', format: 'image/png'}],
+                    group: "background"
+                 }, {
                     source: "local",
                     name: "opengeo:ne_10m_admin_1_states_provinces",
                     title: "Countries",
