@@ -5,7 +5,8 @@ Ext.require([
     'gxp.plugins.WMSSource',
     'gxp.plugins.WMSGetFeatureInfo',
     'gxp.plugins.RemoveLayer',
-    'gxp.plugins.LayerTree'
+    'gxp.plugins.LayerTree',
+    'gxp.plugins.ZoomToLayerExtent'
 ]);
 
 Ext.application({
@@ -39,6 +40,9 @@ Ext.application({
             }, {
                 ptype: "gxp_removelayer",
                 actionTarget: ["tree.tbar", "tree.contextMenu"]
+            }, {
+                ptype: "gxp_zoomtolayerextent",
+                actionTarget: ["tree.contextMenu"]
             }],
             sources: {
                 ol: {

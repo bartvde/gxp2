@@ -33,7 +33,6 @@ Ext.define('gxp.plugins.LayerTree', {
                         }
                     }],
                     expanded: true,
-                    filter: 'x',
                     text: this.baseNodeText
                 }, {
                     plugins: ['gx_overlaylayercontainer'],

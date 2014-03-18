@@ -7,7 +7,8 @@ Ext.define('gxp.Viewer', {
         this.mixins.observable.constructor.call(this, config);
         Ext.apply(this, {
             layerSources: {},
-            portalItems: []
+            portalItems: [],
+            menus: {}
         });
 
         // private array of pending getLayerRecord requests

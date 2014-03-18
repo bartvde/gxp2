@@ -78,6 +78,7 @@ Ext.define('gxp.plugins.Tool', {
             this.actionTarget : [this.actionTarget];
         var a = actions instanceof Array ? actions : [actions];
         var action, actionTarget, cmp, i, j, jj, ct, index = null;
+        var menuTarget = null;
         for (i=actionTargets.length-1; i>=0; --i) {
             actionTarget = actionTargets[i];
             if (actionTarget) {
@@ -86,10 +87,15 @@ Ext.define('gxp.plugins.Tool', {
                     actionTarget = actionTarget.target;
                 }
                 if (actionTarget.indexOf('contextMenu') !== -1) {
-                  Ext.getCmp(actionTarget.split('.')[0]).on('itemcontextmenu', function(view, record, item, index, event, options) {
-                    event.preventDefault();
-                    Ext.create('Ext.menu.Menu', {items: [actions[0]]}).showAt(event.getXY());
-                  });
+                  menuTarget = actionTarget.split('.')[0];
+                  if (!this.target.menus[menuTarget]) {
+                      this.target.menus[menuTarget] = Ext.create('Ext.menu.Menu');
+                  }
+                  //this.target.menus[menuTarget].add(actions[0]);
+                  Ext.getCmp(menuTarget).on('itemcontextmenu', function(view, record, item, index, event, options) {
+                      event.preventDefault();
+                      this.target.menus[menuTarget].showAt(event.getXY());
+                  }, this);
                 } 
                 ct = this.getContainer(actionTarget);
             }
@@ -107,6 +113,9 @@ Ext.define('gxp.plugins.Tool', {
                     }
                 }
                 action = a[j];
+                if (menuTarget !== null) {
+                    this.target.menus[menuTarget].add(action);
+                }
                 if (j == this.defaultAction && action instanceof GeoExt.Action) {
                     action.isDisabled() ?
                         action.activateOnEnable = true :
