@@ -34,3 +34,7 @@
 .x-btn .gxp-icon-zoom-next, .x-tree-node .gxp-icon-zoom-next {
     background-image: url(../img/silk/arrow_right.png);
 }
+/* gxp_zoomtoextent */
+.x-btn .gxp-icon-zoomtoextent, .x-tree-node .gxp-icon-zoomtoextent {
+    background-image: url(../img/silk/arrow_inout.png);
+}

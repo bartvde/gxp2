@@ -14,7 +14,6 @@ Ext.define('gxp.plugins.ZoomToExtent', {
     },
     addActions: function() {
         var actions = gxp.plugins.ZoomToExtent.superclass.addActions.call(this, [{
-            text: this.menuText,
             menuText: this.menuText,
             iconCls: this.iconCls,
             tooltip: this.tooltip,

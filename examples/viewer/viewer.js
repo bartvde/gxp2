@@ -6,6 +6,7 @@ Ext.require([
     'gxp.plugins.WMSGetFeatureInfo',
     'gxp.plugins.RemoveLayer',
     'gxp.plugins.LayerTree',
+    'gxp.plugins.ZoomToExtent',
     'gxp.plugins.ZoomToLayerExtent',
     'gxp.plugins.Navigation',
     'gxp.plugins.NavigationHistory',
@@ -30,7 +31,7 @@ Ext.application({
                     width: 400,
                     height: 200
                 },
-                toggleGroup: "layertools"
+                toggleGroup: "navigation"
             }, {
                 ptype: "gxp_layertree",
                 outputConfig: {
@@ -56,6 +57,8 @@ Ext.application({
                 controlOptions: {zoomOnClick: false}
             }, {
                 ptype: "gxp_navigationhistory"
+            }, {
+                ptype: "gxp_zoomtoextent"
             }],
             sources: {
                 ol: {
