@@ -1,5 +1,5 @@
 .gx-tree-radio {
-    background-image: url('http://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/form/radio.png');
+    background-image: url('http://cdn.sencha.com/ext/gpl/4.2.1/resources/ext-theme-neptune/images/form/radio.png');
 }
 /* gxp_wmsgetfeatureinfo */
 .x-btn .gxp-icon-getfeatureinfo, .x-menu-item .gxp-icon-getfeatureinfo, .x-tree-node .gxp-icon-getfeatureinfo {
@@ -37,4 +37,56 @@
 /* gxp_zoomtoextent */
 .x-btn .gxp-icon-zoomtoextent, .x-tree-node .gxp-icon-zoomtoextent {
     background-image: url(../img/silk/arrow_inout.png);
+}
+/* position the zoom slider within map panel */
+.gx-zoomslider {
+    top: 90px !important;
+    left: 21px !important;
+}
+/* Pan- and Zoom- Panel Styles*/
+.olControlPanPanel div {
+    background-image:url(http://cdn.sencha.com/ext/gpl/4.2.1/resources/ext-theme-neptune/images/tools/tool-sprites-dark.png);
+    height:16px;
+    width:16px;
+    /* workaround for button height in IE */
+    font-size:0px;
+}
+.olControlPanPanel .olControlPanNorthItemInactive {
+    background-position:16px -64px;
+    left:16px
+}
+.olControlPanPanel .olControlPanEastItemInactive {
+    background-position:16px -112px;
+    left: 30px;
+    top: 16px;
+}
+.olControlPanPanel .olControlPanSouthItemInactive {
+    background-position:16px -80px;
+    left: 16px;
+    top: 32px;
+}
+.olControlPanPanel .olControlPanWestItemInactive {
+    background-position:16px -128px;
+    left: 2px;
+    top: 16px;
+}
+.olControlZoomPanel {
+    left:21px;
+}
+.olControlZoomPanel div {
+    background-image:url(http://cdn.sencha.com/ext/gpl/4.2.1/resources/ext-theme-neptune/images/tools/tool-sprites-dark.png);
+    height:16px;
+    width:16px;
+    /* workaround for button height in IE */
+    font-size:0px;
+}
+.olControlZoomPanel .olControlZoomInItemInactive {
+    background-position:16px -256px;
+}
+.olControlZoomPanel .olControlZoomToMaxExtentItemInactive {
+    display: none;
+}
+.olControlZoomPanel .olControlZoomOutItemInactive {
+    background-position:16px -272px;
+    top: 123px;
 }

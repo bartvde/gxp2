@@ -1,5 +1,7 @@
 Ext.require([
     'Ext.container.Viewport',
+    'GeoExt.slider.Tip',
+    'GeoExt.slider.Zoom',
     'gxp.Viewer',
     'gxp.plugins.OLSource',
     'gxp.plugins.WMSSource',
@@ -81,11 +83,6 @@ Ext.application({
                 maxExtent: [-20037508.34, -20037508.34, 20037508.34, 20037508.34],
                 center: [-10764594.758211, 4523072.3184791],
                 zoom: 3,
-                controls: [
-                    new OpenLayers.Control.Zoom(),
-                    new OpenLayers.Control.Attribution(),
-                    new OpenLayers.Control.Navigation()
-                ],
                 layers: [{
                     source: "ol",
                     type: "OpenLayers.Layer.WMS",
@@ -103,6 +100,21 @@ Ext.application({
                     bbox: [-20037508.34, -20037508.34, 20037508.34, 20037508.34],
                     queryable: true,
                     selected: true
+                }],
+                items: [{
+                    xtype: "gx_zoomslider",
+                    vertical: true,
+                    height: 100,
+                    maxHeight: 100,
+                    plugins: Ext.create('GeoExt.slider.Tip', {
+                        getText: function(thumb) {
+                             return Ext.String.format( 
+                                 '<div>Zoom Level: {0}</div><div>Scale: 1:{1}</div>',
+                                 thumb.slider.getZoom(),
+                                 thumb.slider.getScale()
+                             );
+                        }
+                    })
                 }]
             }
         });
