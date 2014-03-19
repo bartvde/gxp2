@@ -17,21 +17,23 @@ Ext.application({
     name: 'Viewer',
     launch: function() {
         Ext.create('gxp.Viewer', {
-            portalItems: ['mymap', {
+            portalItems: [{region: 'center', layout: 'border', tbar: {id: 'paneltbar'}, items: ['mymap', {
                 region: 'west',
                 id: 'west',
                 title: "Layers",
                 layout: 'fit',
                 split: true,
                 width: 250
-            }],
+            }]}],
             tools: [{
                 ptype: "gxp_wmsgetfeatureinfo",
+                showButtonText: true,
                 outputConfig: {
                     width: 400,
                     height: 200
                 },
-                toggleGroup: "navigation"
+                toggleGroup: "navigation",
+                actionTarget: 'paneltbar'
             }, {
                 ptype: "gxp_layertree",
                 outputConfig: {

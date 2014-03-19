@@ -12,9 +12,10 @@ Ext.define('gxp.plugins.WMSGetFeatureInfo', {
         this.popupCache = {};
 
         var actions = gxp.plugins.WMSGetFeatureInfo.superclass.addActions.call(this, [{
+            showButtonText: this.showButtonText,
             tooltip: this.infoActionTip,
             iconCls: "gxp-icon-getfeatureinfo",
-            buttonText: this.buttonText,
+            text: this.buttonText,
             toggleGroup: this.toggleGroup,
             enableToggle: true,
             allowDepress: true,
