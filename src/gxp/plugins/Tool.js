@@ -1,6 +1,6 @@
 Ext.define('gxp.plugins.Tool', {
     alias: 'plugin.gxp_tool',
-    requires: ['Ext.Action'],
+    requires: ['Ext.Action', 'gxp.button.IconButton'],
     actionTarget: "map.tbar",
     showButtonText: false,
     output: null,
@@ -121,9 +121,6 @@ Ext.define('gxp.plugins.Tool', {
                         action.control.activate();
                 }
                 if (ct) {
-                    if (this.showButtonText) {
-                        action.setText(action.initialConfig.buttonText);
-                    }
                     if (ct instanceof Ext.menu.Menu) {
                         action = Ext.apply(new Ext.menu.CheckItem(action), {
                             text: action.initialConfig.menuText,
@@ -131,7 +128,11 @@ Ext.define('gxp.plugins.Tool', {
                             groupClass: null
                         });
                     } else {
-                        action = new Ext.Button(action);
+                        if (this.showButtonText) {
+                            action = new Ext.Button(action);
+                        } else {
+                            action = new gxp.button.IconButton(action);
+                        }
                     }
                     var addedAction = (index === null) ? ct.add(action) : ct.insert(index, action);
                     action = action instanceof Ext.Button ? action : addedAction;
