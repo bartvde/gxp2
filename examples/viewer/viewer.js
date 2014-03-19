@@ -12,7 +12,8 @@ Ext.require([
     'gxp.plugins.ZoomToLayerExtent',
     'gxp.plugins.Navigation',
     'gxp.plugins.NavigationHistory',
-    'gxp.plugins.Zoom'
+    'gxp.plugins.Zoom',
+    'gxp.panel.ScaleOverlay'
 ]);
 
 Ext.application({
@@ -102,6 +103,8 @@ Ext.application({
                     selected: true
                 }],
                 items: [{
+                    xtype: "gxp_scaleoverlay"
+                }, {
                     xtype: "gx_zoomslider",
                     vertical: true,
                     height: 100,

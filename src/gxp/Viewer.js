@@ -167,6 +167,7 @@ Ext.define('gxp.Viewer', {
         }
 
         this.mapPanel = Ext.create('GeoExt.panel.Map', Ext.applyIf({
+            layout: "border",
             map: Ext.applyIf({
                 theme: mapConfig.theme || null,
                 controls: mapConfig.controls || [
