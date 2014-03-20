@@ -36,6 +36,7 @@ Ext.define('gxp.panel.ScaleOverlay', {
     },
     addScaleLine: function() {
         var scaleLinePanel = Ext.create('Ext.Component', {
+            width: 90,
             autoEl: {
                 tag: "div",
                 cls: "olControlScaleLine overlay-element overlay-scaleline"

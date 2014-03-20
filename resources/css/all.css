@@ -92,6 +92,7 @@
 }
 /* gxp_scaleoverlay */
 div.map-overlay {
+    overflow: auto !important;
     z-index: 1000;
     position: absolute;
     left: auto !important;
