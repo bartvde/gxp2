@@ -94,8 +94,10 @@
 div.map-overlay {
     z-index: 1000;
     position: absolute;
-    right: 10px;
-    bottom: 10px;
+    left: auto !important;
+    top: auto !important;
+    right: 10px !important;
+    bottom: 10px !important;
 }
 div.map-overlay div.overlay-element {
     display:inline;
