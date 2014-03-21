@@ -129,7 +129,9 @@ Ext.define('gxp.plugins.Tool', {
                         });
                     } else {
                         if (this.showButtonText) {
-                            action = new Ext.Button(action);
+                            if (!(action instanceof Ext.Button)) {
+                                action = new Ext.Button(action);
+                            }
                         } else {
                             action = new gxp.button.IconButton(action);
                         }

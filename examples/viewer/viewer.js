@@ -13,6 +13,7 @@ Ext.require([
     'gxp.plugins.Navigation',
     'gxp.plugins.NavigationHistory',
     'gxp.plugins.Zoom',
+    'gxp.plugins.Measure',
     'gxp.panel.ScaleOverlay'
 ]);
 
@@ -35,8 +36,13 @@ Ext.application({
                     width: 400,
                     height: 200
                 },
-                toggleGroup: "navigation",
+                toggleGroup: "interaction",
                 actionTarget: 'paneltbar'
+            }, {
+                ptype: "gxp_measure", toggleGroup: "interaction",
+                controlOptions: {immediate: true},
+                showButtonText: true,
+                actionTarget: "paneltbar"
             }, {
                 ptype: "gxp_layertree",
                 outputConfig: {
