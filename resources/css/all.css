@@ -116,3 +116,16 @@ div.map-overlay div.overlay-element {
 .x-btn .gxp-icon-measure-area, .x-menu-item .gxp-icon-measure-area, .x-tree-node .gxp-icon-measure-area {
    background-image: url(../img/geosilk/ruler_square.png) !important;
 }
+/* gxp_cataloguesearch */
+.x-action-col, .gxp-icon-addlayers {
+    background-image: url(../img/silk/add.png);
+    width: 16px;
+    height: 16px;
+}
+/* gxp_addlayers */
+.x-btn .gxp-icon-addlayers, .x-menu-item .gxp-icon-addlayers, .x-tree-node .gxp-icon-addlayers {
+    background-image: url(../img/silk/add.png);
+}
+.x-btn .gxp-icon-addserver {
+    background-image: url(../img/silk/server_add.png);
+}

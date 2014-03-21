@@ -8,6 +8,7 @@ Ext.define('gxp.plugins.Tool', {
         observable: 'Ext.util.Observable'
     },
     constructor: function(config) {
+        this.initConfig(config);
         this.mixins.observable.constructor.call(this, config);
         this.addEvents('activate', 'deactivate');
         this.active = false;
@@ -180,7 +181,7 @@ Ext.define('gxp.plugins.Tool', {
             }
         } else {
             var outputConfig = this.outputConfig || {};
-            container = new Ext.Window(Ext.apply({
+            container = Ext.Create('Ext.Window', Ext.apply({
                 hideBorders: true,
                 shadow: false,
                 closeAction: "hide",

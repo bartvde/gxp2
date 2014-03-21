@@ -313,6 +313,47 @@ Ext.define('gxp.Viewer', {
                 tool.init(this);
             }
         }
+    },
+    isAuthorized: function(roles) {
+        /**
+         * If the application doesn't support authentication, we expect
+         * authorizedRoles to be undefined.  In this case, from the UI
+         * perspective, we treat the user as if they are authorized to do
+         * anything.  This will result in just-in-time authentication challenges
+         * from the browser where authentication credentials are needed.
+         * If the application does support authentication, we expect
+         * authorizedRoles to be a list of roles for which the user is
+         * authorized.
+         */
+        var authorized = true;
+        if (this.authorizedRoles) {
+            authorized = false;
+            if (!roles) {
+                roles = "ROLE_ADMINISTRATOR";
+            }
+            if (!Ext.isArray(roles)) {
+                roles = [roles];
+            }
+            for (var i=roles.length-1; i>=0; --i) {
+                if (~this.authorizedRoles.indexOf(roles[i])) {
+                    authorized = true;
+                    break;
+                }
+            }
+        }
+        return authorized;
+    },
+    doAuthorized: function(roles, callback, scope) {
+        if (this.isAuthorized(roles) || !this.authenticate) {
+            window.setTimeout(function() { callback.call(scope); }, 0);
+        } else {
+            this.authenticate();
+            this._authFn = function authFn() {
+                delete this._authFn;
+                this.doAuthorized(roles, callback, scope, true);
+            };
+            this.on("authorizationchange", this._authFn, this, {single: true});
+        }
     }
 });
 

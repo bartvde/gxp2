@@ -68,11 +68,11 @@ Ext.define('gxp.plugins.WMSSource', {
                     // is read (http://trac.geoext.org/ticket/295).
                     // Until this changes, we duck type a bad capabilities
                     // object and fire failure if found.
-                    if (!this.store.reader.raw || !this.store.reader.raw.service) {
+                    if (!this.store.proxy.reader.raw || !this.store.proxy.reader.raw.service) {
                         this.fireEvent("failure", this, "Invalid capabilities document.");
                     } else {
                         if (!this.title) {
-                            this.title = this.store.reader.raw.service.title;
+                            this.title = this.store.proxy.reader.raw.service.title;
                         }
                         if (!this.ready) {
                             this.ready = true;
@@ -203,7 +203,7 @@ Ext.define('gxp.plugins.WMSSource', {
         if (index > -1) {
             original = this.store.getAt(index);
         } else if (Ext.isObject(config.capability)) {
-            original = this.store.reader.readRecords({capability: {
+            original = this.store.proxy.reader.readRecords({capability: {
                 request: {getmap: {href: this.trimUrl(this.url, this.baseParams)}},
                 layers: [config.capability]}
             }).records[0];
@@ -329,7 +329,7 @@ Ext.define('gxp.plugins.WMSSource', {
         return compatibleProjection;
     },
     initDescribeLayerStore: function() {
-        var raw = this.store.reader.raw;
+        var raw = this.store.proxy.reader.raw;
         if (this.lazy) {
             // When lazy, we assume that the server supports a DescribeLayer
             // request at the layer's url.
@@ -499,7 +499,7 @@ Ext.define('gxp.plugins.WMSSource', {
             params = layer.params,
             options = layer.options;
         var name = config.name,
-            raw = this.store.reader.raw;
+            raw = this.store.proxy.reader.raw;
         if (raw) {
             var capLayers = raw.capability.layers;
             for (var i=capLayers.length-1; i>=0; --i) {

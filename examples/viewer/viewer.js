@@ -14,6 +14,7 @@ Ext.require([
     'gxp.plugins.NavigationHistory',
     'gxp.plugins.Zoom',
     'gxp.plugins.Measure',
+    'gxp.plugins.AddLayers',
     'gxp.panel.ScaleOverlay'
 ]);
 
@@ -52,6 +53,18 @@ Ext.application({
                     tbar: [] // we will add buttons to "tree.bbar" later
                 },
                 outputTarget: "west"
+            }, {
+                ptype: "gxp_addlayers",
+                actionTarget: "tree.tbar",
+                outputTarget: "tree"/*,
+                uploadSource: "local",
+                postUploadAction: {
+                    plugin: "styler"
+                },
+                catalogSourceKey: "local",
+                search: {
+                    selectedSource: "csw"
+                }*/
             }, {
                 ptype: "gxp_removelayer",
                 actionTarget: ["tree.tbar", "tree.contextMenu"]
