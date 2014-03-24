@@ -20,6 +20,10 @@ Ext.define('gxp.plugins.LayerTree', {
                 expanded: true,
                 text: this.rootNodeText,
                 children: [{
+                    plugins: ['gx_overlaylayercontainer'],
+                    expanded: true,
+                    text: this.overlayNodeText
+                }, {
                     plugins: [{
                         ptype: 'gx_layercontainer',
                         loader: {
@@ -34,10 +38,6 @@ Ext.define('gxp.plugins.LayerTree', {
                     }],
                     expanded: true,
                     text: this.baseNodeText
-                }, {
-                    plugins: ['gx_overlaylayercontainer'],
-                    expanded: true,
-                    text: this.overlayNodeText
                 }]
             }
         });
