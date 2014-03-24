@@ -109,7 +109,7 @@ Ext.define('gxp.plugins.Tool', {
                         if (j == this.defaultAction) {
                             a[j].pressed = true;
                         }
-                        a[j] = new Ext.Action(a[j]);
+                        a[j] = Ext.create('Ext.Action', a[j]);
                     }
                 }
                 action = a[j];
@@ -123,7 +123,7 @@ Ext.define('gxp.plugins.Tool', {
                 }
                 if (ct) {
                     if (ct instanceof Ext.menu.Menu) {
-                        action = Ext.apply(new Ext.menu.CheckItem(action), {
+                        action = Ext.apply(Ext.create('Ext.menu.CheckItem', action), {
                             text: action.initialConfig.menuText,
                             group: action.initialConfig.toggleGroup,
                             groupClass: null
@@ -131,10 +131,10 @@ Ext.define('gxp.plugins.Tool', {
                     } else {
                         if (this.showButtonText) {
                             if (!(action instanceof Ext.Button)) {
-                                action = new Ext.Button(action);
+                                action = Ext.create('Ext.Button', action);
                             }
                         } else {
-                            action = new gxp.button.IconButton(action);
+                            action = Ext.create('gxp.button.IconButton', action);
                         }
                     }
                     var addedAction = (index === null) ? ct.add(action) : ct.insert(index, action);

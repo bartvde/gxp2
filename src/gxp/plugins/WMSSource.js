@@ -1,6 +1,6 @@
 Ext.define('gxp.plugins.WMSSource', {
     extend: 'gxp.plugins.LayerSource',
-    requires: ['GeoExt.data.WmsCapabilitiesLayerStore', 'GeoExt.data.LayerModel'],
+    requires: ['GeoExt.data.AttributeStore', 'GeoExt.data.WmsCapabilitiesLayerStore', 'GeoExt.data.LayerModel'],
     alias: 'plugin.gxp_wmssource',
     requiredProperties: ["title", "bbox"],
     constructor: function(config) {
@@ -426,7 +426,7 @@ Ext.define('gxp.plugins.WMSSource', {
                 callback.call(scope, schema);
             }
         } else {
-            schema = new GeoExt.data.AttributeStore({
+            schema = Ext.create('GeoExt.data.AttributeStore', {
                 url: url,
                 baseParams: {
                     SERVICE: "WFS",

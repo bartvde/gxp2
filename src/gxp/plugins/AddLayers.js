@@ -49,7 +49,7 @@ Ext.define('gxp.plugins.AddLayers', {
         };
         var options, uploadButton;
         if (this.initialConfig.search || (this.uploadSource)) {
-            var items = [new Ext.menu.Item({
+            var items = [Ext.create('Ext.menu.Item', {
                 iconCls: 'gxp-icon-addlayers',
                 text: this.addActionMenuText,
                 handler: this.showCapabilitiesGrid,
@@ -57,7 +57,7 @@ Ext.define('gxp.plugins.AddLayers', {
             })];
             if (this.initialConfig.search && this.initialConfig.search.selectedSource &&
               this.target.sources[this.initialConfig.search.selectedSource]) {
-                var search = new Ext.menu.Item({
+                var search = Ext.create('Ext.menu.Item', {
                     iconCls: 'gxp-icon-addlayers',
                     text: this.findActionMenuText,
                     handler: this.showCatalogueSearch,
@@ -75,7 +75,7 @@ Ext.define('gxp.plugins.AddLayers', {
                 });
             }
             if (this.initialConfig.feeds) {
-                items.push(new Ext.menu.Item({
+                items.push(Ext.create('Ext.menu.Item', {
                     iconCls: 'gxp-icon-addlayers',
                     text: this.addFeedActionMenuText,
                     handler: this.showFeedDialog,
@@ -89,7 +89,7 @@ Ext.define('gxp.plugins.AddLayers', {
                 }
             }
             options = Ext.apply(commonOptions, {
-                menu: new Ext.menu.Menu({
+                menu: Ext.create('Ext.menu.Menu', {
                     items: items
                 })
             });
@@ -181,7 +181,7 @@ Ext.define('gxp.plugins.AddLayers', {
     showFeedDialog: function() {
         if(!this.feedDialog) {
             var Cls = this.outputTarget ? Ext.Panel : Ext.Window;
-            this.feedDialog = new Cls(Ext.apply({
+            this.feedDialog = Ext.create(Cls, Ext.apply({
                 closeAction: "hide",
                 autoScroll: true,
                 title: this.addFeedActionMenuText,
@@ -221,7 +221,7 @@ Ext.define('gxp.plugins.AddLayers', {
                 data.push([id, source.title || id, source.url]);
             }
         }
-        var sources = new Ext.data.ArrayStore({
+        var sources = Ext.create('Ext.data.ArrayStore', {
             fields: ["id", "title", "url"],
             data: data
         });
@@ -280,7 +280,7 @@ Ext.define('gxp.plugins.AddLayers', {
             }
         });
 
-        var sourceComboBox = new Ext.form.ComboBox({
+        var sourceComboBox = Ext.create('Ext.form.ComboBox', {
             ref: "../../sourceComboBox",
             width: 165,
             store: sources,
@@ -327,10 +327,10 @@ Ext.define('gxp.plugins.AddLayers', {
             container;
 
         if (this.target.proxy || data.length > 1) {
-            container = new Ext.Container({
+            container = Ext.create('Ext.Container', {
                 cls: 'gxp-addlayers-sourceselect',
                 items: [
-                    new Ext.Toolbar.TextItem({text: this.layerSelectionText}),
+                    Ext.create('Ext.Toolbar.TextItem', {text: this.layerSelectionText}),
                     sourceComboBox
                 ]
             });
@@ -368,7 +368,7 @@ Ext.define('gxp.plugins.AddLayers', {
                         config: {url: url, ptype: ptype},
                         callback: function(id) {
                             // add to combo and select
-                            var record = new sources.recordType({
+                            var record = Ext.create(sources.recordType, {
                                 id: id,
                                 title: this.target.layerSources[id].title || this.untitledText
                             });
@@ -378,7 +378,7 @@ Ext.define('gxp.plugins.AddLayers', {
                         },
                         fallback: function(source, msg) {
                             newSourceDialog.setError(
-                                new Ext.Template(this.addLayerSourceErrorText).apply({type: type, msg: msg})
+                                Ext.create('Ext.Template', this.addLayerSourceErrorText).apply({type: type, msg: msg})
                             );
                         },
                         scope: this
@@ -392,7 +392,7 @@ Ext.define('gxp.plugins.AddLayers', {
             if (me.outputTarget) {
                 me.addOutput(newSourceDialog);
             } else {
-                new Ext.Window({
+                Ext.create('Ext.Window', {
                     title: gxp.NewSourceDialog.prototype.title,
                     modal: true,
                     hideBorders: true,
@@ -425,13 +425,13 @@ Ext.define('gxp.plugins.AddLayers', {
 
         var bbarItems = [
             "->",
-            new Ext.Button({
+            Ext.create('Ext.Button', {
                 text: this.addButtonText,
                 iconCls: "gxp-icon-addlayers",
                 handler: addLayers,
                 scope : this
             }),
-            new Ext.Button({
+            Ext.create('Ext.Button', {
                 text: this.doneText,
                 handler: function() {
                     this.capGrid.hide();
@@ -563,13 +563,13 @@ Ext.define('gxp.plugins.AddLayers', {
             if (typeof uploadConfig === "boolean") {
                 uploadConfig = {};
             }
-            button = new Cls({
+            button = Ext.create(Cls, {
                 text: this.uploadText,
                 iconCls: "gxp-icon-filebrowse",
                 hidden: !this.uploadSource,
                 handler: function() {
                     this.target.doAuthorized(this.uploadRoles, function() {
-                        var panel = new gxp.LayerUploadPanel(Ext.apply({
+                        var panel = Ext.create('gxp.LayerUploadPanel', Ext.apply({
                             title: this.outputTarget ? this.uploadText : undefined,
                             url: url,
                             width: 300,
@@ -645,7 +645,7 @@ Ext.define('gxp.plugins.AddLayers', {
                         if (this.outputTarget) {
                             this.addOutput(panel);
                         } else {
-                            win = new Ext.Window({
+                            win = Ext.create('Ext.Window', {
                                 title: this.uploadText,
                                 modal: true,
                                 resizable: false,
@@ -712,8 +712,8 @@ Ext.define('gxp.plugins.AddLayers', {
         );
     },
     createExpander: function() {
-        return new Ext.grid.plugin.RowExpander({
-            rowBodyTpl: new Ext.Template(this.expanderTemplateText)
+        return Ext.create('Ext.grid.plugin.RowExpander', {
+            rowBodyTpl: Ext.create('Ext.Template', this.expanderTemplateText)
         });
     }
 });

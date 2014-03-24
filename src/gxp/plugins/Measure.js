@@ -134,7 +134,7 @@ Ext.define('gxp.plugins.Measure', {
             },
             menu: Ext.create('Ext.menu.Menu', {
                 items: [
-                    new Ext.create('Ext.menu.CheckItem',
+                    Ext.create('Ext.menu.CheckItem',
                         Ext.create('GeoExt.Action', {
                             text: this.lengthMenuText,
                             iconCls: "gxp-icon-measure-length",
@@ -156,7 +156,7 @@ Ext.define('gxp.plugins.Measure', {
                             )
                         })
                     ),
-                    new Ext.create('Ext.menu.CheckItem',
+                    Ext.create('Ext.menu.CheckItem',
                         Ext.create('GeoExt.Action', {
                             text: this.areaMenuText,
                             iconCls: "gxp-icon-measure-area",
