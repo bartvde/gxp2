@@ -288,7 +288,8 @@ Ext.define('gxp.plugins.AddLayers', {
             store: sources,
             valueField: "id",
             displayField: "title",
-            tpl: '<tpl for="."><div ext:qtip="{url}" class="x-combo-list-item">{title}</div></tpl>',
+            /* TODO update tpl to show title */
+            tpl_: '<tpl for="."><div ext:qtip="{url}" class="x-combo-list-item">{title}</div></tpl>',
             triggerAction: "all",
             editable: false,
             allowBlank: false,
@@ -296,7 +297,8 @@ Ext.define('gxp.plugins.AddLayers', {
             mode: "local",
             value: data[idx][0],
             listeners: {
-                select: function(combo, record, index) {
+                select: function(combo, records, index) {
+                    var record = records[0];
                     var id = record.get("id");
                     if (id === this.addServerId) {
                         showNewSourceDialog();
@@ -304,17 +306,14 @@ Ext.define('gxp.plugins.AddLayers', {
                         return;
                     }
                     var source = this.target.layerSources[id];
-                    capGridPanel.reconfigure(source.store, capGridPanel.getColumnModel());
-                    // TODO: remove the following when this Ext issue is addressed
-                    // http://www.extjs.com/forum/showthread.php?100345-GridPanel-reconfigure-should-refocus-view-to-correct-scroller-height&p=471843
-                    capGridPanel.getView().focusRow(0);
+                    capGridPanel.reconfigure(source.store, capGridPanel.initialConfig.columns);
                     this.setSelectedSource(source);
                     // blur the combo box
                     //TODO Investigate if there is a more elegant way to do this.
-                    (function() {
+                    Ext.Function.defer(function() {
                         combo.triggerBlur();
                         combo.el.blur();
-                    }).defer(100);
+                    }, 100);
                 },
                 focus: function(field) {
                     if (target.proxy) {

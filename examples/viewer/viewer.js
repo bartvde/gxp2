@@ -15,6 +15,7 @@ Ext.require([
     'gxp.plugins.Zoom',
     'gxp.plugins.Measure',
     'gxp.plugins.AddLayers',
+    'gxp.plugins.MapQuestSource',
     'gxp.panel.ScaleOverlay'
 ]);
 
@@ -92,6 +93,9 @@ Ext.application({
                     ptype: "gxp_wmssource",
                     url: "/geoserver/wms",
                     version: "1.1.1"
+                },
+                mapquest: {
+                    ptype: "gxp_mapquestsource"
                 }
             },
             map: {

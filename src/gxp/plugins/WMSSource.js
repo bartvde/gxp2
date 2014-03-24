@@ -61,6 +61,13 @@ Ext.define('gxp.plugins.WMSSource', {
             baseParams: baseParams,
             format: this.format,
             autoLoad: !lazy,
+            proxy: {
+                type: 'ajax',
+                reader: {
+                    type: 'gx_wmscapabilities',
+                    keepRaw: true
+                }
+            },
             layerParams: {exceptions: null},
             listeners: {
                 load: function() {
