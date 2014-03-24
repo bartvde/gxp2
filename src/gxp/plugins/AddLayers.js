@@ -274,9 +274,11 @@ Ext.define('gxp.plugins.AddLayers', {
                 {id: "title", header: this.panelTitleText, dataIndex: "title", sortable: true},
                 {header: "Id", dataIndex: "name", width: 120, sortable: true}
             ],
-            listeners: {
-                rowdblclick: addLayers,
-                scope: this
+            viewConfig: {
+                listeners: {
+                    itemdblclick: addLayers,
+                    scope: this
+                }
             }
         });
 
