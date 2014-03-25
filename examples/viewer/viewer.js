@@ -19,6 +19,7 @@ Ext.require([
     'gxp.plugins.BingSource',
     'gxp.plugins.GoogleSource',
     'gxp.plugins.OSMSource',
+    'gxp.plugins.MapBoxSource',
     'gxp.panel.ScaleOverlay'
 ]);
 
@@ -108,6 +109,9 @@ Ext.application({
                 },
                 osm: {
                     ptype: "gxp_osmsource"
+                },
+                mapbox: {
+                    ptype: "gxp_mapboxsource"
                 }
             },
             map: {
