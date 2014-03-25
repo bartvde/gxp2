@@ -1,3 +1,6 @@
+.olMapViewport {
+    background-color: white;
+}
 .gx-tree-radio {
     background-image: url('http://cdn.sencha.com/ext/gpl/4.2.1/resources/ext-theme-neptune/images/form/radio.png');
 }

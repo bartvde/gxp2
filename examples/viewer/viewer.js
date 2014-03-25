@@ -102,28 +102,22 @@ Ext.application({
                 id: 'mymap',
                 region: 'center',
                 title: "Map",
-                projection: "EPSG:900913",
-                units: "m",
-                maxExtent: [-20037508.34, -20037508.34, 20037508.34, 20037508.34],
-                center: [-10764594.758211, 4523072.3184791],
-                zoom: 3,
+                projection: "EPSG:102113",
+                center: [0, 0],
+                zoom: 2,
                 layers: [{
-                    source: "ol",
-                    type: "OpenLayers.Layer.WMS",
-                    args: ["Blue marble", "http://maps.opengeo.org/geowebcache/service/wms", {layers: 'bluemarble'}],
+                    source: "mapquest",
+                    title: "MapQuest OpenStreetMap",
+                    name: "osm",
                     group: "background"
                 }, {
                     source: "ol",
-                    type: "OpenLayers.Layer.WMS",
-                    args: ["OpenStreetMap", "http://maps.opengeo.org/geowebcache/service/wms", {layers: 'openstreetmap', format: 'image/png'}],
-                    group: "background"
-                 }, {
-                    source: "local",
-                    name: "opengeo:ne_10m_admin_1_states_provinces",
-                    title: "Countries",
-                    bbox: [-20037508.34, -20037508.34, 20037508.34, 20037508.34],
-                    queryable: true,
-                    selected: true
+                    group: "background",
+                    fixed: true,
+                    type: "OpenLayers.Layer",
+                    args: [
+                        "None", {visibility: false}
+                    ]
                 }],
                 items: [{
                     xtype: "gxp_scaleoverlay"
