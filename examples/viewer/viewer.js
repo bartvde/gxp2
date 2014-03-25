@@ -16,6 +16,7 @@ Ext.require([
     'gxp.plugins.Measure',
     'gxp.plugins.AddLayers',
     'gxp.plugins.MapQuestSource',
+    'gxp.plugins.BingSource',
     'gxp.panel.ScaleOverlay'
 ]);
 
@@ -96,6 +97,9 @@ Ext.application({
                 },
                 mapquest: {
                     ptype: "gxp_mapquestsource"
+                },
+                bing: {
+                    ptype: "gxp_bingsource"
                 }
             },
             map: {

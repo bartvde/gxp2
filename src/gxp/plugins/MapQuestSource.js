@@ -69,7 +69,6 @@ Ext.define('gxp.plugins.MapQuestSource', {
         });
         this.store.each(function(l) {
             l.set("group", "background");
-            l.set("name", l.getLayer().type);
         });
         this.fireEvent("ready", this);
 
