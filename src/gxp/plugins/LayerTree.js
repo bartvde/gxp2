@@ -20,9 +20,17 @@ Ext.define('gxp.plugins.LayerTree', {
                 expanded: true,
                 text: this.rootNodeText,
                 children: [{
-                    plugins: ['gx_overlaylayercontainer'],
                     expanded: true,
-                    text: this.overlayNodeText
+                    text: this.overlayNodeText,
+                    plugins: [{
+                        ptype: 'gx_layercontainer',
+                        loader: {
+                            filter: function(record) {
+                                var layer = record.getLayer();
+                                return layer.displayInLayerSwitcher && record.get('group') !== 'background';
+                            }
+                        }
+                    }]
                 }, {
                     plugins: [{
                         ptype: 'gx_layercontainer',
