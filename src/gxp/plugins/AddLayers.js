@@ -267,11 +267,10 @@ Ext.define('gxp.plugins.AddLayers', {
         var capGridPanel = Ext.create('Ext.grid.Panel', {
             store: source.store,
             autoScroll: true,
-            autoExpandColumn: "title",
             plugins: [expander],
             loadMask: true,
             columns: [
-                {id: "title", header: this.panelTitleText, dataIndex: "title", sortable: true},
+                {id: "title", flex: 1, header: this.panelTitleText, dataIndex: "title", sortable: true},
                 {header: "Id", dataIndex: "name", width: 120, sortable: true}
             ],
             viewConfig: {
