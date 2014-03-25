@@ -1,22 +1,15 @@
-.olMapViewport {
-    background-color: white;
-}
 .gx-tree-radio {
     background-image: url('http://cdn.sencha.com/ext/gpl/4.2.1/resources/ext-theme-neptune/images/form/radio.png');
 }
-/* gxp_wmsgetfeatureinfo */
 .x-btn .gxp-icon-getfeatureinfo, .x-menu-item .gxp-icon-getfeatureinfo, .x-tree-node .gxp-icon-getfeatureinfo {
     background-image: url(../img/silk/information.png);
 }
-/* gxp_removelayer */
 .x-btn .gxp-icon-removelayers, .x-menu-item .gxp-icon-removelayers, .x-tree-node .gxp-icon-removelayers {
     background-image: url(../img/silk/delete.png);
 }
-/* gxp_zoomtodataextent, gxp_zoomtoselectedfeatures, gxp_zoomtolayerextent */
 .x-btn .gxp-icon-zoom-to, .x-menu-item .gxp-icon-zoom-to, .x-tree-node .gxp-icon-zoom-to {
     background-image: url(../img/silk/magnifier.png);
 }
-/* gxp_zoom */
 .x-btn .gxp-icon-zoom, .x-tree-node .gxp-icon-zoom {
     background-image: url(../img/silk/magnifier.png);
 }
@@ -26,27 +19,22 @@
 .x-btn .gxp-icon-zoom-out, .x-tree-node .gxp-icon-zoom-out {
     background-image: url(../img/silk/magnifier_zoom_out.png);
 }
-/* gxp_panmap */
 .x-btn .gxp-icon-pan, .x-tree-node .gxp-icon-pan {
     background-image: url(../img/geosilk/pan.png);
 }
-/* gxp_navigationhistory */
 .x-btn .gxp-icon-zoom-previous, .x-tree-node .gxp-icon-zoom-previous {
     background-image: url(../img/silk/arrow_left.png);
 }
 .x-btn .gxp-icon-zoom-next, .x-tree-node .gxp-icon-zoom-next {
     background-image: url(../img/silk/arrow_right.png);
 }
-/* gxp_zoomtoextent */
 .x-btn .gxp-icon-zoomtoextent, .x-tree-node .gxp-icon-zoomtoextent {
     background-image: url(../img/silk/arrow_inout.png);
 }
-/* position the zoom slider within map panel */
 .gx-zoomslider {
     top: 90px !important;
     left: 21px !important;
 }
-/* Pan- and Zoom- Panel Styles*/
 .olControlPanPanel div {
     background-image:url(http://cdn.sencha.com/ext/gpl/4.2.1/resources/ext-theme-neptune/images/tools/tool-sprites-dark.png);
     height:16px;
@@ -80,7 +68,6 @@
     background-image:url(http://cdn.sencha.com/ext/gpl/4.2.1/resources/ext-theme-neptune/images/tools/tool-sprites-dark.png);
     height:16px;
     width:16px;
-    /* workaround for button height in IE */
     font-size:0px;
 }
 .olControlZoomPanel .olControlZoomInItemInactive {
@@ -93,7 +80,6 @@
     background-position:16px -272px;
     top: 123px;
 }
-/* gxp_scaleoverlay */
 div.map-overlay {
     z-index: 1000;
     position: absolute;
@@ -112,20 +98,17 @@ div.map-overlay div.overlay-element {
     left: 0px;
     margin-top: 0px;
 }
-/* gxp_measure */
 .x-btn .gxp-icon-measure-length, .x-menu-item .gxp-icon-measure-length, .x-tree-node .gxp-icon-measure-length {
     background-image: url(../img/geosilk/ruler.png) !important;
 }
 .x-btn .gxp-icon-measure-area, .x-menu-item .gxp-icon-measure-area, .x-tree-node .gxp-icon-measure-area {
    background-image: url(../img/geosilk/ruler_square.png) !important;
 }
-/* gxp_cataloguesearch */
 .x-action-col, .gxp-icon-addlayers {
     background-image: url(../img/silk/add.png);
     width: 16px;
     height: 16px;
 }
-/* gxp_addlayers */
 .x-btn .gxp-icon-addlayers, .x-menu-item .gxp-icon-addlayers, .x-tree-node .gxp-icon-addlayers {
     background-image: url(../img/silk/add.png);
 }

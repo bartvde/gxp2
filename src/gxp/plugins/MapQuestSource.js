@@ -85,7 +85,7 @@ Ext.define('gxp.plugins.MapQuestSource', {
         var index = this.store.findExact("name", config.name);
         if (index > -1) {
 
-            record = this.store.getAt(index).copy(Ext.data.Record.id({}));
+            record = this.store.getAt(index).copy();
             var layer = record.getLayer().clone();
  
             // set layer title from config
