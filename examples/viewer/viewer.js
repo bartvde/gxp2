@@ -22,13 +22,14 @@ Ext.require([
     'gxp.plugins.MapBoxSource',
     'gxp.plugins.FeatureManager',
     'gxp.plugins.QueryForm',
+    'gxp.plugins.FeatureGrid',
     'gxp.panel.ScaleOverlay'
 ]);
 
 Ext.application({
     name: 'Viewer',
     launch: function() {
-        Ext.create('gxp.Viewer', {
+        window.app = Ext.create('gxp.Viewer', {
             portalItems: [{
                 region: 'center',
                 layout: 'border',
@@ -79,6 +80,19 @@ Ext.application({
                 maxFeatures: 50,
                 paging: true,
                 pagingType: gxp.plugins.FeatureManager.WFS_PAGING
+            }, {
+                ptype: "gxp_featuregrid",
+                featureManager: "querymanager",
+                showTotalResults: true,
+                autoLoadFeature: false,
+                alwaysDisplayOnMap: true,
+                controlOptions: {multiple: true},
+                displayMode: "selected",
+                outputTarget: "table",
+                outputConfig: {
+                    id: "featuregrid",
+                    columnsSortable: false
+                }
             }, {
                 ptype: "gxp_wmsgetfeatureinfo",
                 showButtonText: true,

@@ -1,6 +1,6 @@
 Ext.define('gxp.data.WFSFeatureStore', {
     extend: 'GeoExt.data.FeatureStore',
-    requires: ['gxp.data.proxy.WFSProtocol'],
+    requires: ['GeoExt.data.reader.Feature', 'gxp.data.proxy.WFSProtocol'],
     setOgcFilter: function(ogcFilter) {
         this.proxy.setFilter(ogcFilter);
     },
@@ -11,6 +11,10 @@ Ext.define('gxp.data.WFSFeatureStore', {
                 url: config.url,
                 featureType: config.featureType,
                 featureNS:  config.featureNS,
+                reader: {
+                    type: 'feature',
+                    idProperty: 'id'
+                },
                 geometryName: config.geometryName,
                 schema: config.schema,
                 filter: config.ogcFilter,
@@ -37,11 +41,11 @@ Ext.define('gxp.data.WFSFeatureStore', {
          * return from this method will be applied to record.data.  So it makes
          * sense that it looks very much like what reader.readRecords does.
          */
-        var reader = this.proxy.reader;
+        /*var reader = this.proxy.reader;
         this.proxy.reader.extractValues = (function(data, items, length) {
             var obj = reader.readRecords([data.feature]);
             return obj.records[0].data;
-        });
+        });*/
 
         /**
          * TODO: Determine the appropriate meta.idProperty value.
