@@ -1,6 +1,6 @@
 Ext.define('gxp.plugins.WMSSource', {
     extend: 'gxp.plugins.LayerSource',
-    requires: ['GeoExt.data.AttributeStore', 'GeoExt.data.WmsCapabilitiesLayerStore', 'GeoExt.data.LayerModel'],
+    requires: ['GeoExt.data.WmsDescribeLayerStore', 'GeoExt.data.AttributeStore', 'GeoExt.data.WmsCapabilitiesLayerStore', 'GeoExt.data.LayerModel'],
     alias: 'plugin.gxp_wmssource',
     requiredProperties: ["title", "bbox"],
     constructor: function(config) {
@@ -362,7 +362,8 @@ Ext.define('gxp.plugins.WMSSource', {
                 REQUEST: "DescribeLayer"
             };
             this.describeLayerStore = Ext.create('GeoExt.data.WMSDescribeLayerStore', {
-                url: this.trimUrl(req.href, params),
+                /*url: this.trimUrl(req.href, params),*/
+                url: this.url, /* TODO use url from GetCaps but requires proxy */
                 baseParams: params
             });
         }
@@ -434,13 +435,20 @@ Ext.define('gxp.plugins.WMSSource', {
             }
         } else {
             schema = Ext.create('GeoExt.data.AttributeStore', {
-                url: url,
+                url: this.url, /* TODO use correct url (local var) but requires proxy */
                 baseParams: {
                     SERVICE: "WFS",
                     //TODO should get version from WFS GetCapabilities
                     VERSION: "1.1.0",
                     REQUEST: "DescribeFeatureType",
                     TYPENAME: typeName
+                },
+                proxy: {
+                    type: 'ajax',
+                    reader: {
+                        type: 'gx_attribute',
+                        keepRaw: true
+                    }
                 },
                 autoLoad: true,
                 listeners: {
@@ -489,8 +497,8 @@ Ext.define('gxp.plugins.WMSSource', {
                     version: "1.1.0",
                     srsName: record.getLayer().projection.getCode(),
                     url: schema.url,
-                    featureType: schema.reader.raw.featureTypes[0].typeName,
-                    featureNS: schema.reader.raw.targetNamespace,
+                    featureType: schema.proxy.reader.raw.featureTypes[0].typeName,
+                    featureNS: schema.proxy.reader.raw.targetNamespace,
                     geometryName: geometryName
                 });
             }

@@ -115,3 +115,6 @@ div.map-overlay div.overlay-element {
 .x-btn .gxp-icon-addserver {
     background-image: url(../img/silk/server_add.png);
 }
+.x-btn .gxp-icon-find, .x-menu-item .gxp-icon-find {
+    background-image: url(../img/silk/find.png);
+}

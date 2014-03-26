@@ -5,6 +5,18 @@ Ext.define('gxp.Viewer', {
     requires: ['Ext.PluginManager', 'gxp.util', 'Ext.layout.container.Border', 'Ext.panel.Panel', 'Ext.Toolbar', 'GeoExt.panel.Map'],
     constructor: function(config) {
         this.mixins.observable.constructor.call(this, config);
+        this.addEvents(
+            "ready",
+            "beforecreateportal",
+            "portalready",
+            "beforelayerselectionchange",
+            "layerselectionchange",
+            "featureedit",
+            "authorizationchange",
+            "beforesave",
+            "save",
+            "beforehashchange"
+        );
         Ext.apply(this, {
             layerSources: {},
             portalItems: [],
@@ -354,6 +366,9 @@ Ext.define('gxp.Viewer', {
             };
             this.on("authorizationchange", this._authFn, this, {single: true});
         }
+    },
+    getSource: function(layerRec) {
+        return layerRec && this.layerSources[layerRec.get("source")];
     }
 });
 

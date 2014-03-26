@@ -20,6 +20,8 @@ Ext.require([
     'gxp.plugins.GoogleSource',
     'gxp.plugins.OSMSource',
     'gxp.plugins.MapBoxSource',
+    'gxp.plugins.FeatureManager',
+    'gxp.plugins.QueryForm',
     'gxp.panel.ScaleOverlay'
 ]);
 
@@ -27,15 +29,57 @@ Ext.application({
     name: 'Viewer',
     launch: function() {
         Ext.create('gxp.Viewer', {
-            portalItems: [{region: 'center', layout: 'border', tbar: {id: 'paneltbar'}, items: ['mymap', {
-                region: 'west',
-                id: 'west',
-                title: "Layers",
-                layout: 'fit',
-                split: true,
-                width: 250
-            }]}],
+            portalItems: [{
+                region: 'center',
+                layout: 'border',
+                tbar: {id: 'paneltbar'},
+                items: ['mymap', {
+                    region: 'west',
+                    id: 'west',
+                    title: "Layers",
+                    layout: 'fit',
+                    split: true,
+                    width: 250
+                }, {
+                    region: "south",
+                    id: "south",
+                    height: 220,
+                    border: false,
+                    split: true,
+                    collapsible: true,
+                    collapseMode: "mini",
+                    collapsed: true,
+                    hideCollapseTool: true,
+                    header: false,
+                    layout: "border",
+                    items: [{
+                        region: "center",
+                        id: "table",
+                        title: "Table",
+                        layout: "fit"
+                    }, {
+                        region: "west",
+                        width: 320,
+                        id: "query",
+                        title: "Query",
+                        split: true,
+                        collapsible: true,
+                        collapseMode: "mini",
+                        collapsed: true,
+                        hideCollapseTool: true,
+                        layout: "fit"
+                    }]
+                }]
+            }],
             tools: [{
+                ptype: "gxp_featuremanager",
+                id: "querymanager",
+                selectStyle: {cursor: ''},
+                autoLoadFeatures: true,
+                maxFeatures: 50,
+                paging: true,
+                pagingType: gxp.plugins.FeatureManager.WFS_PAGING
+            }, {
                 ptype: "gxp_wmsgetfeatureinfo",
                 showButtonText: true,
                 outputConfig: {
@@ -44,6 +88,13 @@ Ext.application({
                 },
                 toggleGroup: "interaction",
                 actionTarget: 'paneltbar'
+            }, {
+                ptype: "gxp_queryform",
+                showButtonText: true,
+                featureManager: "querymanager",
+                autoExpand: "query",
+                actionTarget: "paneltbar",
+                outputTarget: "query"
             }, {
                 ptype: "gxp_measure", toggleGroup: "interaction",
                 controlOptions: {immediate: true},

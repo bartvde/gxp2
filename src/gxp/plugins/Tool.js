@@ -3,6 +3,7 @@ Ext.define('gxp.plugins.Tool', {
     requires: ['Ext.Action', 'gxp.button.IconButton'],
     actionTarget: "map.tbar",
     showButtonText: false,
+    autoActivate: true,
     output: null,
     mixins: {
         observable: 'Ext.util.Observable'
