@@ -336,9 +336,11 @@ Ext.define('gxp.plugins.FeatureManager', {
                         proxy: {
                             type: 'gxp_wfsprotocol',
                             outputFormat: this.format,
-                            multi: this.multi
+                            multi: this.multi,
+                            setParamsAsOptions: true,
+                            limitParam: 'maxFeatures'
                         },
-                        maxFeatures: this.maxFeatures,
+                        pageSize: this.maxFeatures,
                         layer: this.featureLayer,
                         ogcFilter: filter,
                         autoLoad: autoLoad,
@@ -620,7 +622,7 @@ Ext.define('gxp.plugins.FeatureManager', {
                         }
                         var startIndex = this.pageIndex*this.maxFeatures;
                         this.fireEvent("setpage", this, condition, callback, scope, this.pageIndex, this.numPages);
-                        this.featureStore.load({startIndex: startIndex, callback: function() {
+                        this.featureStore.load({params: {startIndex: startIndex}, callback: function() {
                             callback && callback.call(scope);
                         }});
                     }
