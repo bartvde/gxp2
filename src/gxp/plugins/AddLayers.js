@@ -293,7 +293,7 @@ Ext.define('gxp.plugins.AddLayers', {
             editable: false,
             allowBlank: false,
             forceSelection: true,
-            mode: "local",
+            queryMode: "local",
             value: data[idx][0],
             listeners: {
                 select: function(combo, records, index) {

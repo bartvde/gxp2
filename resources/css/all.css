@@ -118,3 +118,28 @@ div.map-overlay div.overlay-element {
 .x-btn .gxp-icon-find, .x-menu-item .gxp-icon-find {
     background-image: url(../img/silk/find.png);
 }
+.x-btn .add {
+    background-image: url(../img/silk/add.png);
+}
+.x-btn .delete {
+    background-image: url(../img/silk/delete.png);
+}
+.x-btn .duplicate {
+    background-image: url(../img/silk/arrow_divide.png);
+}
+.x-btn .save {
+    background-image: url(../img/accept.png);
+}
+.x-btn .cancel {
+    background-image: url(../img/decline.png);
+}
+.x-btn .edit {
+    background-image: url(../img/pencil.png);
+}
+.x-btn .process, .x-menu-item .process {
+    background-image: url(../img/silk/cog.png);
+}
+.gxp-filterbuilder .x-toolbar {
+    background: transparent;
+    border: none !important;
+}
