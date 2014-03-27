@@ -281,7 +281,7 @@ Ext.define('gxp.container.FilterBuilder', {
         }
         return {
             xtype: "combo",
-            store: new Ext.data.SimpleStore({
+            store: Ext.create('Ext.data.SimpleStore', {
                 data: data,
                 fields: ["value", "name"]
             }),
@@ -326,7 +326,7 @@ Ext.define('gxp.container.FilterBuilder', {
         }
     },
     createChildFiltersPanel: function() {
-        this.childFilterContainer = new Ext.Container();
+        this.childFilterContainer = Ext.create('Ext.Container');
         var grandchildren = this.filter.filters[0].filters;
         var grandchild;
         for(var i=0, len=grandchildren.length; i<len; ++i) {
@@ -360,7 +360,7 @@ Ext.define('gxp.container.FilterBuilder', {
         return this.childFilterContainer;
     },
     newRow: function(filterContainer) {
-        var ct = new Ext.Container({
+        var ct = Ext.create('Ext.Container', {
             layout: "column",
             items: [{
                 xtype: "container",

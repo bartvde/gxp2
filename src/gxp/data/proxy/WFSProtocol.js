@@ -49,7 +49,7 @@ Ext.define('gxp.data.proxy.WFSProtocol', {
     doRequest: function(operation, callback, scope) {
         if (operation.action === 'read') {
             this.callParent(arguments);
-        } else {
+        } else if (operation.action !== 'destroy') {
             // TODO bartvde fix up commits
             if(!(records instanceof Array)) {
                 records = [records];

@@ -72,11 +72,11 @@ Ext.define('gxp.plugins.FeatureGrid', {
                 }
             };
         }
-        this.displayItem = new Ext.toolbar.TextItem({});
+        this.displayItem = Ext.create('Ext.toolbar.TextItem');
         config = Ext.apply({
             xtype: "gxp_featuregrid",
             border: false,
-            sm: new GeoExt.selection.FeatureModel(smCfg),
+            selModel: Ext.create('GeoExt.selection.FeatureModel', smCfg),
             autoScroll: true,
             columnMenuDisabled: !!featureManager.paging,
             bbar: (featureManager.paging ? [{
@@ -133,7 +133,7 @@ Ext.define('gxp.plugins.FeatureGrid', {
                 },
                 scope: this
             }] : [])),
-            contextMenu: new Ext.menu.Menu({items: []})
+            contextMenu: Ext.create('Ext.menu.Menu', {items: []})
         }, config || {});
         config.store = Ext.create('GeoExt.data.FeatureStore');
         var featureGrid = gxp.plugins.FeatureGrid.superclass.addOutput.call(this, config);
@@ -205,15 +205,16 @@ Ext.define('gxp.plugins.FeatureGrid', {
                 r.get("type").indexOf("gml:") == 0 && ignoreFields.push(r.get("name"));
             });
             featureGrid.ignoreFields = ignoreFields;
-            featureGrid.setStore(featureManager.featureStore, schema);
-            if (!featureManager.featureStore) {
+            if (featureManager.featureStore) {
+                featureGrid.setStore(featureManager.featureStore, schema);
+            } else {
                 // not a feature layer, reset toolbar
                 if (featureManager.paging) {
-                    featureGrid.lastPageButton.disable();
-                    featureGrid.nextPageButton.disable();
-                    featureGrid.firstPageButton.disable();
-                    featureGrid.prevPageButton.disable();
-                    featureGrid.zoomToPageButton.disable();
+                    featureGrid.down('*[ref=lastPageButton]').disable();
+                    featureGrid.down('*[ref=nextPageButton]').disable();
+                    featureGrid.down('*[ref=firstPageButton]').disable();
+                    featureGrid.down('*[ref=prevPageButton]').disable();
+                    featureGrid.down('*[ref=zoomToPageButton]').disable();
                 }
                 this.displayTotalResults();
             }

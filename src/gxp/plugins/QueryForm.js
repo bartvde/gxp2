@@ -177,10 +177,7 @@ Ext.define('gxp.plugins.QueryForm', {
 
         featureManager.on({
             "beforequery": function() {
-                new Ext.LoadMask(queryForm.getEl(), {
-                    store: featureManager.featureStore,
-                    msg: this.queryMsg
-                }).show();
+                queryForm.getEl().mask(this.queryMsg);
             },
             "query": function(tool, store) {
                 if (store) {
@@ -196,6 +193,7 @@ Ext.define('gxp.plugins.QueryForm', {
                                 queryForm.ownerCt.ownerCt;
                             ownerCt instanceof Ext.Window && ownerCt.hide();
                         }
+                        queryForm.getEl().unmask();
                     }
                 }
             },

@@ -331,7 +331,7 @@ Ext.define('gxp.plugins.FeatureManager', {
                         resultType: "hits",
                         filter: filter
                     }, protocolOptions));
-                    this.featureStore = new gxp.data.WFSFeatureStore(Ext.apply({
+                    this.featureStore = Ext.create('gxp.data.WFSFeatureStore', Ext.apply({
                         fields: fields,
                         proxy: {
                             type: 'gxp_wfsprotocol',

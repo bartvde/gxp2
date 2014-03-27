@@ -1,7 +1,7 @@
 Ext.define('gxp.grid.FeaturePanel', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.gxp_featuregrid',
-    requires: ['Ext.grid.column.Number', 'Ext.form.DateField', 'Ext.form.TimeField'],
+    requires: ['GeoExt.selection.FeatureModel', 'GeoExt.data.FeatureStore', 'Ext.grid.column.Number', 'Ext.form.DateField', 'Ext.form.TimeField'],
     map: null,
     ignoreFields: null,
     includeFields: null,
@@ -19,13 +19,11 @@ Ext.define('gxp.grid.FeaturePanel', {
                 this.map.addLayer(this.layer);
             }
         } else {
-            this.store = new Ext.data.Store();
-            this.cm = new Ext.grid.ColumnModel({
-                columns: []
-            });
+            this.store = Ext.create('Ext.data.Store');
+            this.columns = [];
         }
         if(this.layer) {
-            this.sm = this.sm || new GeoExt.grid.FeatureSelectionModel({
+            this.selModel = this.selModel || Ext.create('GeoExt.selection.FeatureModel', {
                 layerFromStore: false,
                 layer: this.layer
             });
@@ -66,8 +64,9 @@ Ext.define('gxp.grid.FeaturePanel', {
             this.reconfigure(store, this.getColumns(store));
         } else {
             this.reconfigure(
-                new Ext.data.Store(),
-                new Ext.grid.ColumnModel({columns: []}));
+                Ext.create('Ext.data.Store'),
+                []
+            );
         }
     },
     getColumns: function(store) {

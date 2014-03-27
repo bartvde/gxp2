@@ -6,7 +6,7 @@ Ext.define('gxp.data.WFSFeatureStore', {
     },
     constructor: function(config) {
         if(!(config.proxy && config.proxy instanceof GeoExt.data.proxy.Protocol)) {
-            config.proxy = new gxp.data.proxy.WFSProtocol(Ext.apply({
+            config.proxy = Ext.create('gxp.data.proxy.WFSProtocol', Ext.apply({
                 srsName: config.srsName,
                 url: config.url,
                 featureType: config.featureType,
@@ -24,7 +24,7 @@ Ext.define('gxp.data.WFSFeatureStore', {
         }
         if(!config.writer) {
             // a writer is not used, but is required by store.save
-            config.writer = new Ext.data.DataWriter({
+            config.writer = Ext.create('Ext.data.DataWriter', {
                 write: Ext.emptyFn
             });
         }

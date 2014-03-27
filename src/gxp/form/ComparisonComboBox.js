@@ -20,7 +20,7 @@ Ext.define('gxp.form.ComparisonComboBox', {
     editable: true,
     initComponent: function() {
         var defConfig = {
-            store: new Ext.data.ArrayStore({
+            store: Ext.create('Ext.data.ArrayStore', {
                 data: this.allowedTypes,
                 fields: ["value", "text"]
             }),

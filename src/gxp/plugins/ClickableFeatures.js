@@ -70,9 +70,9 @@ Ext.define('gxp.plugins.ClickableFeatures', {
             params.SRS = projection.getCode();
         }
 
-        var store = new GeoExt.data.FeatureStore({
+        var store = Ext.create('GeoExt.data.FeatureStore', {
             fields: {},
-            proxy: new GeoExt.data.ProtocolProxy({
+            proxy: Ext.create('GeoExt.data.proxy.Protocol', {
                 protocol: new OpenLayers.Protocol.HTTP({
                     url: (typeof layer.url === "string") ? layer.url : layer.url[0],
                     params: params,

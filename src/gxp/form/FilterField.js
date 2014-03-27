@@ -1,7 +1,7 @@
 Ext.define('gxp.form.FilterField', {
     extend: 'Ext.form.FieldContainer',
     alias: 'widget.gxp_filterfield',
-    requires: ['gxp.form.ComparisonComboBox'],
+    requires: ['gxp.form.ComparisonComboBox', 'GeoExt.data.AttributeStore'],
     lowerBoundaryTip: "lower boundary",
     upperBoundaryTip: "upper boundary",
     caseInsensitiveMatch: false,
@@ -19,7 +19,7 @@ Ext.define('gxp.form.FilterField', {
         // listener *after* the initial combo filtering.
         //TODO Assume that the AttributeStore is already loaded and always
         // create a new one without geometry fields.
-        var mode = "remote", attributes = new GeoExt.data.AttributeStore();
+        var mode = "remote", attributes = Ext.create('GeoExt.data.AttributeStore');
         if (this.attributes) {
             if (this.attributes.getCount() != 0) {
                 mode = "local";
