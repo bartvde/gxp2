@@ -26,6 +26,7 @@ Ext.require([
     'gxp.plugins.FeatureGrid',
     'gxp.plugins.LayerProperties',
     'gxp.panel.ScaleOverlay',
+    'gxp.container.WMSStylesDialog',
     'gxp.tab.CrumbPanel'
 ]);
 

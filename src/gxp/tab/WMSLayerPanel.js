@@ -88,7 +88,7 @@ Ext.define('gxp.tab.WMSLayerPanel', {
         ];
 
         // only add the Styles panel if we know for sure that we have styles
-        if (this.styling && gxp.WMSStylesDialog && this.layerRecord.get("styles")) {
+        if (this.styling && gxp.container.WMSStylesDialog && this.layerRecord.get("styles")) {
             // TODO: revisit this
             var url = this.layerRecord.get("restUrl");
             if (!url) {
@@ -134,7 +134,7 @@ Ext.define('gxp.tab.WMSLayerPanel', {
         }
     },
     createStylesPanel: function(url) {
-        var config = gxp.WMSStylesDialog.createGeoServerStylerConfig(
+        var config = gxp.container.WMSStylesDialog.createGeoServerStylerConfig(
             this.layerRecord, url
         );
         if (this.rasterStyling === true) {
@@ -142,7 +142,7 @@ Ext.define('gxp.tab.WMSLayerPanel', {
                 ptype: "gxp_wmsrasterstylesdialog"
             });
         }
-        var ownerCt = this.ownerCt;
+        /*var ownerCt = this.ownerCt;
         if (!(ownerCt.ownerCt instanceof Ext.Window)) {
             config.dialogCls = Ext.Panel;
             config.showDlg = function(dlg) {
@@ -150,7 +150,7 @@ Ext.define('gxp.tab.WMSLayerPanel', {
                 dlg.autoHeight = false;
                 ownerCt.add(dlg);
             };
-        }
+        }*/
         return Ext.apply(config, {
             title: this.stylesText,
             style: "padding: 10px",

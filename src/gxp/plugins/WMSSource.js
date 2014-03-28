@@ -287,6 +287,30 @@ Ext.define('gxp.plugins.WMSSource', {
             Ext.define('gxp.data.WMSLayerModel',{
                 extend: 'GeoExt.data.LayerModel',
                 fields: [
+                    /* TODO bartvde see if there is a way not having to repeat the list of fields from the parent model */
+                    {name: "name", type: "string", mapping: "metadata.name"},
+                    {name: "abstract", type: "string", mapping: "metadata.abstract"},
+                    {name: "queryable", type: "boolean", mapping: "metadata.queryable"},
+                    {name: "opaque", type: "boolean", mapping: "metadata.opaque"},
+                    {name: "noSubsets", type: "boolean", mapping: "metadata.noSubsets"},
+                    {name: "cascaded", type: "int", mapping: "metadata.cascaded"},
+                    {name: "fixedWidth", type: "int", mapping: "metadata.fixedWidth"},
+                    {name: "fixedHeight", type: "int", mapping: "metadata.fixedHeight"},
+                    {name: "minScale", type: "float", mapping: "metadata.minScale"},
+                    {name: "maxScale", type: "float", mapping: "metadata.maxScale"},
+                    {name: "prefix", type: "string", mapping: "metadata.prefix"},
+                    {name: "attribution", type: "string"},
+                    {name: "formats", mapping: "metadata.formats"}, // array
+                    {name: "infoFormats", mapping: "metadata.infoFormats"}, //array
+                    {name: "styles", mapping: "metadata.styles"}, // array
+                    {name: "srs", mapping: "metadata.srs"}, // object
+                    {name: "dimensions", mapping: "metadata.dimensions"}, // object
+                    {name: "bbox", mapping: "metadata.bbox"}, // object
+                    {name: "llbbox", mapping: "metadata.llbbox"}, // array
+                    {name: "keywords", mapping: "metadata.keywords"}, // array
+                    {name: "identifiers", mapping: "metadata.identifiers"}, // object
+                    {name: "authorityURLs", mapping: "metadata.authorityURLs"}, // object
+                    {name: "metadataURLs", mapping: "metadata.metadataURLs"}, // array
                     {name: "source", type: "string", mapping: 'metadata.source'},
                     {name: "group", type: "string", mapping: 'metadata.group'},
                     {name: "fixed", type: "boolean", mapping: 'metadata.fixed'},
@@ -295,8 +319,7 @@ Ext.define('gxp.plugins.WMSSource', {
                     {name: "restUrl", type: "string", mapping: 'metadata.restUrl'},
                     {name: "infoFormat", type: "string", mapping: 'metadata.infoFormat'},
                     {name: "getFeatureInfo", mapping: 'metadata.getFeatureInfo'},
-                    {name: "queryable", type: "boolean", mapping: 'metadata.queryable'},
-                    {name: "srs"}
+                    {name: "queryable", type: "boolean", mapping: 'metadata.queryable'}
                ]
             });
             Ext.applyIf(layer.metadata, {
