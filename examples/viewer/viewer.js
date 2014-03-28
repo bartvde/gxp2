@@ -5,6 +5,7 @@ Ext.require([
     'gxp.Viewer',
     'gxp.plugins.OLSource',
     'gxp.plugins.WMSSource',
+    'gxp.plugins.WMSCSource',
     'gxp.plugins.WMSGetFeatureInfo',
     'gxp.plugins.RemoveLayer',
     'gxp.plugins.LayerTree',
@@ -168,7 +169,7 @@ Ext.application({
                     ptype: "gxp_olsource"
                 },
                 local: {
-                    ptype: "gxp_wmssource",
+                    ptype: "gxp_wmscsource",
                     url: "/geoserver/wms",
                     version: "1.1.1"
                 },

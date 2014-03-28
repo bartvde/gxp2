@@ -295,7 +295,8 @@ Ext.define('gxp.plugins.WMSSource', {
                     {name: "restUrl", type: "string", mapping: 'metadata.restUrl'},
                     {name: "infoFormat", type: "string", mapping: 'metadata.infoFormat'},
                     {name: "getFeatureInfo", mapping: 'metadata.getFeatureInfo'},
-                    {name: "queryable", type: "boolean", mapping: 'metadata.queryable'}
+                    {name: "queryable", type: "boolean", mapping: 'metadata.queryable'},
+                    {name: "srs"}
                ]
             });
             Ext.applyIf(layer.metadata, {
