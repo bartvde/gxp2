@@ -113,19 +113,21 @@ Ext.define('gxp.tab.WMSLayerPanel', {
             CQL = this.cqlFormat.write(filter);
         }
         this.filterBuilder.hide();
-        this.cqlField.setValue(CQL);
-        this.cqlField.show();
-        this.cqlToolbar.show();
+        var cqlField = this.down('*[ref=cqlField]');
+        cqlField.setValue(CQL);
+        cqlField.show();
+        this.down('*[ref=cqlToolbar]').show();
     },
     switchToFilterBuilder: function() {
         var filter = null;
+        var cqlField = this.down('*[ref=cqlField]');
         // when parsing fails, we keep the previous filter in the filter builder
         try {
-            filter = this.cqlFormat.read(this.cqlField.getValue());
+            filter = this.cqlFormat.read(cqlField.getValue());
         } catch(e) {
         }
-        this.cqlField.hide();
-        this.cqlToolbar.hide();
+        cqlField.hide();
+        this.down('*[ref=cqlToolbar]').hide();
         this.filterBuilder.show();
         if (filter !== null) {
             this.filterBuilder.setFilter(filter);
@@ -389,8 +391,7 @@ Ext.define('gxp.tab.WMSLayerPanel', {
                     scope: this
                 }]
             }, {
-                xtype: "fieldcontainer",
-                layout: "hbox",
+                xtype: "fieldset",
                 title: this.queryText,
                 hideLabels: true,
                 ref: "filterFieldset",
@@ -414,19 +415,18 @@ Ext.define('gxp.tab.WMSLayerPanel', {
                     anchor: '99%',
                     width: '100%',
                     growMax: 100,
-                    ref: "../../cqlField",
+                    ref: "cqlField",
                     hidden: true
-                }],
-                buttons: [{
-                    ref: "../../../cqlToolbar",
+                }, {
+                    xtype: 'button',
+                    ref: "cqlToolbar",
                     hidden: true,
                     text: this.switchToFilterBuilderText,
                     handler: this.switchToFilterBuilder,
                     scope: this
                 }]
             }, {
-                xtype: "fieldcontainer",
-                layout: "hbox",
+                xtype: "fieldset",
                 title: this.scaleText,
                 listeners: {
                     expand: function() {
