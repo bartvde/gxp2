@@ -23,7 +23,9 @@ Ext.require([
     'gxp.plugins.FeatureManager',
     'gxp.plugins.QueryForm',
     'gxp.plugins.FeatureGrid',
-    'gxp.panel.ScaleOverlay'
+    'gxp.plugins.LayerProperties',
+    'gxp.panel.ScaleOverlay',
+    'gxp.tab.CrumbPanel'
 ]);
 
 Ext.application({
@@ -36,6 +38,7 @@ Ext.application({
                 tbar: {id: 'paneltbar'},
                 items: ['mymap', {
                     region: 'west',
+                    xtype: 'gxp_crumbpanel',
                     id: 'west',
                     title: "Layers",
                     layout: 'fit',
@@ -138,6 +141,12 @@ Ext.application({
             }, {
                 ptype: "gxp_removelayer",
                 actionTarget: ["tree.tbar", "tree.contextMenu"]
+            }, {
+                ptype: "gxp_layerproperties",
+                id: "layerproperties",
+                outputConfig: {defaults: {autoScroll: true}, width: 320},
+                actionTarget: ["tree.tbar", "tree.contextMenu"],
+                outputTarget: "west"
             }, {
                 ptype: "gxp_zoomtolayerextent",
                 actionTarget: ["tree.contextMenu"]
