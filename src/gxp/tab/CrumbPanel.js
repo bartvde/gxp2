@@ -3,6 +3,7 @@ Ext.define('gxp.tab.CrumbPanel', {
     alias: 'widget.gxp_crumbpanel',
     enableTabScroll: true,
     initComponent: function() {
+        this.activeTab = 0;
         this.tabBar = {
             renderTpl: [
                 '<div id="{id}-body" class="{baseCls}-body {bodyCls} {bodyTargetCls}{childElCls}<tpl if="ui"> {baseCls}-body-{ui}<tpl for="uiCls"> {parent.baseCls}-body-{parent.ui}-{.}</tpl></tpl> gxp-crumb"<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>>',
@@ -20,7 +21,7 @@ Ext.define('gxp.tab.CrumbPanel', {
     onBeforeAdd: function(cmp) {
         cmp.tabConfig = {
             renderTpl: [
-                '<div class="gxp-crumb-separator">\u00BB</div>',
+                '<div class="x-tab-inner gxp-crumb-separator">\u00BB</div>',
                 '<span id="{id}-btnWrap" class="{baseCls}-wrap',
                 '<tpl if="splitCls"> {splitCls}</tpl>',
                 '{childElCls}" unselectable="on">',

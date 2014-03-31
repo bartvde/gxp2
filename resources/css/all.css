@@ -155,8 +155,21 @@ div.map-overlay div.overlay-element {
     width: 12px;
     height: 11px;
     position: absolute;
-    top: -1px;
+    top: 3px;
     right: 1px;
     z-index: 2;
-    font-size: 18px;
+    font-size: 15px !important;
+}
+.x-tab-active .gxp-crumb-separator {
+    display: none;
+}
+.gxp-crumb .x-tab {
+    border: none;
+    box-shadow: none;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    background-image: none;
+    background-color: transparent;
 }
