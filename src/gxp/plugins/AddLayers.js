@@ -448,9 +448,7 @@ Ext.define('gxp.plugins.AddLayers', {
             }
         }
 
-//        var Cls = this.outputTarget ? Ext.Panel : Ext.Window;
-// TODO restore crumbpanel
-        var Cls = Ext.Window;
+        var Cls = this.outputTarget ? Ext.Panel : Ext.Window;
         this.capGrid = Ext.create(Cls, Ext.apply({
             title: this.availableLayersText,
             closeAction: "hide",

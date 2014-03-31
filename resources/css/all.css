@@ -146,7 +146,7 @@ div.map-overlay div.overlay-element {
 .x-btn .gxp-icon-layerproperties, .x-menu-item .gxp-icon-layerproperties, .x-tree-node .gxp-icon-layerproperties {
     background-image: url(../img/silk/wrench.png);
 }
-.gxp-crumbpanel-header ul, li.gxp-crumb {
+.gxp-crumbpanel-header ul, div.gxp-crumb {
     position: relative;
 }
 .gxp-crumb .x-tab-left {
@@ -182,4 +182,9 @@ div.map-overlay div.overlay-element {
 }
 .gxp-crumbpanel-header {
     padding-bottom: 0;
+}
+// new crumb panel
+.gxp-crumb .x-tab-default-top {
+    border-style: none;
+    background-image: none;
 }

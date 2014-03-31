@@ -198,7 +198,7 @@ Ext.define('gxp.plugins.Tool', {
         if (container) {
             var component = container.add(config);
             component.on("removed", function(cmp) {
-                this.output.remove(cmp);
+                Ext.Array.remove(this.output, cmp);
             }, this, {single: true});
             if (component instanceof Ext.Window) {
                 component.show();

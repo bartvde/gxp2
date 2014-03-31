@@ -41,8 +41,7 @@ Ext.application({
                 items: ['mymap', {
                     region: 'west',
                     xtype: 'gxp_crumbpanel',
-                    id: 'west',
-                    title: "Layers",
+                    id: 'tree',
                     layout: 'fit',
                     split: true,
                     width: 250
@@ -122,15 +121,16 @@ Ext.application({
             }, {
                 ptype: "gxp_layertree",
                 outputConfig: {
-                    id: "tree",
+                    id: "layers",
+                    title: "Layers",
                     autoScroll: true,
                     border: true,
                     tbar: [] // we will add buttons to "tree.bbar" later
                 },
-                outputTarget: "west"
+                outputTarget: "tree"
             }, {
                 ptype: "gxp_addlayers",
-                actionTarget: "tree.tbar",
+                actionTarget: "layers.tbar",
                 outputTarget: "tree"/*,
                 uploadSource: "local",
                 postUploadAction: {
@@ -142,16 +142,16 @@ Ext.application({
                 }*/
             }, {
                 ptype: "gxp_removelayer",
-                actionTarget: ["tree.tbar", "tree.contextMenu"]
+                actionTarget: ["layers.tbar", "layers.contextMenu"]
             }, {
                 ptype: "gxp_layerproperties",
                 id: "layerproperties",
                 outputConfig: {defaults: {autoScroll: true}, width: 320},
-                actionTarget: ["tree.tbar", "tree.contextMenu"],
-                outputTarget: "west"
+                actionTarget: ["layers.tbar", "layers.contextMenu"],
+                outputTarget: "tree"
             }, {
                 ptype: "gxp_zoomtolayerextent",
-                actionTarget: ["tree.contextMenu"]
+                actionTarget: ["layers.contextMenu"]
             }, {
                 ptype: "gxp_navigation",
                 toggleGroup: "navigation"
