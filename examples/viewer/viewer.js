@@ -44,7 +44,7 @@ Ext.application({
                     id: 'tree',
                     layout: 'fit',
                     split: true,
-                    width: 250
+                    width: 320
                 }, {
                     region: "south",
                     id: "south",

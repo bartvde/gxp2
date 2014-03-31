@@ -1,7 +1,6 @@
 Ext.define('gxp.tab.CrumbPanel', {
     extend: 'Ext.tab.Panel',
     alias: 'widget.gxp_crumbpanel',
-    widths: null,
     enableTabScroll: true,
     initComponent: function() {
         this.tabBar = {
@@ -17,7 +16,6 @@ Ext.define('gxp.tab.CrumbPanel', {
             ]
         };
         this.callParent(arguments);
-        this.widths = {};
     },
     onBeforeAdd: function(cmp) {
         cmp.tabConfig = {
@@ -52,20 +50,16 @@ Ext.define('gxp.tab.CrumbPanel', {
     onAdd: function(cmp) {
         this.callParent(arguments);
         cmp.on("hide", this.onCmpHide, this);
+        this.setActiveTab(cmp);
     },
     onRemove: function(cmp) {
         this.callParent(arguments);
         cmp.un("hide", this.onCmpHide, this);
-        //TODO investigate why hidden components are displayed again when
-        // another crumb is activated - this just works around the issue
-        cmp.getEl().dom.style.display = "none";
-        this.activeTab.doLayout();
     },
     onCmpHide: function(cmp) {
         var lastIndex = this.items.getCount() - 1;
         if (!cmp.hidden && this.items.indexOf(cmp) === lastIndex) {
-           this.remove(cmp, cmp.closeAction !== "hide");
-           //this.setActiveTab(this.getComponent(--lastIndex));
+            this.setActiveTab(this.getComponent(--lastIndex));
         }
     },
     setActiveTab: function(item) {
@@ -76,23 +70,19 @@ Ext.define('gxp.tab.CrumbPanel', {
         } else {
             index = this.items.indexOf(item);
         }
+        if (index === this.lastIndex) {
+            this.callParent(arguments);
+            return;
+        }
+        this.lastIndex = index;
         if (~index) {
             var cmp, i;
             for (i=this.items.getCount()-1; i>index; --i) {
                 cmp = this.getComponent(i);
                 // remove, but don't destroy if component was configured with
                 // {closeAction: "hide"}
-                //this.remove(cmp, cmp.closeAction !== "hide");
+                this.remove(cmp, cmp.closeAction !== "hide");
             }
-        }
-        var width = item.initialConfig.minWidth || item.initialConfig.width,
-            previousWidth = this.getWidth();
-        if (width > previousWidth) {
-            this.widths[this.getComponent(index - 1).id] = previousWidth;
-            this.setWidth(width);
-            /*if (this.ownerCt) {
-                this.ownerCt.syncSize();
-            }*/
         }
         this.callParent(arguments);
     }
