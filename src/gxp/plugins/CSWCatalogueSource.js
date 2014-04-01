@@ -12,9 +12,20 @@ Ext.define('gxp.plugins.CSWCatalogueSource', {
     alias: 'plugin.gxp_cataloguesource',
     createStore: function() {
         this.store = Ext.create('Ext.data.Store', {
+            /* override to support having a different value than 0 for the start */
+            read: function() {
+                if (arguments && arguments.length > 0) {
+                    if (arguments[0].start > 0) {
+                        arguments[0].start -= 1;
+                    }
+                }
+                return this.load.apply(this, arguments);
+            },
+            pageSize: 10,
             model: 'gxp.data.CswRecordsModel',
             proxy: Ext.create('GeoExt.data.proxy.Protocol', Ext.apply({
                 setParamsAsOptions: true,
+                startParam: 'startPosition',
                 reader: new GeoExt.data.reader.CswRecords(),
                 protocol: new OpenLayers.Protocol.CSW({
                     url: this.url
@@ -22,15 +33,6 @@ Ext.define('gxp.plugins.CSWCatalogueSource', {
             }, this.proxyOptions || {}))
         });
         gxp.plugins.LayerSource.prototype.createStore.apply(this, arguments);
-    },
-    getPagingStart: function() {
-        return 1;
-    },
-    getPagingParamNames: function() {
-        return {
-            start: 'startPosition',
-            limit: 'maxRecords'
-        };
     },
     getFullFilter: function(filter, otherFilters) {
         var filters = [];
