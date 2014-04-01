@@ -130,12 +130,14 @@ Ext.define('gxp.plugins.Tool', {
                             groupClass: null
                         });
                     } else {
-                        if (this.showButtonText) {
-                            if (!(action instanceof Ext.Button)) {
-                                action = Ext.create('Ext.Button', action);
+                        if (!Ext.isString(action)) {
+                            if (this.showButtonText) {
+                                if (!(action instanceof Ext.Button)) {
+                                    action = Ext.create('Ext.Button', action);
+                                }
+                            } else {
+                                action = Ext.create('gxp.button.IconButton', action);
                             }
-                        } else {
-                            action = Ext.create('gxp.button.IconButton', action);
                         }
                     }
                     var addedAction = (index === null) ? ct.add(action) : ct.insert(index, action);

@@ -173,3 +173,6 @@ div.map-overlay div.overlay-element {
     background-image: none;
     background-color: transparent;
 }
+.x-btn .gxp-icon-print, .x-menu-item .gxp-icon-print, .x-tree-node .gxp-icon-print {
+    background-image: url(../img/silk/printer.png);
+}

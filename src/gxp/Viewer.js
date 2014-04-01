@@ -1,4 +1,5 @@
 Ext.define('gxp.Viewer', {
+    defaultToolType: "gxp_tool",
     mixins: {
         observable: 'Ext.util.Observable'
     },
