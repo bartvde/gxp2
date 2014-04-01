@@ -1,7 +1,7 @@
 Ext.define('gxp.plugins.AddLayers', {
     extend: 'gxp.plugins.Tool',
     requires: [
-        'Ext.grid.Panel', 'Ext.grid.plugin.RowExpander'
+        'Ext.grid.Panel', 'Ext.grid.plugin.RowExpander', 'gxp.panel.CatalogueSearch'
     ],
     alias: 'plugin.gxp_addlayers',
     addActionMenuText: "Add layers",

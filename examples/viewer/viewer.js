@@ -27,6 +27,7 @@ Ext.require([
     'gxp.plugins.LayerProperties',
     'gxp.panel.ScaleOverlay',
     'gxp.container.WMSStylesDialog',
+    'gxp.plugins.CSWCatalogueSource',
     'gxp.tab.CrumbPanel'
 ]);
 
@@ -131,15 +132,15 @@ Ext.application({
             }, {
                 ptype: "gxp_addlayers",
                 actionTarget: "layers.tbar",
-                outputTarget: "tree"/*,
+                outputTarget: "tree",/*
                 uploadSource: "local",
                 postUploadAction: {
                     plugin: "styler"
-                },
+                },*/
                 catalogSourceKey: "local",
                 search: {
                     selectedSource: "csw"
-                }*/
+                }
             }, {
                 ptype: "gxp_removelayer",
                 actionTarget: ["layers.tbar", "layers.contextMenu"]
@@ -188,6 +189,11 @@ Ext.application({
                 },
                 mapbox: {
                     ptype: "gxp_mapboxsource"
+                },
+                csw: {
+                    url: "/geoserver/csw",
+                    ptype: "gxp_cataloguesource",
+                    yx: {'urn:x-ogc:def:crs:EPSG:6.11:4326': true}
                 }
             },
             map: {
