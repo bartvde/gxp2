@@ -28,7 +28,6 @@ Ext.require([
     'gxp.panel.ScaleOverlay',
     'gxp.container.WMSStylesDialog',
     'gxp.plugins.CSWCatalogueSource',
-    'gxp.plugins.Print',
     'gxp.tab.CrumbPanel'
 ]);
 
@@ -99,12 +98,6 @@ Ext.application({
                     id: "featuregrid",
                     columnsSortable: false
                 }
-            }, {
-                ptype: "gxp_print",
-                customParams: {outputFilename: 'GeoExplorer-print'},
-                printService: "/geoserver/pdf/",
-                actionTarget: "paneltbar",
-                showButtonText: true
             }, {
                 actions: ["-"],
                 actionTarget: "paneltbar"
