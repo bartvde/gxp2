@@ -1,7 +1,7 @@
 Ext.define('gxp.plugins.AddLayers', {
     extend: 'gxp.plugins.Tool',
     requires: [
-        'Ext.grid.Panel', 'Ext.grid.plugin.RowExpander', 'gxp.panel.CatalogueSearch'
+        'Ext.grid.Panel', 'Ext.grid.plugin.RowExpander', 'gxp.panel.CatalogueSearch', 'gxp.form.LayerUploadPanel'
     ],
     alias: 'plugin.gxp_addlayers',
     addActionMenuText: "Add layers",
@@ -567,7 +567,7 @@ Ext.define('gxp.plugins.AddLayers', {
                 hidden: !this.uploadSource,
                 handler: function() {
                     this.target.doAuthorized(this.uploadRoles, function() {
-                        var panel = Ext.create('gxp.LayerUploadPanel', Ext.apply({
+                        var panel = Ext.create('gxp.form.LayerUploadPanel', Ext.apply({
                             title: this.outputTarget ? this.uploadText : undefined,
                             url: url,
                             width: 300,

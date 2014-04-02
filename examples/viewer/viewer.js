@@ -135,11 +135,11 @@ Ext.application({
             }, {
                 ptype: "gxp_addlayers",
                 actionTarget: "layers.tbar",
-                outputTarget: "tree",/*
+                outputTarget: "tree",
                 uploadSource: "local",
                 postUploadAction: {
                     plugin: "styler"
-                },*/
+                },
                 catalogSourceKey: "local",
                 search: {
                     selectedSource: "csw"
