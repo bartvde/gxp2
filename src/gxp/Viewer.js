@@ -10,15 +10,13 @@ Ext.define('gxp.Viewer', {
             var createComplete = function(fn, cb) {
                 return function(request) {
                     if(cb && cb[fn]) {
-                        cb[fn].call(cb.scope || window, Ext.applyIf({
-                            argument: cb.argument
-                        }, request));
+                        cb[fn].apply(cb.scope || window, [cb.argument, (fn == "success"), request]);
                     }
                 };
             };
             Ext.apply(Ext.Ajax, {
                 request: function(options) {
-                    var data, method, cb = options.callback, uri = options.url;
+                    var data, method;
                     options = options || {};
                     method = options.method;
                     var hs = options.headers;
@@ -47,12 +45,13 @@ Ext.define('gxp.Viewer', {
                         hs["Content-Type"] = "application/x-www-form-urlencoded";
                     }
                     return OpenLayers.Request.issue({
-                        success: createComplete("success", cb),
-                        failure: createComplete("failure", cb),
+                        success: createComplete("success", {success: options.callback, argument: options, scope: options.scope}),
+                        failure: createComplete("failure", {failure: options.callback, argument: options, scope: options.scope}),
                         method: method,
                         headers: hs,
+                        params: options.params,
                         data: data,
-                        url: uri
+                        url: options.url
                     });
                 },
                 isCallInProgress: function(request) {

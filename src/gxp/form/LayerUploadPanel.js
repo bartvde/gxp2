@@ -1,3 +1,11 @@
+Ext.define('gxp.data.DataStore', {
+    extend: 'Ext.data.Model',
+    fields: [
+        "name",
+        "href"
+    ]
+});
+
 Ext.define('gxp.form.LayerUploadPanel', {
     extend: 'Ext.form.Panel',
     requires: ['Ext.data.JsonStore', 'Ext.form.field.File'],
@@ -157,16 +165,17 @@ Ext.define('gxp.form.LayerUploadPanel', {
             name: "workspace",
             ref: "workspace",
             fieldLabel: this.workspaceLabel,
-            store: new Ext.data.JsonStore({
+            store: new Ext.data.Store({
                 proxy: {
                     type: 'ajax',
-                    url: this.getWorkspacesUrl()
+                    url: this.getWorkspacesUrl(),
+                    reader: {
+                        type: 'json',
+                        root: "workspaces.workspace"
+                    }
                 },
                 autoLoad: true,
-                reader: {
-                    root: "workspaces.workspace"
-                },
-                fields: ["name", "href"]
+                model: 'gxp.data.DataStore'
             }),
             displayField: "name",
             valueField: "name",
@@ -185,16 +194,14 @@ Ext.define('gxp.form.LayerUploadPanel', {
     },
     createDataStoresCombo: function() {
         // this store will be loaded whenever a workspace is selected
-        Ext.define('gxp.data.DataStore', {
-            extend: 'Ext.data.Model',
-            fields: [
-                "name",
-                "href"
-            ]
-        });
         var store = new Ext.data.JsonStore({
             autoLoad: false,
-            root: "dataStores.dataStore",
+            proxy: {
+                type: 'memory',
+                reader: {
+                    root: "dataStores.dataStore"
+                }
+            },
             model: 'gxp.data.DataStore'
         });
         this.on({

@@ -363,8 +363,7 @@ Ext.define('gxp.plugins.WMSSource', {
                 REQUEST: "DescribeLayer"
             };
             this.describeLayerStore = Ext.create('GeoExt.data.WMSDescribeLayerStore', {
-                /*url: this.trimUrl(req.href, params),*/
-                url: this.url, /* TODO use url from GetCaps but requires proxy */
+                url: this.trimUrl(req.href, params),
                 baseParams: params
             });
         }
