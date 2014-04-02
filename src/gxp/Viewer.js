@@ -3,8 +3,67 @@ Ext.define('gxp.Viewer', {
     mixins: {
         observable: 'Ext.util.Observable'
     },
-    requires: ['Ext.PluginManager', 'gxp.util', 'Ext.layout.container.Border', 'Ext.panel.Panel', 'Ext.Toolbar', 'GeoExt.panel.Map'],
+    requires: ['Ext.Ajax', 'Ext.PluginManager', 'gxp.util', 'Ext.layout.container.Border', 'Ext.panel.Panel', 'Ext.Toolbar', 'GeoExt.panel.Map'],
     constructor: function(config) {
+        if (config.proxy) {
+            OpenLayers.ProxyHost = config.proxy;
+            var createComplete = function(fn, cb) {
+                return function(request) {
+                    if(cb && cb[fn]) {
+                        cb[fn].call(cb.scope || window, Ext.applyIf({
+                            argument: cb.argument
+                        }, request));
+                    }
+                };
+            };
+            Ext.apply(Ext.Ajax, {
+                request: function(options) {
+                    var data, method, cb = options.callback, uri = options.url;
+                    options = options || {};
+                    method = options.method;
+                    var hs = options.headers;
+                    if(options.xmlData) {
+                        if(!hs || !hs["Content-Type"]) {
+                            hs = hs || {};
+                            hs["Content-Type"] = "text/xml";
+                        }
+                        method = method || "POST";
+                        data = options.xmlData;
+                    } else if(options.jsonData) {
+                        if(!hs || !hs["Content-Type"]) {
+                            hs = hs || {};
+                            hs["Content-Type"] = "application/json";
+                        }
+                        method = method || "POST";
+                        data = typeof options.jsonData == "object" ?
+                        Ext.encode(options.jsonData) : options.jsonData;
+                    }
+                    // if POST method, options.form or options.params means
+                    // form-encoded data, so change content-type
+                    if ((method && method.toLowerCase() == "post") &&
+                      (options.form || options.params) &&
+                      (!hs || !hs["Content-Type"])) {
+                        hs = hs || {};
+                        hs["Content-Type"] = "application/x-www-form-urlencoded";
+                    }
+                    return OpenLayers.Request.issue({
+                        success: createComplete("success", cb),
+                        failure: createComplete("failure", cb),
+                        method: method,
+                        headers: hs,
+                        data: data,
+                        url: uri
+                    });
+                },
+                isCallInProgress: function(request) {
+                    // do not prevent our caller from calling abort()
+                    return true;
+                },
+                abort: function(request) {
+                    request.abort();
+                }
+            });
+        }
         this.mixins.observable.constructor.call(this, config);
         this.addEvents(
             "ready",

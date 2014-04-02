@@ -35,6 +35,7 @@ Ext.application({
     name: 'Viewer',
     launch: function() {
         window.app = Ext.create('gxp.Viewer', {
+            proxy: "/cgi-bin/proxy.cgi?url=",
             portalItems: [{
                 region: 'center',
                 layout: 'border',
