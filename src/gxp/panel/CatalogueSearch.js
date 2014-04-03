@@ -1,3 +1,7 @@
+/**
+ * @include form/CSWFilterField.js
+ */
+
 Ext.define('gxp.panel.CatalogueSearch', {
     extend: 'Ext.panel.Panel',
     requires: ['Ext.grid.column.Action', 'Ext.grid.TemplateColumn', 'Ext.form.Panel', 'Ext.form.FieldContainer', 'gxp.form.CSWFilterField'],

@@ -1,3 +1,9 @@
+/**
+ * @requires plugins/Tool.js
+ * @include OpenLayers/Control/ZoomBox.js
+ * @include GeoExt/Action.js
+ */
+
 Ext.define('gxp.plugins.Zoom', {
     extend: 'gxp.plugins.Tool',
     requires: [

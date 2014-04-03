@@ -1,3 +1,15 @@
+/**
+ * @requires plugins/Tool.js
+ * @include data/WFSFeatureStore.js
+ * @include data/proxy/WFSProtocol.js
+ * @include OpenLayers/StyleMap.js
+ * @include OpenLayers/Rule.js
+ * @include OpenLayers/Layer/Vector.js
+ * @include OpenLayers/Renderer/SVG.js
+ * @include OpenLayers/Renderer/VML.js
+ * @include OpenLayers/Renderer/Canvas.js
+ */
+
 Ext.define('gxp.plugins.FeatureManager', {
     extend: 'gxp.plugins.Tool',
     alias: 'plugin.gxp_featuremanager',

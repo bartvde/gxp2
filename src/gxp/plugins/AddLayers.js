@@ -1,3 +1,9 @@
+/**
+ * @requires plugins/Tool.js
+ * @include panel/CatalogueSearch.js
+ * @include form/LayerUploadPanel.js
+ */
+
 Ext.define('gxp.plugins.AddLayers', {
     extend: 'gxp.plugins.Tool',
     requires: [

@@ -1,3 +1,7 @@
+/**
+ * @requires plugins/WMSSource.js
+ */
+
 Ext.define('gxp.plugins.CatalogueSource', {
     extend: 'gxp.plugins.WMSSource',
     url: null,

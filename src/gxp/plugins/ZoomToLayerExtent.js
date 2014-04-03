@@ -1,3 +1,7 @@
+/**
+ * @requires plugins/ZoomToExtent.js
+ */
+
 Ext.define('gxp.plugins.ZoomToLayerExtent', {
     extend: 'gxp.plugins.ZoomToExtent',
     alias: 'plugin.gxp_zoomtolayerextent',

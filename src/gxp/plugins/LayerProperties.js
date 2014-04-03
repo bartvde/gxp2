@@ -1,3 +1,7 @@
+/**
+ * @requires plugins/Tool.js
+ */
+
 Ext.define('gxp.plugins.LayerProperties', {
     extend: 'gxp.plugins.Tool',
     alias: 'plugin.gxp_layerproperties',

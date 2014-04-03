@@ -1,3 +1,9 @@
+/**
+ * @include GeoExt/slider/LayerOpacity.js
+ * @include OpenLayers/Format/CQL.js
+ * @include container/FilterBuilder.js
+ */
+
 Ext.define('gxp.tab.WMSLayerPanel', {
     extend: 'Ext.tab.Panel',
     requires: ['GeoExt.slider.LayerOpacity', 'gxp.container.FilterBuilder'],

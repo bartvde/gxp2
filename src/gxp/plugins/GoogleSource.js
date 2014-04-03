@@ -1,3 +1,8 @@
+/**
+ * @requires plugins/LayerSource.js
+ * @include OpenLayers/Layer/Google/v3.js
+ */
+
 Ext.define('gxp.plugins.GoogleSourceLoader', {
     extend: 'Ext.util.Observable',
     singleton: true,

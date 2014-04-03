@@ -1,3 +1,7 @@
+/**
+ * @requires OpenLayers/Filter/Comparison.js
+ */
+
 Ext.define('gxp.form.ComparisonComboBox', {
     extend: 'Ext.form.ComboBox',
     allowedTypes: [

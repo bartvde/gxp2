@@ -1,3 +1,7 @@
+/**
+ * @requires plugins/Tool.js
+ */
+
 Ext.define('gxp.plugins.RemoveLayer', {
     extend: 'gxp.plugins.Tool',
     alias: 'plugin.gxp_removelayer',

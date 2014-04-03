@@ -1,3 +1,8 @@
+/**
+ * @requires plugins/LayerSource.js
+ * @include OpenLayers/Layer/OSM.js
+ */
+
 Ext.define('gxp.plugins.OSMSource', {
     extend: 'gxp.plugins.LayerSource',
     alias: 'plugin.gxp_osmsource',

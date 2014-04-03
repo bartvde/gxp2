@@ -1,3 +1,14 @@
+/**
+ * @include util.js
+ * @include OpenLayers/Control/Attribution.js
+ * @include OpenLayers/Control/ZoomPanel.js
+ * @include OpenLayers/Control/Navigation.js
+ * @include OpenLayers/Kinetic.js
+ * @include OpenLayers/Control/PanPanel.js
+ * @include OpenLayers/Request.js
+ * @requires GeoExt/panel/Map.js
+ */
+
 Ext.define('gxp.Viewer', {
     defaultToolType: "gxp_tool",
     mixins: {

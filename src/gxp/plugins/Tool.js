@@ -1,6 +1,11 @@
+/**
+ * @include GeoExt/Action.js
+ * @include button/IconButton.js
+ */
+
 Ext.define('gxp.plugins.Tool', {
     alias: 'plugin.gxp_tool',
-    requires: ['Ext.Action', 'gxp.button.IconButton'],
+    requires: ['Ext.Action', 'GeoExt.Action', 'gxp.button.IconButton'],
     actionTarget: "map.tbar",
     showButtonText: false,
     autoActivate: true,

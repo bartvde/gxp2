@@ -1,3 +1,17 @@
+/**
+ * @include util.js
+ * @requires plugins/LayerSource.js
+ * @include OpenLayers/Layer/WMS.js
+ * @include OpenLayers/Format/WMSCapabilities/v1_1_0.js
+ * @include OpenLayers/Format/WMSCapabilities/v1_1_1.js
+ * @include OpenLayers/Format/WMSCapabilities/v1_3_0.js
+ * @include OpenLayers/Protocol/WFS/v1_1_0.js
+ * @include GeoExt/data/WmsCapabilitiesLayerStore.js
+ * @include GeoExt/data/WmsDescribeLayerStore.js
+ * @include GeoExt/data/AttributeStore.js
+ * @include GeoExt/data/WmsCapabilitiesLayerModel.js
+ */
+
 Ext.define('gxp.plugins.WMSSource', {
     extend: 'gxp.plugins.LayerSource',
     requires: ['GeoExt.data.WmsDescribeLayerStore', 'GeoExt.data.AttributeStore', 'GeoExt.data.WmsCapabilitiesLayerStore', 'GeoExt.data.WmsCapabilitiesLayerModel'],

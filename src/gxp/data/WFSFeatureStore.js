@@ -1,3 +1,9 @@
+/**
+ * @include data/proxy/WFSProtocol.js
+ * @requires GeoExt/data/FeatureStore.js
+ * @include GeoExt/data/reader/Feature.js
+ */
+
 Ext.define('gxp.data.WFSFeatureStore', {
     extend: 'GeoExt.data.FeatureStore',
     requires: ['GeoExt.data.reader.Feature', 'gxp.data.proxy.WFSProtocol'],

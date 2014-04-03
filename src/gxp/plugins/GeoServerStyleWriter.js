@@ -1,3 +1,8 @@
+/**
+ * @include util.js
+ * @requires plugins/StyleWriter.js
+ */
+
 Ext.define('gxp.plugins.GeoServerStyleWriter', {
     extend: 'gxp.plugins.StyleWriter',
     alias: 'plugin.gxp_geoserverstylewriter',

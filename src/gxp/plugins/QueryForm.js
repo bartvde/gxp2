@@ -1,3 +1,8 @@
+/**
+ * @requires plugins/Tool.js
+ * @include container/FilterBuilder.js
+ */
+
 Ext.define('gxp.plugins.QueryForm', {
     extend: 'gxp.plugins.Tool',
     requires: ['Ext.window.MessageBox', 'Ext.layout.container.Form', 'Ext.form.FieldSet', 'gxp.container.FilterBuilder'],

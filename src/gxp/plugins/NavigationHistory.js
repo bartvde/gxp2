@@ -1,3 +1,8 @@
+/**
+ * @requires plugins/Tool.js
+ * @include OpenLayers/Control/NavigationHistory.js
+ */
+
 Ext.define('gxp.plugins.NavigationHistory', {
     extend: 'gxp.plugins.Tool',
     requires: [

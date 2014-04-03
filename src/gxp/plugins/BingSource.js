@@ -1,3 +1,8 @@
+/**
+ * @requires plugins/LayerSource.js
+ * @include OpenLayers/Layer/Bing.js
+ */
+
 Ext.define('gxp.plugins.BingSource', {
     extend: 'gxp.plugins.LayerSource',
     alias: 'plugin.gxp_bingsource',

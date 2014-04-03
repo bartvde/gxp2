@@ -1,6 +1,19 @@
+/**
+ * @include util.js
+ * @include plugins/GeoServerStyleWriter.js
+ * @include OpenLayers/Renderer/SVG.js
+ * @include OpenLayers/Renderer/VML.js
+ * @include OpenLayers/Renderer/Canvas.js
+ * @include OpenLayers/Style2.js
+ * @include OpenLayers/Format/SLD/v1_0_0_GeoServer.js
+ * @include GeoExt/data/AttributeStore.js
+ * @include GeoExt/container/WmsLegend.js
+ * @include GeoExt/container/VectorLegend.js
+ */
+
 Ext.define('gxp.container.WMSStylesDialog', {
     extend: 'Ext.container.Container',
-    requires: ['Ext.data.JsonStore', 'GeoExt.container.WmsLegend', 'gxp.plugins.GeoServerStyleWriter'],
+    requires: ['Ext.data.JsonStore', 'GeoExt.data.AttributeStore', 'GeoExt.container.VectorLegend', 'GeoExt.container.WmsLegend', 'gxp.plugins.GeoServerStyleWriter'],
     alias: 'widget.gxp_wmsstylesdialog',
     statics: {
         createGeoServerStylerConfig: function(layerRecord, url) {

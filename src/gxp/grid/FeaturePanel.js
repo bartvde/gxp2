@@ -1,3 +1,8 @@
+/**
+ * @include GeoExt/selection/FeatureModel.js
+ * @include GeoExt/data/FeatureStore.js
+ */
+
 Ext.define('gxp.grid.FeaturePanel', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.gxp_featuregrid',

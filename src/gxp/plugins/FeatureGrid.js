@@ -1,3 +1,9 @@
+/**
+ * @requires plugins/ClickableFeatures.js
+ * @include grid/FeaturePanel.js
+ * @include GeoExt/selection/FeatureModel.js
+ */
+
 Ext.define('gxp.plugins.FeatureGrid', {
     extend: 'gxp.plugins.ClickableFeatures',
     alias: 'plugin.gxp_featuregrid',

@@ -1,3 +1,7 @@
+/**
+ * @requires GeoExt/data/proxy/Protocol.js
+ */
+
 Ext.define('gxp.data.proxy.WFSProtocol', {
     extend: 'GeoExt.data.proxy.Protocol',
     alias: 'proxy.gxp_wfsprotocol',

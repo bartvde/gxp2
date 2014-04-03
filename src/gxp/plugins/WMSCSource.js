@@ -1,3 +1,8 @@
+/**
+ * @requires plugins/WMSSource.js
+ * @include OpenLayers/Format/WMSCapabilities/v1_1_1_WMSC.js
+ */
+
 Ext.define('gxp.plugins.WMSCSource', {
     extend: 'gxp.plugins.WMSSource',
     alias: 'plugin.gxp_wmscsource',

@@ -1,3 +1,8 @@
+/**
+ * @requires plugins/LayerSource.js
+ * @include OpenLayers/Layer/TMS.js
+ */
+
 Ext.define('gxp.plugins.MapBoxSource', {
     extend: 'gxp.plugins.LayerSource',
     alias: 'plugin.gxp_mapboxsource',

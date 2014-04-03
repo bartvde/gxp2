@@ -1,3 +1,8 @@
+/**
+ * @requires plugins/Tool.js
+ * @include OpenLayers/Kinetic.js
+ */
+
 Ext.define('gxp.plugins.Navigation', {
     extend: 'gxp.plugins.Tool',
     requires: [

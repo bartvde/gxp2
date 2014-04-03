@@ -1,3 +1,8 @@
+/**
+ * @requires plugins/LayerSource.js
+ * @include GeoExt/data/LayerModel.js
+ */
+
 Ext.define('gxp.plugins.OLSource', {
     extend: 'gxp.plugins.LayerSource',
     requires: ['GeoExt.data.LayerModel'],

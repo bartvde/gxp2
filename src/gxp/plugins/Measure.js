@@ -1,3 +1,17 @@
+/**
+ * @requires plugins/Tool.js
+ * @include OpenLayers/StyleMap.js
+ * @include OpenLayers/Rule.js
+ * @include OpenLayers/Control/Measure.js
+ * @include OpenLayers/Layer/Vector.js
+ * @include OpenLayers/Handler/Path.js
+ * @include OpenLayers/Handler/Polygon.js
+ * @include OpenLayers/Renderer/SVG.js
+ * @include OpenLayers/Renderer/VML.js
+ * @include OpenLayers/Renderer/Canvas.js
+ * @include GeoExt/Action.js
+ */
+
 Ext.define('gxp.plugins.Measure', {
     extend: 'gxp.plugins.Tool',
     alias: 'plugin.gxp_measure',

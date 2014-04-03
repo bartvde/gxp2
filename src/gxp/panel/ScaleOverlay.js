@@ -1,3 +1,9 @@
+/**
+ * @include OpenLayers/Control/ScaleLine.js
+ * @include GeoExt/data/ScaleStore.js
+ * @include GeoExt/panel/Map.js
+ */
+
 Ext.define('gxp.panel.ScaleOverlay', {
     extend: 'Ext.panel.Panel',
     requires: [

@@ -1,3 +1,10 @@
+/**
+ * @requires plugins/Tool.js
+ * @requires GeoExt/window/Popup.js
+ * @requires OpenLayers/Control/WMSGetFeatureInfo.js
+ * @requires OpenLayers/Format/WMSGetFeatureInfo.js
+ */
+
 Ext.define('gxp.plugins.WMSGetFeatureInfo', {
     extend: 'gxp.plugins.Tool',
     requires: ['Ext.layout.container.Accordion', 'GeoExt.window.Popup'],
