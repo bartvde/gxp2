@@ -1,6 +1,6 @@
 /**
  * @requires plugins/CatalogueSource.js
- * @include GeoExt/data/reader/CSWRecords.js
+ * @include GeoExt/data/reader/CswRecords.js
  * @include GeoExt/data/proxy/Protocol.js
  * @include OpenLayers/Protocol/CSW/v2_0_2.js
  */
