@@ -1,6 +1,7 @@
 /**
  * @include util.js
  * @include plugins/GeoServerStyleWriter.js
+ * @require OpenLayers/Renderer.js
  * @include OpenLayers/Renderer/SVG.js
  * @include OpenLayers/Renderer/VML.js
  * @include OpenLayers/Renderer/Canvas.js
