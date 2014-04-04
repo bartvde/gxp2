@@ -232,7 +232,7 @@ Ext.define('gxp.tab.WMSLayerPanel', {
         layer.mergeNewParams({
             format: format
         });
-        var cb = this.transparentCb;
+        var cb = this.down('*[ref=transparentCb]');
         if (format == "image/jpeg") {
             this.transparent = cb.getValue();
             cb.setValue(false);
@@ -315,7 +315,7 @@ Ext.define('gxp.tab.WMSLayerPanel', {
                         }
                     }, {
                         xtype: "checkbox",
-                        ref: '../../../transparentCb',
+                        ref: 'transparentCb',
                         checked: transparent,
                         listeners: {
                             check: function(checkbox, checked) {
