@@ -1,5 +1,5 @@
 /**
- * @include form/CSWFilterField.js
+ * @requires form/CSWFilterField.js
  */
 
 Ext.define('gxp.panel.CatalogueSearch', {

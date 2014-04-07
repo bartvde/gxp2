@@ -1,7 +1,7 @@
 /**
- * @include GeoExt/slider/LayerOpacity.js
+ * @requires GeoExt/slider/LayerOpacity.js
  * @include OpenLayers/Format/CQL.js
- * @include container/FilterBuilder.js
+ * @requires container/FilterBuilder.js
  */
 
 Ext.define('gxp.tab.WMSLayerPanel', {

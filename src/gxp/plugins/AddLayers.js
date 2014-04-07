@@ -1,7 +1,7 @@
 /**
  * @requires plugins/Tool.js
- * @include panel/CatalogueSearch.js
- * @include form/LayerUploadPanel.js
+ * @requires panel/CatalogueSearch.js
+ * @requires form/LayerUploadPanel.js
  */
 
 Ext.define('gxp.plugins.AddLayers', {

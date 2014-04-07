@@ -1,7 +1,7 @@
 /**
  * @requires plugins/Tool.js
- * @include data/WFSFeatureStore.js
- * @include data/proxy/WFSProtocol.js
+ * @requires data/WFSFeatureStore.js
+ * @requires data/proxy/WFSProtocol.js
  * @include OpenLayers/StyleMap.js
  * @include OpenLayers/Rule.js
  * @include OpenLayers/Layer/Vector.js

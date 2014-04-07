@@ -1,8 +1,8 @@
 /**
  * @requires plugins/Tool.js
- * @include GeoExt/data/TreeStore.js
- * @include GeoExt/data/LayerTreeModel.js
- * @include GeoExt/tree/OverlayLayerContainer.js
+ * @requires GeoExt/tree/Panel.js
+ * @requires GeoExt/data/LayerTreeModel.js
+ * @requires GeoExt/tree/LayerContainer.js
  */
 
 Ext.define('gxp.plugins.LayerTree', {
@@ -11,7 +11,7 @@ Ext.define('gxp.plugins.LayerTree', {
         'GeoExt.tree.Panel',
         'Ext.data.TreeStore',
         'GeoExt.data.LayerTreeModel',
-        'GeoExt.tree.OverlayLayerContainer'
+        'GeoExt.tree.LayerContainer'
     ],
     alias: 'plugin.gxp_layertree',
     shortTitle: "Layers",

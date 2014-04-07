@@ -1,6 +1,6 @@
 /**
- * @include form/ComparisonComboBox.js
- * @include GeoExt/data/AttributeStore.js
+ * @requires form/ComparisonComboBox.js
+ * @requires GeoExt/data/AttributeStore.js
  */
 
 Ext.define('gxp.form.FilterField', {

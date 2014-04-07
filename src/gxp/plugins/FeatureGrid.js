@@ -1,7 +1,7 @@
 /**
  * @requires plugins/ClickableFeatures.js
- * @include grid/FeaturePanel.js
- * @include GeoExt/selection/FeatureModel.js
+ * @requires grid/FeaturePanel.js
+ * @requires GeoExt/selection/FeatureModel.js
  */
 
 Ext.define('gxp.plugins.FeatureGrid', {

@@ -1,6 +1,6 @@
 /**
  * @include GeoExt/Action.js
- * @include button/IconButton.js
+ * @requires button/IconButton.js
  */
 
 Ext.define('gxp.plugins.Tool', {

@@ -1,6 +1,6 @@
 /**
- * @include GeoExt/selection/FeatureModel.js
- * @include GeoExt/data/FeatureStore.js
+ * @requires GeoExt/selection/FeatureModel.js
+ * @requires GeoExt/data/FeatureStore.js
  */
 
 Ext.define('gxp.grid.FeaturePanel', {

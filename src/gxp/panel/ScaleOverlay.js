@@ -1,6 +1,6 @@
 /**
  * @include OpenLayers/Control/ScaleLine.js
- * @include GeoExt/data/ScaleStore.js
+ * @requires GeoExt/data/ScaleStore.js
  * @include GeoExt/panel/Map.js
  */
 

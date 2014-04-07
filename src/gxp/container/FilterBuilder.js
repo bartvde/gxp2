@@ -1,5 +1,5 @@
 /**
- * @include form/FilterField.js
+ * @requires form/FilterField.js
  */
 
 Ext.define('gxp.container.FilterBuilder', {

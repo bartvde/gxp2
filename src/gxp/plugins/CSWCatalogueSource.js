@@ -1,7 +1,8 @@
 /**
  * @requires plugins/CatalogueSource.js
- * @include GeoExt/data/reader/CswRecords.js
- * @include GeoExt/data/proxy/Protocol.js
+ * @requires GeoExt/data/CswRecordsModel.js
+ * @requires GeoExt/data/reader/CswRecords.js
+ * @requires GeoExt/data/proxy/Protocol.js
  * @include OpenLayers/Protocol/CSW/v2_0_2.js
  */
 

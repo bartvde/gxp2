@@ -1,5 +1,6 @@
 /**
  * @requires plugins/Tool.js
+ * @requires tab/WMSLayerPanel.js
  */
 
 Ext.define('gxp.plugins.LayerProperties', {

@@ -1,7 +1,7 @@
 /**
- * @include data/proxy/WFSProtocol.js
+ * @requires data/proxy/WFSProtocol.js
  * @requires GeoExt/data/FeatureStore.js
- * @include GeoExt/data/reader/Feature.js
+ * @requires GeoExt/data/reader/Feature.js
  */
 
 Ext.define('gxp.data.WFSFeatureStore', {
