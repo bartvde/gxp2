@@ -1,5 +1,5 @@
 /**
- * @include util.js
+ * @requires util.js
  * @include OpenLayers/Control/Attribution.js
  * @include OpenLayers/Control/ZoomPanel.js
  * @include OpenLayers/Control/Navigation.js
