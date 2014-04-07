@@ -34,7 +34,7 @@ Ext.define('gxp.form.CSWFilterField', {
             ref: 'combo',
             xtype: "combo",
             fieldLabel: this.comboFieldLabel,
-            store: new Ext.data.ArrayStore({
+            store: Ext.create('Ext.data.ArrayStore', {
                 fields: ['id', 'value'],
                 data: this.comboStoreData
             }),

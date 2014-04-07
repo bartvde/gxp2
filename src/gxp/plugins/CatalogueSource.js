@@ -20,7 +20,7 @@ Ext.define('gxp.plugins.CatalogueSource', {
                 {name: "typeName", type: "string"}
             ]
         );
-        var record = new recordType({
+        var record = Ext.create(recordType, {
             owsType: "WFS",
             owsURL: rec.get('url'),
             typeName: rec.get('name')

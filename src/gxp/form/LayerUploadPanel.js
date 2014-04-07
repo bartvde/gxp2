@@ -165,7 +165,7 @@ Ext.define('gxp.form.LayerUploadPanel', {
             name: "workspace",
             ref: "workspace",
             fieldLabel: this.workspaceLabel,
-            store: new Ext.data.Store({
+            store: Ext.create('Ext.data.Store', {
                 proxy: {
                     type: 'ajax',
                     url: this.getWorkspacesUrl(),
@@ -194,7 +194,7 @@ Ext.define('gxp.form.LayerUploadPanel', {
     },
     createDataStoresCombo: function() {
         // this store will be loaded whenever a workspace is selected
-        var store = new Ext.data.JsonStore({
+        var store = Ext.create('Ext.data.JsonStore', {
             autoLoad: false,
             proxy: {
                 type: 'memory',
@@ -209,7 +209,7 @@ Ext.define('gxp.form.LayerUploadPanel', {
                 combo.reset();
                 var workspaceUrl = record.get("href");
                 store.removeAll();
-                store.proxy = new Ext.data.HttpProxy({
+                store.proxy = Ext.create('Ext.data.HttpProxy', {
                     url: workspaceUrl.split(".json").shift() + "/datastores.json"
                 });
                 store.proxy.on('loadexception', addDefault, this);
@@ -222,14 +222,14 @@ Ext.define('gxp.form.LayerUploadPanel', {
             var defaultData = {
                 name: this.dataStoreNewText
             };
-            var r = new store.model(defaultData);
+            var r = Ext.create(store.model, defaultData);
             store.insert(0, r);
             store.proxy && store.proxy.un('loadexception', addDefault, this);
         };
 
         store.on('load', addDefault, this);
 
-        var combo = new Ext.form.ComboBox({
+        var combo = Ext.create('Ext.form.ComboBox', {
             name: "store",
             ref: "../dataStore",
             emptyText: this.dataStoreEmptyText,
@@ -265,7 +265,7 @@ Ext.define('gxp.form.LayerUploadPanel', {
                             name: json.dataStore.workspace.name,
                             href: json.dataStore.workspace.href
                         };
-                        var r = new store.model(data);
+                        var r = Ext.create(store.model, data);
                         this.fireEvent("workspaceselected", this, r);
                     }
                     //TODO Revisit this logic - currently we assume that stores

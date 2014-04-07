@@ -48,7 +48,7 @@ Ext.define('gxp.tab.WMSLayerPanel', {
             this.source.getSchema(this.layerRecord, function(attributeStore) {
                 if (attributeStore !== false) {
                     var filter = this.layerRecord.getLayer().params.CQL_FILTER;
-                    this.filterBuilder = new gxp.container.FilterBuilder({
+                    this.filterBuilder = Ext.create('gxp.container.FilterBuilder', {
                         filter: filter && this.cqlFormat.read(filter),
                         allowGroups: false,
                         listeners: {

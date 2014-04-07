@@ -144,7 +144,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                             newStyle.isDefault = false;
                             newStyle.name = this.newStyleName();
                             var store = this.stylesStore;
-                            store.add(new store.recordType({
+                            store.add(Ext.create(store.recordType, {
                                 "name": newStyle.name,
                                 "title": newStyle.title,
                                 "abstract": newStyle.description,
@@ -193,7 +193,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
             name: this.newStyleName(),
             rules: [this.createRule()]
         });
-        store.add(new store.recordType({
+        store.add(Ext.create(store.recordType, {
             "name": newStyle.name,
             "userStyle": newStyle
         }));
@@ -227,7 +227,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                 }
             }]
         };
-        var styleProperties = new this.dialogCls(Ext.apply(buttonCfg, {
+        var styleProperties = Ext.create(this.dialogCls, Ext.apply(buttonCfg, {
             title: String.format(this.styleWindowTitle,
                 userStyle.title || userStyle.name),
             shortTitle: userStyle.title || userStyle.name,
@@ -298,7 +298,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
         });
     },
     addRulesFieldSet: function() {
-        var rulesFieldSet = new Ext.form.FieldSet({
+        var rulesFieldSet = Ext.create('Ext.form.FieldSet', {
             itemId: "rulesfieldset",
             title: this.rulesFieldsetTitle,
             autoScroll: true,
@@ -306,7 +306,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
             hideMode: "offsets",
             hidden: true
         });
-        var rulesToolbar = new Ext.Toolbar({
+        var rulesToolbar = Ext.create('Ext.Toolbar', {
             style: "border-width: 0 1px 1px 1px;",
             hidden: true,
             items: [
@@ -384,7 +384,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
         var rule = this.selectedRule;
         var origRule = rule.clone();
 
-        var ruleDlg = new this.dialogCls({
+        var ruleDlg = Ext.create(this.dialogCls, {
             title: String.format(this.ruleWindowTitle,
                 rule.title || rule.name || this.newRuleText),
             shortTitle: rule.title || rule.name || this.newRuleText,
@@ -397,7 +397,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                 ref: "rulePanel",
                 symbolType: this.symbolType,
                 rule: rule,
-                attributes: new GeoExt.data.AttributeStore({
+                attributes: Ext.create('GeoExt.data.AttributeStore', {
                     url: this.layerDescription.owsURL,
                     baseParams: {
                         "SERVICE": this.layerDescription.owsType,
@@ -502,7 +502,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                 // userStyles with inline styles.
                 index = this.stylesStore.findExact("name", userStyle.name);
                 index !== -1 && this.stylesStore.removeAt(index);
-                record = new this.stylesStore.recordType({
+                record = Ext.create(this.stylesStore.recordType, {
                     "name": userStyle.name,
                     "title": userStyle.title,
                     "abstract": userStyle.description,
@@ -621,7 +621,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
     },
     createStylesStore: function(callback) {
         var styles = this.layerRecord.get("styles") || [];
-        this.stylesStore = new Ext.data.JsonStore({
+        this.stylesStore = Ext.create('Ext.data.JsonStore', {
             data: {
                 styles: styles
             },
@@ -712,7 +712,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
     },
     addStylesCombo: function() {
         var store = this.stylesStore;
-        var combo = new Ext.form.ComboBox(Ext.apply({
+        var combo = Ext.create('Ext.form.ComboBox', Ext.apply({
             fieldLabel: this.chooseStyleText,
             store: store,
             editable: true, /* was false but not allowed in combination with typeAhead */
@@ -743,7 +743,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
         this.doLayout();
     },
     createLegendImage: function() {
-        var legend = new GeoExt.WMSLegend({
+        var legend = Ext.create('GeoExt.WMSLegend', {
             showTitle: false,
             layerRecord: this.layerRecord,
             autoScroll: true,

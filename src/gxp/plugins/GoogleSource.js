@@ -169,7 +169,7 @@ Ext.define('gxp.plugins.GoogleSource', {
                 {name: "selected", type: "boolean"}
             ]
         });
-        this.store = new GeoExt.data.LayerStore({
+        this.store = Ext.create('GeoExt.data.LayerStore', {
             layers: layers,
             model: 'gxp.data.GoogleLayerModel'
         });

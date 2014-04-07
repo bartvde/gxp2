@@ -68,7 +68,7 @@ Ext.define('gxp.plugins.MapQuestSource', {
             ]
         });
 
-        this.store = new GeoExt.data.LayerStore({
+        this.store = Ext.create('GeoExt.data.LayerStore', {
             model: 'gxp.data.MapQuestLayerModel',
             layers: layers
         });

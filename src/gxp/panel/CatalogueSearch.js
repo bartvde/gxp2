@@ -154,7 +154,7 @@ Ext.define('gxp.panel.CatalogueSearch', {
                         xtype: "combo",
                         ref: "sourceCombo",
                         fieldLabel: this.datasourceLabel,
-                        store: new Ext.data.ArrayStore({
+                        store: Ext.create('Ext.data.ArrayStore', {
                             fields: ['id', 'value'],
                             data: sourceComboData
                         }),
@@ -188,7 +188,7 @@ Ext.define('gxp.panel.CatalogueSearch', {
                     items: [{
                         xtype: "combo",
                         fieldLabel: this.filterLabel,
-                        store: new Ext.data.ArrayStore({
+                        store: Ext.create('Ext.data.ArrayStore', {
                             fields: ['id', 'value'],
                             data: filterOptions
                         }),
@@ -225,7 +225,7 @@ Ext.define('gxp.panel.CatalogueSearch', {
                 },
                 border: false,
                 ref: "grid",
-                bbar: new Ext.PagingToolbar({
+                bbar: Ext.create('Ext.PagingToolbar', {
                     store: this.sources[this.selectedSource].store
                 }),
                 loadMask: true,
@@ -235,7 +235,7 @@ Ext.define('gxp.panel.CatalogueSearch', {
                     id: 'title',
                     flex: 1,
                     xtype: "templatecolumn",
-                    tpl: new Ext.XTemplate('<b>{title}</b><br/>{abstract}'),
+                    tpl: Ext.create('Ext.XTemplate', '<b>{title}</b><br/>{abstract}'),
                     sortable: true
                 }, {
                     xtype: "actioncolumn",
