@@ -1,5 +1,5 @@
 /**
- * @include GeoExt/Action.js
+ * @requires GeoExt/Action.js
  * @requires button/IconButton.js
  */
 

@@ -1,3 +1,7 @@
+/**
+ * @requires OpenLayers/Filter/Comparison.js
+ */
+
 Ext.define('gxp.form.CSWFilterField', {
     extend: 'Ext.form.FieldContainer',
     alias: 'widget.gxp_cswfilterfield',

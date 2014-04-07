@@ -7,6 +7,7 @@
  * @include OpenLayers/Control/PanPanel.js
  * @include OpenLayers/Request.js
  * @requires GeoExt/panel/Map.js
+ * @requires OpenLayers/Util.js
  */
 
 Ext.define('gxp.Viewer', {

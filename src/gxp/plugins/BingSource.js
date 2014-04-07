@@ -1,5 +1,7 @@
 /**
  * @requires plugins/LayerSource.js
+ * @requires GeoExt/data/LayerModel.js
+ * @requires GeoExt/data/LayerStore.js
  * @include OpenLayers/Layer/Bing.js
  */
 

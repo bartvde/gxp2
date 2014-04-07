@@ -1,7 +1,7 @@
 /**
  * @include OpenLayers/Control/ScaleLine.js
  * @requires GeoExt/data/ScaleStore.js
- * @include GeoExt/panel/Map.js
+ * @requires GeoExt/panel/Map.js
  */
 
 Ext.define('gxp.panel.ScaleOverlay', {

@@ -1,5 +1,6 @@
 /**
  * @require plugins/LayerSource.js
+ * @requires GeoExt/data/LayerModel.js
  * @include OpenLayers/Layer/OSM.js
  */
 
