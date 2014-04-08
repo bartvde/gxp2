@@ -15,7 +15,7 @@ Ext.define('gxp.Viewer', {
     mixins: {
         observable: 'Ext.util.Observable'
     },
-    requires: ['Ext.Ajax', 'Ext.PluginManager', 'gxp.util', 'Ext.layout.container.Border', 'Ext.panel.Panel', 'Ext.Toolbar', 'GeoExt.panel.Map'],
+    requires: ['Ext.JSON', 'Ext.Ajax', 'Ext.PluginManager', 'gxp.util', 'Ext.layout.container.Border', 'Ext.panel.Panel', 'Ext.Toolbar', 'GeoExt.panel.Map'],
     constructor: function(config) {
         if (config.proxy) {
             OpenLayers.ProxyHost = config.proxy;
@@ -465,7 +465,7 @@ Ext.define('gxp.Viewer', {
         return layerRec && this.layerSources[layerRec.get("source")];
     },
     save: function(callback, scope) {
-        var configStr = Ext.util.JSON.encode(this.getState());
+        var configStr = Ext.JSON.encode(this.getState());
         var method, url;
         if (this.id) {
             method = "PUT";
@@ -493,7 +493,7 @@ Ext.define('gxp.Viewer', {
     },
     handleSave: function(request) {
         if (request.status == 200) {
-            var config = Ext.util.JSON.decode(request.responseText);
+            var config = Ext.JSON.decode(request.responseText);
             var mapId = config.id;
             if (mapId) {
                 this.id = mapId;
