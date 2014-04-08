@@ -508,6 +508,48 @@ Ext.define('gxp.Viewer', {
                 console.warn(this.saveErrorText + request.responseText);
             }
         }
+    },
+    getState: function() {
+
+        // start with what was originally given
+        var state = Ext.apply({}, this.initialConfig);
+
+        // update anything that can change
+        var center = this.mapPanel.map.getCenter();
+        Ext.apply(state.map, {
+            center: [center.lon, center.lat],
+            zoom: this.mapPanel.map.zoom,
+            layers: []
+        });
+
+        // include all layer config
+        var sources = {};
+        this.mapPanel.layers.each(function(record){
+            var layer = record.getLayer();
+            if (layer.displayInLayerSwitcher && !(layer instanceof OpenLayers.Layer.Vector) ) {
+                var id = record.get("source");
+                var source = this.layerSources[id];
+                if (!source) {
+                    throw new Error("Could not find source for record '" + record.get("name") + " and layer " + layer.name + "'");
+                }
+                // add layer
+                state.map.layers.push(source.getConfigForRecord(record));
+                if (!sources[id]) {
+                    sources[id] = source.getState();
+                }
+            }
+        }, this);
+        // update sources, adding new ones
+        Ext.apply(this.sources, sources);
+        //get tool states, for most tools this will be the same as its initial config
+        state.tools = [];
+        Ext.iterate(this.tools,function(key,val,obj){
+            //only get and persist the state if there a tool specific getState method
+            if(val.getState != gxp.plugins.Tool.prototype.getState){
+                state.tools.push(val.getState());
+            }
+        });
+        return state;
     }
 });
 
