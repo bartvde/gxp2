@@ -1,5 +1,6 @@
 /**
  * @requires plugins/Tool.js
+ * @requires grid/FeatureEditor.js
  * @requires GeoExt/window/Popup.js
  * @requires OpenLayers/Control/WMSGetFeatureInfo.js
  * @requires OpenLayers/Format/WMSGetFeatureInfo.js
@@ -7,7 +8,7 @@
 
 Ext.define('gxp.plugins.WMSGetFeatureInfo', {
     extend: 'gxp.plugins.Tool',
-    requires: ['Ext.layout.container.Accordion', 'GeoExt.window.Popup'],
+    requires: ['gxp.grid.FeatureEditor', 'Ext.layout.container.Accordion', 'GeoExt.window.Popup'],
     alias: 'plugin.gxp_wmsgetfeatureinfo',
     outputTarget: "map",
     popupCache: null,
