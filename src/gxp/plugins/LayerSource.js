@@ -3,10 +3,9 @@ Ext.define('gxp.plugins.LayerSource', {
         observable: 'Ext.util.Observable'
     },
     constructor: function(config) {
+        this.initConfig(config);
         this.mixins.observable.constructor.call(this, config);
-        var me = this;
-        me.initialConfig = config;
-        me.addEvents('ready', 'failure');
+        this.addEvents('ready', 'failure');
     },
     init: function(target) {
         this.target = target;
