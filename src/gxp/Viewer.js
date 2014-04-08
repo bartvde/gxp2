@@ -463,6 +463,51 @@ Ext.define('gxp.Viewer', {
     },
     getSource: function(layerRec) {
         return layerRec && this.layerSources[layerRec.get("source")];
+    },
+    save: function(callback, scope) {
+        var configStr = Ext.util.JSON.encode(this.getState());
+        var method, url;
+        if (this.id) {
+            method = "PUT";
+            url = "../maps/" + this.id;
+        } else {
+            method = "POST";
+            url = "../maps/";
+        }
+        var requestConfig = {
+            method: method,
+            url: url,
+            data: configStr
+        };
+        if (this.fireEvent("beforesave", requestConfig, callback) !== false) {
+            OpenLayers.Request.issue(Ext.apply(requestConfig, {
+                callback: function(request) {
+                    this.handleSave(request);
+                    if (callback) {
+                        callback.call(scope || this, request);
+                    }
+                },
+                scope: this
+            }));
+        }
+    },
+    handleSave: function(request) {
+        if (request.status == 200) {
+            var config = Ext.util.JSON.decode(request.responseText);
+            var mapId = config.id;
+            if (mapId) {
+                this.id = mapId;
+                var hash = "#maps/" + mapId;
+                if (this.fireEvent("beforehashchange", hash) !== false) {
+                    window.location.hash = hash;
+                }
+                this.fireEvent("save", this.id);
+            }
+        } else {
+            if (window.console) {
+                console.warn(this.saveErrorText + request.responseText);
+            }
+        }
     }
 });
 
