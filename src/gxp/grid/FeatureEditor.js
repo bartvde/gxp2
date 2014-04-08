@@ -4,7 +4,7 @@
 
 Ext.define('gxp.grid.FeatureEditor', {
     extend: 'Ext.grid.PropertyGrid',
-    requires: ['Ext.data.Store', 'Ext.grid.GridEditor', 'GeoExt.Form', 'Ext.form.DateField', 'Ext.form.TimeField'],
+    requires: ['Ext.data.Store', 'GeoExt.Form', 'Ext.form.DateField', 'Ext.form.TimeField'],
     alias: 'widget.gxp_editorgrid',
     feature: null,
     schema: null,
@@ -20,8 +20,6 @@ Ext.define('gxp.grid.FeatureEditor', {
         if (!this.timeFormat) {
             this.timeFormat = Ext.form.TimeField.prototype.format;
         }
-        this.customRenderers = this.customRenderers || {};
-        this.customEditors = this.customEditors || {};
         var feature = this.feature,
             attributes;
         if (this.fields) {
@@ -59,6 +57,7 @@ Ext.define('gxp.grid.FeatureEditor', {
                     this.propertyNames[name] = annotations.label;
                 }
                 var listeners;
+                this.sourceConfig[name] = this.sourceConfig[name] || {};
                 if (typeof value == "string") {
                     var format;
                     switch(type.split(":").pop()) {
@@ -86,7 +85,7 @@ Ext.define('gxp.grid.FeatureEditor', {
                                     }
                                 }
                             };
-                            this.customRenderers[name] = (function() {
+                            this.sourceConfig[name].renderer = (function() {
                                 return function(value) {
                                     //TODO When http://trac.osgeo.org/openlayers/ticket/3131
                                     // is resolved, change the 5 lines below to
@@ -110,11 +109,8 @@ Ext.define('gxp.grid.FeatureEditor', {
                             break;
                     }
                 }
-                this.customEditors[name] = Ext.create('Ext.grid.GridEditor', {
-                    field: Ext.create(fieldCfg),
-                    listeners: listeners
-                });
-                attributes[name] = value;
+                fieldCfg.listeners = listeners;
+                this.sourceConfig[name].editor = Ext.create(fieldCfg);
             }, this);
             feature.attributes = attributes;
         }
