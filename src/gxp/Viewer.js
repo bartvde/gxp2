@@ -55,10 +55,12 @@ Ext.define('gxp.Viewer', {
                       (!hs || !hs["Content-Type"])) {
                         hs = hs || {};
                         hs["Content-Type"] = "application/x-www-form-urlencoded";
+                        data = Ext.Object.toQueryString(options.params);
+                        delete options.params;
                     }
                     return OpenLayers.Request.issue({
-                        success: createComplete("success", {success: options.callback, argument: options, scope: options.scope}),
-                        failure: createComplete("failure", {failure: options.callback, argument: options, scope: options.scope}),
+                        success: createComplete("success", {success: options.success || options.callback, argument: options, scope: options.scope}),
+                        failure: createComplete("failure", {failure: options.failure || options.callback, argument: options, scope: options.scope}),
                         method: method,
                         headers: hs,
                         params: options.params,
