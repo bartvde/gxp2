@@ -21,5 +21,19 @@ gxp.util = {
         for(var i=0; i<requests; ++i) {
             trigger(i);
         }
+    },
+    getAbsoluteUrl: function(url) {
+        var a;
+        if(Ext.isIE6 || Ext.isIE7 || Ext.isIE8) {
+            a = document.createElement("<a href='" + url + "'/>");
+            a.style.display = "none";
+            document.body.appendChild(a);
+            a.href = a.href;
+            document.body.removeChild(a);
+        } else {
+            a = document.createElement("a");
+            a.href = url;
+        }
+        return a.href;
     }
 };
