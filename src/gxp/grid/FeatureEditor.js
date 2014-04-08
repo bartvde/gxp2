@@ -1,6 +1,10 @@
+/**
+ * @requires GeoExt/Form.js
+ */
+
 Ext.define('gxp.grid.FeatureEditor', {
     extend: 'Ext.grid.PropertyGrid',
-    requires: ['GeoExt.Form'],
+    requires: ['Ext.data.Store', 'Ext.grid.GridEditor', 'GeoExt.Form', 'Ext.form.DateField', 'Ext.form.TimeField'],
     alias: 'widget.gxp_editorgrid',
     feature: null,
     schema: null,
@@ -106,7 +110,7 @@ Ext.define('gxp.grid.FeatureEditor', {
                             break;
                     }
                 }
-                this.customEditors[name] = new Ext.grid.GridEditor({
+                this.customEditors[name] = Ext.create('Ext.grid.GridEditor', {
                     field: Ext.create(fieldCfg),
                     listeners: listeners
                 });
