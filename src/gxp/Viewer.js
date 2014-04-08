@@ -426,6 +426,27 @@ Ext.define('gxp.Viewer', {
         }
         return authorized;
     },
+    setAuthorizedRoles: function(authorizedRoles) {
+        this.authorizedRoles = authorizedRoles;
+        this.fireEvent("authorizationchange");
+    },
+    cancelAuthentication: function() {
+        if (this._authFn) {
+            this.un("authorizationchange", this._authFn, this);
+        }
+        this.fireEvent("authorizationchange");
+    },
+    isAuthenticated: function(role) {
+        /**
+         * If the application supports authentication, we expect a list of
+         * authorized roles to be set (length zero if user has not logged in).
+         * If the application does not support authentication, authorizedRoles
+         * should be undefined.  In this case, we return true so that components
+         * that require authentication can still be enabled.  This leaves the
+         * authentication challenge up to the browser.
+         */
+        return !this.authorizedRoles || this.authorizedRoles.length > 0;
+    },
     doAuthorized: function(roles, callback, scope) {
         if (this.isAuthorized(roles) || !this.authenticate) {
             window.setTimeout(function() { callback.call(scope); }, 0);
