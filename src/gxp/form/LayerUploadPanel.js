@@ -56,7 +56,7 @@ Ext.define('gxp.form.LayerUploadPanel', {
             fieldLabel: this.fileLabel,
             name: "file",
             buttonText: "",
-            buttonCfg: {
+            buttonConfig: {
                 iconCls: "gxp-icon-filebrowse"
             },
             listeners: {
@@ -120,9 +120,9 @@ Ext.define('gxp.form.LayerUploadPanel', {
                         url: this.getUploadUrl(),
                         method: "POST",
                         jsonData: jsonData,
-                        success: function(response) {
+                        success: function(options, success, response) {
                             this._import = response.getResponseHeader("Location");
-                            this.optionsFieldset.expand();
+                            this.down('*[ref=optionsFieldset]').expand();
                             form.submit({
                                 url: this._import + "/tasks?expand=all",
                                 waitMsg: this.waitMsgText,
@@ -184,7 +184,8 @@ Ext.define('gxp.form.LayerUploadPanel', {
             triggerAction: "all",
             forceSelection: true,
             listeners: {
-                select: function(combo, record, index) {
+                select: function(combo, records, index) {
+                    var record = records[0];
                     this.getDefaultDataStore(record.get('name'));
                     this.fireEvent("workspaceselected", this, record);
                 },
@@ -196,12 +197,6 @@ Ext.define('gxp.form.LayerUploadPanel', {
         // this store will be loaded whenever a workspace is selected
         var store = Ext.create('Ext.data.JsonStore', {
             autoLoad: false,
-            proxy: {
-                type: 'memory',
-                reader: {
-                    root: "dataStores.dataStore"
-                }
-            },
             model: 'gxp.data.DataStore'
         });
         this.on({
@@ -209,9 +204,13 @@ Ext.define('gxp.form.LayerUploadPanel', {
                 combo.reset();
                 var workspaceUrl = record.get("href");
                 store.removeAll();
-                store.proxy = Ext.create('Ext.data.HttpProxy', {
-                    url: workspaceUrl.split(".json").shift() + "/datastores.json"
-                });
+                store.setProxy(Ext.create('Ext.data.proxy.Ajax', {
+                    url: workspaceUrl.split(".json").shift() + "/datastores.json",
+                    reader: {
+                        type: 'json',
+                        root: "dataStores.dataStore"
+                    }
+                }));
                 store.proxy.on('loadexception', addDefault, this);
                 store.load();
             },
@@ -231,7 +230,7 @@ Ext.define('gxp.form.LayerUploadPanel', {
 
         var combo = Ext.create('Ext.form.ComboBox', {
             name: "store",
-            ref: "../dataStore",
+            ref: "dataStore",
             emptyText: this.dataStoreEmptyText,
             fieldLabel: this.dataStoreLabel,
             store: store,
@@ -274,7 +273,7 @@ Ext.define('gxp.form.LayerUploadPanel', {
                     // store.
                     if (json.dataStore && json.dataStore.enabled === true && !/file/i.test(json.dataStore.type)) {
                         this.defaultDataStore = json.dataStore.name;
-                        this.dataStore.setValue(this.defaultDataStore);
+                        this.down('*[ref=dataStore]').setValue(this.defaultDataStore);
                     }
                 }
             },
