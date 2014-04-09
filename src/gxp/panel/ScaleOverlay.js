@@ -11,6 +11,7 @@ Ext.define('gxp.panel.ScaleOverlay', {
     ],
     alias: 'widget.gxp_scaleoverlay',
     map: null,
+    layout: 'hbox',
     zoomLevelText: "Zoom level",
     initComponent: function() {
         this.callParent(arguments);
@@ -42,7 +43,7 @@ Ext.define('gxp.panel.ScaleOverlay', {
     },
     addScaleLine: function() {
         var scaleLinePanel = Ext.create('Ext.Component', {
-            width: 90,
+            flex: 1,
             autoEl: {
                 tag: "div",
                 cls: "olControlScaleLine overlay-element overlay-scaleline"
@@ -79,6 +80,7 @@ Ext.define('gxp.panel.ScaleOverlay', {
             }
             this.zoomSelector.clearValue();
         }
+        this.doLayout();
     },
     addScaleCombo: function() {
         this.zoomStore = Ext.create('GeoExt.data.ScaleStore', {
