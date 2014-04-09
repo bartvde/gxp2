@@ -6,6 +6,57 @@
  * @requires OpenLayers/Format/WMSGetFeatureInfo.js
  */
 
+// TODO investigate more why we need this override
+// see https://github.com/bartvde/gxp2/issues/5
+GeoExt.window.Popup.prototype.position = function() {
+    if(this._mapMove === true) {
+        this.insideViewport = this.map.getExtent().containsLonLat(this.location);
+        if(this.insideViewport !== this.isVisible()) {
+            this.setVisible(this.insideViewport);
+        }
+    }
+    if(this.isVisible()) {
+        var locationPx = this.map.getPixelFromLonLat(this.location),
+            mapBox = Ext.fly(this.map.div).getBox(true),
+            top = locationPx.y,
+            left = locationPx.x,
+            elSize = this.el.getSize(),
+            ancSize = this.anc.getSize(),
+            ancPos = this.anchorPosition;
+
+        if (ancPos.indexOf("right") > -1 || locationPx.x > mapBox.width / 2) {
+            // right
+            this.anc.addCls("right");
+            var ancRight = this.el.getX(true) + elSize.width -
+                           this.anc.getX(true) - ancSize.width;
+            left -= elSize.width - ancRight - ancSize.width / 2;
+        } else {
+            // left
+            this.anc.removeCls("right");
+            var ancLeft = this.anc.getLeft(true);
+            left -= ancLeft + ancSize.width / 2;
+        }
+        if (ancPos.indexOf("bottom") > -1 || locationPx.y > mapBox.height / 2) {
+            // bottom
+            this.anc.removeCls("top");
+            // position the anchor
+            var popupHeight = this.getHeight();
+            if (isNaN(popupHeight) === false) {
+                this.anc.setTop((popupHeight-1) + "px");
+            }
+            top -= elSize.height + ancSize.height;
+        } else {
+            // top
+            this.anc.addCls("top");
+            // remove eventually set top property (bottom-case)
+            this.anc.setTop("");
+            top += ancSize.height; // ok
+        }
+
+        this.setPosition(left, top);
+    }
+};
+
 Ext.define('gxp.plugins.WMSGetFeatureInfo', {
     extend: 'gxp.plugins.Tool',
     requires: ['gxp.grid.FeatureEditor', 'Ext.layout.container.Accordion', 'GeoExt.window.Popup'],
