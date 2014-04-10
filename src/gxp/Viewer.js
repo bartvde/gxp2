@@ -32,6 +32,12 @@ Ext.define('gxp.Viewer', {
                     options = options || {};
                     method = options.method;
                     var hs = options.headers;
+                    var me = this;
+                    if (me.isFormUpload(options)) {
+                        var requestOptions = me.setOptions(options, options.scope || window);
+                        me.upload(options.form, requestOptions.url, requestOptions.data, options);
+                        return null;
+                    }
                     if(options.xmlData) {
                         if(!hs || !hs["Content-Type"]) {
                             hs = hs || {};

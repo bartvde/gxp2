@@ -30,7 +30,6 @@ Ext.define('gxp.form.LayerUploadPanel', {
     crsLabel: "CRS",
     crsEmptyText: "Coordinate Reference System ID",
     invalidCrsText: "CRS identifier should be an EPSG code (e.g. EPSG:4326)",
-    fileUpload: true,
     validFileExtensions: [".zip", ".tif", ".tiff", ".gz", ".tar.bz2", ".tar", ".tgz", ".tbz2"],
     defaultDataStore: null,
     selectedWorkspace: null,
