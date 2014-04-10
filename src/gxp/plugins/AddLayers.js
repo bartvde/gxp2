@@ -605,7 +605,6 @@ Ext.define('gxp.plugins.AddLayers', {
                                         names[ws + ":" + item.layer.name] = true;
                                     }
                                     this.selectedSource.store.load({
-                                        params: {"_dc": Math.random()},
                                         callback: function(records, options, success) {
                                             var gridPanel, sel;
                                             if (this.capGrid && this.capGrid.isVisible()) {
