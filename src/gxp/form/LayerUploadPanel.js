@@ -33,6 +33,13 @@ Ext.define('gxp.form.LayerUploadPanel', {
     validFileExtensions: [".zip", ".tif", ".tiff", ".gz", ".tar.bz2", ".tar", ".tgz", ".tbz2"],
     defaultDataStore: null,
     selectedWorkspace: null,
+    constructor: function(config) {
+        config.errorReader = {
+            isReader: true,
+            read: config.handleUploadResponse || Ext.bind(this.handleUploadResponse, this)
+        };
+        this.callParent(arguments);
+    },
     initComponent: function() {
         // TODO restore error reader
         this.items = [{
