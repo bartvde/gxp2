@@ -527,7 +527,9 @@ Ext.define('gxp.plugins.AddLayers', {
                     outputConfig = actionPlugin.outputConfig;
                     actionPlugin = actionPlugin.plugin;
                 }
-                this.target.tools[actionPlugin].addOutput(outputConfig);
+                if (this.target.tools[actionPlugin]) {
+                    this.target.tools[actionPlugin].addOutput(outputConfig);
+                }
             }
         }
     },
