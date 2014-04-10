@@ -41,7 +41,6 @@ Ext.define('gxp.form.LayerUploadPanel', {
         this.callParent(arguments);
     },
     initComponent: function() {
-        // TODO restore error reader
         this.items = [{
             xtype: "textfield",
             name: "title",
@@ -406,7 +405,7 @@ Ext.define('gxp.form.LayerUploadPanel', {
             method: "GET",
             url: this._import + '?expand=all',
             failure: this.handleFailure,
-            success: function(response) {
+            success: function(options, success, response) {
                 if (this.waitMsg) {
                     this.waitMsg.hide();
                 }
