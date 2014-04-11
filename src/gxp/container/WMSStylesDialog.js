@@ -1,16 +1,30 @@
 /**
  * @include util.js
- * @include plugins/GeoServerStyleWriter.js
+ * @requires plugins/GeoServerStyleWriter.js
  * @require OpenLayers/Renderer.js
  * @include OpenLayers/Renderer/SVG.js
  * @include OpenLayers/Renderer/VML.js
  * @include OpenLayers/Renderer/Canvas.js
  * @include OpenLayers/Style2.js
  * @include OpenLayers/Format/SLD/v1_0_0_GeoServer.js
- * @include GeoExt/data/AttributeStore.js
- * @include GeoExt/container/WmsLegend.js
- * @include GeoExt/container/VectorLegend.js
+ * @requires GeoExt/data/AttributeStore.js
+ * @requires GeoExt/container/WmsLegend.js
+ * @requires GeoExt/container/VectorLegend.js
  */
+
+Ext.define('gxp.data.WMSStylesModel', {
+    extend: 'Ext.data.Model',
+    // add a userStyle field (not included in styles from
+    // GetCapabilities), which will be populated with the userStyle
+    // object if GetStyles is supported by the WMS
+    fields: [
+        "name",
+        "title",
+        "abstract",
+        "legend",
+        "userStyle"
+    ]
+});
 
 Ext.define('gxp.container.WMSStylesDialog', {
     extend: 'Ext.container.Container',
@@ -144,7 +158,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                             newStyle.isDefault = false;
                             newStyle.name = this.newStyleName();
                             var store = this.stylesStore;
-                            store.add(Ext.create(store.recordType, {
+                            store.add(Ext.create(store.model, {
                                 "name": newStyle.name,
                                 "title": newStyle.title,
                                 "abstract": newStyle.description,
@@ -193,7 +207,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
             name: this.newStyleName(),
             rules: [this.createRule()]
         });
-        store.add(Ext.create(store.recordType, {
+        store.add(Ext.create(store.model, {
             "name": newStyle.name,
             "userStyle": newStyle
         }));
@@ -460,7 +474,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
         this.items.get(2).setVisible(visible);
         this.doLayout();
     },
-    parseSLD: function(response, options) {
+    parseSLD: function(options, success, response) {
         var data = response.responseXML;
         if (!data || !data.documentElement) {
             data = new OpenLayers.Format.XML().read(response.responseText);
@@ -502,7 +516,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                 // userStyles with inline styles.
                 index = this.stylesStore.findExact("name", userStyle.name);
                 index !== -1 && this.stylesStore.removeAt(index);
-                record = Ext.create(this.stylesStore.recordType, {
+                record = Ext.create(this.stylesStore.model, {
                     "name": userStyle.name,
                     "title": userStyle.title,
                     "abstract": userStyle.description,
@@ -633,10 +647,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                     idProperty: 'name'
                 }
             },
-            // add a userStyle field (not included in styles from
-            // GetCapabilities), which will be populated with the userStyle
-            // object if GetStyles is supported by the WMS
-            fields: ["name", "title", "abstract", "legend", "userStyle"],
+            model: 'gxp.data.WMSStylesModel', 
             listeners: {
                 "add": function(store, records) {
                     for(var rec, i=records.length-1; i>=0; --i) {

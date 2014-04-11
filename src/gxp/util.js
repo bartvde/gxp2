@@ -1,6 +1,23 @@
 Ext.namespace("gxp");
 
 gxp.util = {
+    _uniqueNames: {},
+    uniqueName: function(name, delimiter) {
+        delimiter = delimiter || " ";
+        var regEx = new RegExp(delimiter + "[0-9]*$");
+        var key = name.replace(regEx, "");
+        var regExResult = regEx.exec(name);
+        var count = this._uniqueNames[key] !== undefined ?
+            this._uniqueNames[key] :
+            (regExResult instanceof Array ? Number(regExResult[0]) : undefined);
+        var newName = key;
+        if(count !== undefined) {
+            count++;
+            newName += delimiter + count;
+        }
+        this._uniqueNames[key] = count || 0;
+        return newName;
+    },
     dispatch: function(functions, complete, scope) {
         complete = complete || Ext.emptyFn;
         scope = scope || this;
