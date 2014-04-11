@@ -850,6 +850,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                     this.markModified();
                 },
                 "afterlayout": function() {
+                    var legend = this.items.get(2).down('gx_vectorlegend');
                     // restore selection
                     //TODO QA: avoid accessing private properties/methods
                     if (this.selectedRule !== null &&

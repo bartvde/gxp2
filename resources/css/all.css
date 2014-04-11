@@ -179,3 +179,6 @@ div.map-overlay div.overlay-element {
 .x-btn .gxp-icon-filebrowse, .x-menu-item .gxp-icon-filebrowse {
     background-image: url(../img/silk/folder.png);
 }
+.x-btn .gxp-icon-palette, .x-menu-item .gxp-icon-palette, img.gxp-icon-palette {
+   background-image: url(../img/silk/palette.png);
+}
