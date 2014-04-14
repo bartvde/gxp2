@@ -28,7 +28,7 @@ Ext.define('gxp.form.field.Color', {
         // Add the colorField listener to color the field.
         this.on({
             render: this.colorField,
-            valid: this.colorField,
+            change: this.colorField,
             scope: this
         });
     },
@@ -47,7 +47,7 @@ Ext.define('gxp.form.field.Color', {
     },
     colorField: function() {
         var color = this.colorToHex(this.getValue()) || this.defaultBackground;
-        this.getEl().setStyle({
+        this.inputEl.setStyle({
             "background": color,
             "color": this.isDark(color) ? "#ffffff" : "#000000"
         });

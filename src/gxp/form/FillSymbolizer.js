@@ -44,7 +44,7 @@ Ext.define('gxp.form.FillSymbolizer', {
                 this.symbolizer.fill === false,
             hideMode: "offsets",
             defaults: {
-                width: 100 // TODO: move to css
+                width: 200
             },
             items: [{
                 xtype: "gxp_colorfield",
@@ -56,7 +56,7 @@ Ext.define('gxp.form.FillSymbolizer', {
                     OpenLayers.Renderer.defaultSymbolizer[this.colorProperty],
                 plugins: colorFieldPlugins,
                 listeners: {
-                    valid: function(field) {
+                    change: function(field) {
                         var newValue = field.getValue();
                         var modified = this.symbolizer[this.colorProperty] != newValue;
                         this.symbolizer[this.colorProperty] = newValue;

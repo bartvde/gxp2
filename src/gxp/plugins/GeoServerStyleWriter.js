@@ -18,7 +18,7 @@ Ext.define('gxp.plugins.GeoServerStyleWriter', {
         var dispatchQueue = [];
         var store = this.target.stylesStore;
         store.each(function(rec) {
-            (rec.phantom || store.modified.indexOf(rec) !== -1) &&
+            (rec.phantom || store.getModifiedRecords().indexOf(rec) !== -1) &&
                 this.writeStyle(rec, dispatchQueue);
         }, this);
         var success = function() {

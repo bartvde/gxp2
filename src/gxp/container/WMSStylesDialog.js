@@ -457,14 +457,12 @@ Ext.define('gxp.container.WMSStylesDialog', {
     },
     saveRule: function(cmp, rule) {
         var style = this.selectedStyle;
-        var legend = this.items.get(2).items.get(0);
         var userStyle = style.get("userStyle");
         var i = userStyle.rules.indexOf(this.selectedRule);
         userStyle.rules[i] = rule;
         this.afterRuleChange(rule);
     },
     afterRuleChange: function(rule) {
-        var legend = this.items.get(2).items.get(0);
         this.selectedRule = rule;
         // mark the style as modified
         this.selectedStyle.store.afterEdit(this.selectedStyle);
@@ -717,8 +715,8 @@ Ext.define('gxp.container.WMSStylesDialog', {
                         response.responseXML && response.responseXML.documentElement ?
                             response.responseXML : response.responseText);
                     this.layerDescription = result[0];
+                    callback.call(this);
                 },
-                callback: callback,
                 scope: this
             });
         }
