@@ -96,7 +96,7 @@ Ext.define('gxp.plugins.ClickableFeatures', {
                             fids: [fid]
                         });
 
-                        var autoLoad = function() {
+                        var autoLoad = Ext.bind(function() {
                             featureManager.loadFeatures(
                                 filter, function(features) {
                                     if (features.length) {
@@ -105,7 +105,7 @@ Ext.define('gxp.plugins.ClickableFeatures', {
                                     }
                                 }, this
                             );
-                        }.createDelegate(this);
+                        }, this);
 
                         var feature = featureManager.featureLayer.getFeatureByFid(fid);
                         if (feature) {

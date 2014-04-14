@@ -1,7 +1,9 @@
 /**
  * @include util.js
  * @requires plugins/GeoServerStyleWriter.js
- * @require OpenLayers/Renderer.js
+ * @requires container/StylePropertiesDialog.js
+ * @requires tab/RulePanel.js
+ * @requires OpenLayers/Renderer.js
  * @include OpenLayers/Renderer/SVG.js
  * @include OpenLayers/Renderer/VML.js
  * @include OpenLayers/Renderer/Canvas.js
@@ -28,7 +30,7 @@ Ext.define('gxp.data.WMSStylesModel', {
 
 Ext.define('gxp.container.WMSStylesDialog', {
     extend: 'Ext.container.Container',
-    requires: ['Ext.data.JsonStore', 'GeoExt.data.AttributeStore', 'GeoExt.container.VectorLegend', 'GeoExt.container.WmsLegend', 'gxp.plugins.GeoServerStyleWriter'],
+    requires: ['gxp.tab.RulePanel', 'gxp.container.StylePropertiesDialog', 'Ext.data.JsonStore', 'GeoExt.data.AttributeStore', 'GeoExt.container.VectorLegend', 'GeoExt.container.WmsLegend', 'gxp.plugins.GeoServerStyleWriter'],
     alias: 'widget.gxp_wmsstylesdialog',
     statics: {
         createGeoServerStylerConfig: function(layerRecord, url) {
@@ -242,7 +244,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
             }]
         };
         var styleProperties = Ext.create(this.dialogCls, Ext.apply(buttonCfg, {
-            title: String.format(this.styleWindowTitle,
+            title: Ext.String.format(this.styleWindowTitle,
                 userStyle.title || userStyle.name),
             shortTitle: userStyle.title || userStyle.name,
             bodyBorder: false,
@@ -399,7 +401,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
         var origRule = rule.clone();
 
         var ruleDlg = Ext.create(this.dialogCls, {
-            title: String.format(this.ruleWindowTitle,
+            title: Ext.String.format(this.ruleWindowTitle,
                 rule.title || rule.name || this.newRuleText),
             shortTitle: rule.title || rule.name || this.newRuleText,
             layout: "fit",
@@ -710,7 +712,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                 },
                 method: "GET",
                 disableCaching: false,
-                success: function(response) {
+                success: function(options, success, response) {
                     var result = new OpenLayers.Format.WMSDescribeLayer().read(
                         response.responseXML && response.responseXML.documentElement ?
                             response.responseXML : response.responseText);
