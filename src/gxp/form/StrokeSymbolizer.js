@@ -61,7 +61,8 @@ Ext.define('gxp.form.StrokeSymbolizer', {
                 triggerAction: "all",
                 editable: false,
                 listeners: {
-                    select: function(combo, record) {
+                    select: function(combo, records) {
+                        var record = records[0];
                         this.symbolizer.strokeDashstyle = record.get("value");
                         this.fireEvent("change", this.symbolizer);
                     },
@@ -77,7 +78,7 @@ Ext.define('gxp.form.StrokeSymbolizer', {
                     OpenLayers.Renderer.defaultSymbolizer.strokeColor,
                 plugins: colorFieldPlugins,
                 listeners: {
-                    valid: function(field) {
+                    change: function(field) {
                         var newValue = field.getValue();
                         var modified = this.symbolizer.strokeColor != newValue;
                         this.symbolizer.strokeColor = newValue;

@@ -246,7 +246,8 @@ Ext.define('gxp.form.LayerUploadPanel', {
             triggerAction: "all",
             forceSelection: true,
             listeners: {
-                select: function(combo, record, index) {
+                select: function(combo, records) {
+                    var record = records[0];
                     this.fireEvent("datastoreselected", this, record);
                 },
                 scope: this
