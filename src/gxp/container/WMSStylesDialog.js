@@ -465,7 +465,8 @@ Ext.define('gxp.container.WMSStylesDialog', {
     afterRuleChange: function(rule) {
         this.selectedRule = rule;
         // mark the style as modified
-        this.selectedStyle.store.afterEdit(this.selectedStyle);
+        this.selectedStyle.setDirty();
+        this.markModified();
     },
     setRulesFieldSetVisible: function(visible) {
         // the toolbar

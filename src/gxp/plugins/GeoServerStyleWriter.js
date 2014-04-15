@@ -18,7 +18,7 @@ Ext.define('gxp.plugins.GeoServerStyleWriter', {
         var dispatchQueue = [];
         var store = this.target.stylesStore;
         store.each(function(rec) {
-            (rec.phantom || store.getModifiedRecords().indexOf(rec) !== -1) &&
+            (rec.phantom || store.getUpdatedRecords().indexOf(rec) !== -1) &&
                 this.writeStyle(rec, dispatchQueue);
         }, this);
         var success = function() {
@@ -26,7 +26,7 @@ Ext.define('gxp.plugins.GeoServerStyleWriter', {
             if (this._failed !== true) {
                 // we don't need any callbacks for deleting styles.
                 this.deleteStyles();
-                var modified = this.target.stylesStore.getModifiedRecords();
+                var modified = this.target.stylesStore.getUpdatedRecords();
                 for (var i=modified.length-1; i>=0; --i) {
                     // mark saved
                     modified[i].phantom = false;
