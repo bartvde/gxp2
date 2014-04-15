@@ -405,6 +405,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                 rule.title || rule.name || this.newRuleText),
             shortTitle: rule.title || rule.name || this.newRuleText,
             layout: "fit",
+            closeAction: "hide",
             width: 320,
             height: 450,
             modal: true,
@@ -444,13 +445,13 @@ Ext.define('gxp.container.WMSStylesDialog', {
                 iconCls: "cancel",
                 handler: function() {
                     this.saveRule(ruleDlg.rulePanel, origRule);
-                    ruleDlg.destroy();
+                    ruleDlg.close();
                 },
                 scope: this
             }, {
                 text: this.saveText,
                 iconCls: "save",
-                handler: function() { ruleDlg.destroy(); }
+                handler: function() { ruleDlg.close(); }
             }]
         });
         this.showDlg(ruleDlg);
