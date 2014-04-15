@@ -222,8 +222,8 @@ Ext.define('gxp.container.WMSStylesDialog', {
                 text: this.cancelText,
                 iconCls: "cancel",
                 handler: function() {
-                    styleProperties.propertiesDialog.userStyle = userStyle;
-                    styleProperties.destroy();
+                    styleProperties.down('*[ref=propertiesDialog]').userStyle = userStyle;
+                    styleProperties.close();
                     if (prevStyle) {
                         this._cancelling = true;
                         this.stylesStore.remove(this.selectedStyle);
@@ -239,7 +239,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                 text: this.saveText,
                 iconCls: "save",
                 handler: function() {
-                    styleProperties.destroy();
+                    styleProperties.close();
                 }
             }]
         };
@@ -249,25 +249,18 @@ Ext.define('gxp.container.WMSStylesDialog', {
             shortTitle: userStyle.title || userStyle.name,
             bodyBorder: false,
             autoHeight: true,
+            closeAction: 'hide',
             width: 300,
             modal: true,
             items: {
                 border: false,
                 items: {
                     xtype: "gxp_stylepropertiesdialog",
-                    ref: "../propertiesDialog",
+                    ref: "propertiesDialog",
                     userStyle: userStyle.clone(),
                     nameEditable: false,
                     style: "padding: 10px;"
                 }
-            },
-            listeners: {
-                "beforedestroy": function() {
-                    this.selectedStyle.set(
-                        "userStyle",
-                        styleProperties.propertiesDialog.userStyle);
-                },
-                scope: this
             }
         }));
         this.showDlg(styleProperties);
