@@ -417,7 +417,6 @@ Ext.define('gxp.container.WMSStylesDialog', {
                     method: "GET",
                     disableCaching: false
                 }),
-                autoScroll: true,
                 border: false,
                 defaults: {
                     autoHeight: true,

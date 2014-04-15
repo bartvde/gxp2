@@ -43,7 +43,7 @@ Ext.define('gxp.form.StrokeSymbolizer', {
                 this.symbolizer.stroke === false,
             hideMode: "offsets",
             defaults: {
-                width: 100 // TODO: move to css
+                width: 200 // TODO: move to css
             },
             items: [{
                 xtype: "combo",

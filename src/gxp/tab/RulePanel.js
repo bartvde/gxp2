@@ -278,11 +278,10 @@ Ext.define('gxp.tab.RulePanel', {
                 },
                 items: [{
                     layout: "form",
-                    width: 150,
+                    columnWidth: 0.8,
                     items: [{
                         xtype: "textfield",
                         fieldLabel: this.nameText,
-                        anchor: "95%",
                         value: this.rule && (this.rule.title || this.rule.name || ""),
                         listeners: {
                             change: function(el, value) {
@@ -294,7 +293,7 @@ Ext.define('gxp.tab.RulePanel', {
                     }]
                 }, {
                     layout: "form",
-                    width: 70,
+                    columnWidth: 0.2,
                     items: [this.symbolizerSwatch]
                 }]
             }]
