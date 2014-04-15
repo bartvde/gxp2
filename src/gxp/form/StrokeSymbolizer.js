@@ -49,7 +49,7 @@ Ext.define('gxp.form.StrokeSymbolizer', {
                 xtype: "combo",
                 name: "style",
                 fieldLabel: this.styleText,
-                store: new Ext.data.SimpleStore({
+                store: Ext.create('Ext.data.SimpleStore', {
                     data: this.dashStyles,
                     fields: ["value", "display"]
                 }),
@@ -118,7 +118,7 @@ Ext.define('gxp.form.StrokeSymbolizer', {
                     scope: this
                 },
                 plugins: [
-                    new GeoExt.slider.Tip({
+                    Ext.create('GeoExt.slider.Tip', {
                         getText: function(thumb) {
                             return thumb.value + "%";
                         }

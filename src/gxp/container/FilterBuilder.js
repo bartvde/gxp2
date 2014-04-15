@@ -1,5 +1,7 @@
 /**
  * @requires form/FilterField.js
+ * @include OpenLayers/Filter/Logical.js
+ * @include OpenLayers/Filter/Comparison.js
  */
 
 Ext.define('gxp.container.FilterBuilder', {

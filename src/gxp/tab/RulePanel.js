@@ -50,7 +50,7 @@ Ext.define('gxp.tab.RulePanel', {
 
         this.activeTab = 0;
 
-        this.textSymbolizer = new gxp.panel.TextSymbolizer({
+        this.textSymbolizer = Ext.create('gxp.panel.TextSymbolizer', {
             symbolizer: this.getTextSymbolizer(),
             attributes: this.attributes,
             fonts: this.fonts,
@@ -67,7 +67,7 @@ Ext.define('gxp.tab.RulePanel', {
          * no scale value.  If someone thinks that a scale value of zero should have
          * a different interpretation, this needs to be changed.
          */
-        this.scaleLimitPanel = new gxp.panel.ScaleLimit({
+        this.scaleLimitPanel = Ext.create('gxp.panel.ScaleLimit', {
             maxScaleDenominator: this.rule.maxScaleDenominator || undefined,
             limitMaxScaleDenominator: !!this.rule.maxScaleDenominator,
             maxScaleDenominatorLimit: this.maxScaleDenominatorLimit,
@@ -87,7 +87,7 @@ Ext.define('gxp.tab.RulePanel', {
             }
         });
 
-        this.filterBuilder = new gxp.container.FilterBuilder({
+        this.filterBuilder = Ext.create('gxp.container.FilterBuilder', {
             allowGroups: this.nestedFilters,
             filter: this.rule && this.rule.filter && this.rule.filter.clone(),
             attributes: this.attributes,

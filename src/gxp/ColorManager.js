@@ -4,6 +4,9 @@
 
 Ext.namespace("gxp");
 
+Ext.require('Ext.ColorPalette');
+Ext.require('Ext.Window');
+
 gxp.ColorManager = function(config) {
     Ext.apply(this, config);
 };
@@ -39,8 +42,8 @@ Ext.apply(gxp.ColorManager.prototype, {
     },
     fieldFocus: function(field) {
         if(!gxp.ColorManager.pickerWin) {
-            gxp.ColorManager.picker = new Ext.ColorPalette();
-            gxp.ColorManager.pickerWin = new Ext.Window({
+            gxp.ColorManager.picker = Ext.create('Ext.ColorPalette');
+            gxp.ColorManager.pickerWin = Ext.create('Ext.Window', {
                 title: "Color Picker",
                 closeAction: "hide",
                 autoWidth: true,
@@ -57,7 +60,7 @@ Ext.apply(gxp.ColorManager.prototype, {
             if (!~colors.indexOf(value)) {
                 if (gxp.ColorManager.picker.ownerCt) {
                     gxp.ColorManager.pickerWin.remove(gxp.ColorManager.picker);
-                    gxp.ColorManager.picker = new Ext.ColorPalette();
+                    gxp.ColorManager.picker = Ext.create('Ext.ColorPalette');
                 }
                 colors.push(value);
                 gxp.ColorManager.picker.colors = colors;
@@ -97,7 +100,7 @@ Ext.apply(gxp.ColorManager.prototype, {
     Ext.util.Observable.observeClass(gxp.form.field.Color);
     gxp.form.field.Color.on({
         render: function(field) {
-            var manager = new gxp.ColorManager();
+            var manager = Ext.create('gxp.ColorManager');
             manager.register(field);
         }
     });

@@ -1,11 +1,12 @@
 /**
  * @requires form/FillSymbolizer.js
  * @requires form/StrokeSymbolizer.js
+ * @requires GeoExt/slider/Tip.js
  */
 
 Ext.define('gxp.panel.PointSymbolizer', {
     extend: 'Ext.panel.Panel',
-    requires: ['gxp.form.FillSymbolizer', 'gxp.form.StrokeSymbolizer'],
+    requires: ['GeoExt.slider.Tip', 'gxp.form.FillSymbolizer', 'gxp.form.StrokeSymbolizer'],
     alias: 'widget.gxp_pointsymbolizer',
     symbolizer: null,
     graphicCircleText: "circle",
@@ -44,7 +45,7 @@ Ext.define('gxp.panel.PointSymbolizer', {
 
         this.external = !!this.symbolizer["externalGraphic"];
 
-        this.markPanel = new Ext.Panel({
+        this.markPanel = Ext.create('Ext.Panel', {
             border: false,
             collapsed: this.external,
             layout: "form",
@@ -74,7 +75,7 @@ Ext.define('gxp.panel.PointSymbolizer', {
                 }
             }]
         });
-        this.urlField = new Ext.form.TextField({
+        this.urlField = Ext.create('Ext.form.TextField', {
             name: "url",
             fieldLabel: this.urlText,
             value: this.symbolizer["externalGraphic"],
@@ -89,7 +90,7 @@ Ext.define('gxp.panel.PointSymbolizer', {
             width: 100 // TODO: push this to css
         });
 
-        this.graphicPanel = new Ext.Panel({
+        this.graphicPanel = Ext.create('Ext.Panel', {
             border: false,
             collapsed: !this.external,
             layout: "form",
@@ -107,7 +108,7 @@ Ext.define('gxp.panel.PointSymbolizer', {
                     scope: this
                 },
                 plugins: [
-                    new GeoExt.SliderTip({
+                    Ext.create('GeoExt.slider.Tip', {
                         getText: function(thumb) {
                             return thumb.value + "%";
                         }
@@ -120,7 +121,7 @@ Ext.define('gxp.panel.PointSymbolizer', {
             xtype: "combo",
             name: "mark",
             fieldLabel: this.symbolText,
-            store: new Ext.data.JsonStore({
+            store: Ext.create('Ext.data.JsonStore', {
                 data: {root: this.pointGraphics},
                 root: "root",
                 fields: ["value", "display", "preview", {name: "mark", type: "boolean"}]
@@ -128,7 +129,7 @@ Ext.define('gxp.panel.PointSymbolizer', {
             value: this.external ? 0 : this.symbolizer["graphicName"],
             displayField: "display",
             valueField: "value",
-            tpl: new Ext.XTemplate(
+            tpl: Ext.create('Ext.XTemplate', 
                 '<tpl for=".">' +
                     '<div class="x-combo-list-item gx-pointsymbolizer-mark-item">' +
                     '<tpl if="preview">' +

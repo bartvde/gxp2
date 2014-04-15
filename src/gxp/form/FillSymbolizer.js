@@ -1,11 +1,12 @@
 /**
  * @requires form/field/Color.js
+ * @requires GeoExt/slider/Tip.js
  */
 
 Ext.define('gxp.form.FillSymbolizer', {
     extend: 'Ext.form.FormPanel',
     alias: 'widget.gxp_fillsymbolizer',
-    requires: ['gxp.form.field.Color'],
+    requires: ['gxp.form.field.Color', 'GeoExt.slider.Tip'],
     symbolizer: null,
     colorProperty: "fillColor",
     opacityProperty: "fillOpacity",
@@ -78,7 +79,7 @@ Ext.define('gxp.form.FillSymbolizer', {
                     scope: this
                 },
                 plugins: [
-                    new GeoExt.SliderTip({
+                    Ext.create('GeoExt.slider.Tip', {
                         getText: function(thumb) {
                             return thumb.value + "%";
                         }

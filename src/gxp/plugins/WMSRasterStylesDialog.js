@@ -8,6 +8,7 @@ Ext.namespace('gxp.plugins');
 Ext.define('gxp.plugins.WMSRasterStylesDialog', {
     extend: 'Object',
     alias: 'plugin.gxp_wmsrasterstylesdialog',
+    requires: ['gxp.util', 'GeoExt.FeatureRenderer'],
     isRaster: null,
     init: function(target) {
         Ext.apply(target, gxp.plugins.WMSRasterStylesDialog);
@@ -79,7 +80,7 @@ Ext.define('gxp.plugins.WMSRasterStylesDialog', {
         var me = this;
         var rule = this.selectedRule;
 
-        var pseudoRuleDlg = new Ext.Window({
+        var pseudoRuleDlg = Ext.create('Ext.Window', {
             title: "Color Map Entry: " + rule.name,
             width: 340,
             autoHeight: true,
@@ -148,7 +149,7 @@ Ext.define('gxp.plugins.WMSRasterStylesDialog', {
                         }, {
                             layout: "form",
                             width: 70,
-                            items: [new GeoExt.FeatureRenderer({
+                            items: [Ext.create('GeoExt.FeatureRenderer', {
                                 symbolType: this.symbolType,
                                 symbolizers: [rule.symbolizers[0]],
                                 isFormField: true,

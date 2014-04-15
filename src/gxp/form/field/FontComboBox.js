@@ -1,5 +1,6 @@
 Ext.define('gxp.form.field.FontComboBox', {
     extend: 'Ext.form.field.ComboBox',
+    requires: ['Ext.XTemplate'],
     alias: 'widget.gxp_fontcombo',
     fonts: [
         "Serif",
@@ -26,7 +27,7 @@ Ext.define('gxp.form.field.FontComboBox', {
             valueField: "field1",
             store: fonts,
             value: defaultFont,
-            tpl: new Ext.XTemplate(
+            tpl: Ext.create('Ext.XTemplate',
                 '<tpl for=".">' +
                     '<div class="x-combo-list-item">' +
                     '<span style="font-family: {field1};">{field1}</span>' +

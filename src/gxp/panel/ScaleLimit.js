@@ -30,7 +30,7 @@ Ext.define('gxp.panel.ScaleLimit', {
             padding: "5px"
         };
 
-        this.scaleSliderTemplate = new Ext.Template(this.scaleSliderTemplate);
+        this.scaleSliderTemplate = Ext.create('Ext.Template', this.scaleSliderTemplate);
 
         Ext.applyIf(this, {
             minScaleDenominator: this.minScaleDenominatorLimit,
@@ -42,7 +42,7 @@ Ext.define('gxp.panel.ScaleLimit', {
             1 / (this.scaleLevels - 1)
         );
 
-        this.scaleSlider = new Ext.Slider({
+        this.scaleSlider = Ext.create('Ext.Slider', {
             vertical: true,
             height: 100,
             values: [0, 100],
@@ -57,7 +57,7 @@ Ext.define('gxp.panel.ScaleLimit', {
                 },
                 scope: this
             },
-            plugins: [new gxp.slider.Tip({
+            plugins: [Ext.create('gxp.slider.Tip', {
                 getText: Ext.bind(function(thumb) {
                     var index = thumb.slider.thumbs.indexOf(thumb);
                     var value = thumb.value;
@@ -74,7 +74,7 @@ Ext.define('gxp.panel.ScaleLimit', {
             })]
         });
 
-        this.maxScaleDenominatorInput = new Ext.form.NumberField({
+        this.maxScaleDenominatorInput = Ext.create('Ext.form.NumberField', {
             allowNegative: false,
             width: 100,
             fieldLabel: "1",
@@ -107,7 +107,7 @@ Ext.define('gxp.panel.ScaleLimit', {
                 scope: this
             }
         });
-        this.minScaleDenominatorInput = new Ext.form.NumberField({
+        this.minScaleDenominatorInput = Ext.create('Ext.form.NumberField', {
             allowNegative: false,
             width: 100,
             fieldLabel: "1",
