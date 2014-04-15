@@ -86,7 +86,8 @@ Ext.define('gxp.panel.TextSymbolizer', {
             valueField: "name",
             value: this.symbolizer.label && this.symbolizer.label.replace(/^\${(.*)}$/, "$1"),
             listeners: {
-                select: function(combo, record) {
+                select: function(combo, records) {
+                    var record = records[0];
                     this.symbolizer.label = "${" + record.get("name") + "}";
                     this.fireEvent("change", this.symbolizer);
                 },
@@ -108,7 +109,8 @@ Ext.define('gxp.panel.TextSymbolizer', {
                 width: 110,
                 value: this.symbolizer.fontFamily,
                 listeners: {
-                    select: function(combo, record) {
+                    select: function(combo, records) {
+                        var record = records[0];
                         this.symbolizer.fontFamily = record.get("field1");
                         this.fireEvent("change", this.symbolizer);
                     },
@@ -119,6 +121,9 @@ Ext.define('gxp.panel.TextSymbolizer', {
                 text: this.sizeText + ": "
             }, {
                 xtype: "numberfield",
+                hideTrigger: true,
+                keyNavEnabled: false,
+                mouseWheelEnabled: false,
                 allowNegative: false,
                 emptyText: OpenLayers.Renderer.defaultSymbolizer.fontSize,
                 value: this.symbolizer.fontSize,
@@ -202,7 +207,8 @@ Ext.define('gxp.panel.TextSymbolizer', {
                 store: ["none", "stretch", "proportional"],
                 mode: 'local',
                 listeners: {
-                    "select": function(combo, record) {
+                    "select": function(combo, records) {
+                        var record = records[0];
                         if (combo.getValue() === "none") {
                             this.graphicMargin.hide();
                         } else {
@@ -364,7 +370,8 @@ Ext.define('gxp.panel.TextSymbolizer', {
                     ['rb', 'Right-bottom']
                 ],
                 listeners: {
-                    select: function(combo, record) {
+                    select: function(combo, records) {
+                        var record = records[0];
                         this.symbolizer.labelAlign = combo.getValue();
                         delete this.symbolizer.labelAnchorPointX;
                         delete this.symbolizer.labelAnchorPointY;
@@ -441,7 +448,8 @@ Ext.define('gxp.panel.TextSymbolizer', {
                     helpText: this.priorityHelp
                 }],
                 listeners: {
-                    select: function(combo, record) {
+                    select: function(combo, records) {
+                        var record = records[0];
                         this.symbolizer[combo.name] = "${" + record.get("name") + "}";
                         this.fireEvent("change", this.symbolizer);
                     },
