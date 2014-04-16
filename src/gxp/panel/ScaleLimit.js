@@ -45,6 +45,7 @@ Ext.define('gxp.panel.ScaleLimit', {
         this.scaleSlider = Ext.create('Ext.Slider', {
             vertical: true,
             height: 100,
+            columnWidth: 0.1,
             values: [0, 100],
             listeners: {
                 changecomplete: function(slider, value) {
@@ -76,7 +77,9 @@ Ext.define('gxp.panel.ScaleLimit', {
 
         this.maxScaleDenominatorInput = Ext.create('Ext.form.NumberField', {
             allowNegative: false,
-            width: 100,
+            hideTrigger: true,
+            keyNavEnabled: false,
+            mouseWheelEnabled: false,
             fieldLabel: "1",
             value: Math.round(this.maxScaleDenominator),
             disabled: !this.limitMaxScaleDenominator,
@@ -84,7 +87,7 @@ Ext.define('gxp.panel.ScaleLimit', {
                 return !this.limitMinScaleDenominator || (value > this.minScaleDenominator);
             }, this),
             listeners: {
-                valid: function(field) {
+                validitychange: function(field) {
                     var value = Number(field.getValue());
                     var limit = Math.round(this.maxScaleDenominatorLimit);
                     if(value < limit && value > this.minScaleDenominator) {
@@ -109,7 +112,9 @@ Ext.define('gxp.panel.ScaleLimit', {
         });
         this.minScaleDenominatorInput = Ext.create('Ext.form.NumberField', {
             allowNegative: false,
-            width: 100,
+            hideTrigger: true,
+            keyNavEnabled: false,
+            mouseWheelEnabled: false,
             fieldLabel: "1",
             value: Math.round(this.minScaleDenominator),
             disabled: !this.limitMinScaleDenominator,
@@ -117,7 +122,7 @@ Ext.define('gxp.panel.ScaleLimit', {
                 return !this.limitMaxScaleDenominator || (value < this.maxScaleDenominator);
             }, this),
             listeners: {
-                valid: function(field) {
+                validitychange: function(field) {
                     var value = Number(field.getValue());
                     var limit = Math.round(this.minScaleDenominatorLimit);
                     if(value > limit && value < this.maxScaleDenominator) {
@@ -142,6 +147,7 @@ Ext.define('gxp.panel.ScaleLimit', {
         });
         this.items = [this.scaleSlider, {
             xtype: "panel",
+            columnWidth: 0.9,
             layout: "form",
             defaults: {border: false},
             items: [{
@@ -153,7 +159,7 @@ Ext.define('gxp.panel.ScaleLimit', {
                     checked: !!this.limitMinScaleDenominator,
                     fieldLabel: this.maxScaleLimitText,
                     listeners: {
-                        check: function(box, checked) {
+                        change: function(box, checked) {
                             this.limitMinScaleDenominator = checked;
                             var slider = this.scaleSlider;
                             slider.setValue(1, 100);
@@ -168,6 +174,7 @@ Ext.define('gxp.panel.ScaleLimit', {
             }, {
                 labelWidth: 10,
                 layout: "form",
+                maxWidth: 200,
                 items: [this.minScaleDenominatorInput]
             }, {
                 labelWidth: 90,
@@ -177,7 +184,7 @@ Ext.define('gxp.panel.ScaleLimit', {
                     checked: !!this.limitMaxScaleDenominator,
                     fieldLabel: this.minScaleLimitText,
                     listeners: {
-                        check: function(box, checked) {
+                        change: function(box, checked) {
                             this.limitMaxScaleDenominator = checked;
                             var slider = this.scaleSlider;
                             slider.setValue(0, 0);
@@ -192,6 +199,7 @@ Ext.define('gxp.panel.ScaleLimit', {
             }, {
                 labelWidth: 10,
                 layout: "form",
+                maxWidth: 200,
                 items: [this.maxScaleDenominatorInput]
             }]
         }];
