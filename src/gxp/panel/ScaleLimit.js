@@ -76,7 +76,7 @@ Ext.define('gxp.panel.ScaleLimit', {
         });
 
         this.maxScaleDenominatorInput = Ext.create('Ext.form.NumberField', {
-            allowNegative: false,
+            minValue: 0,
             hideTrigger: true,
             keyNavEnabled: false,
             mouseWheelEnabled: false,
@@ -111,7 +111,7 @@ Ext.define('gxp.panel.ScaleLimit', {
             }
         });
         this.minScaleDenominatorInput = Ext.create('Ext.form.NumberField', {
-            allowNegative: false,
+            minValue: 0,
             hideTrigger: true,
             keyNavEnabled: false,
             mouseWheelEnabled: false,

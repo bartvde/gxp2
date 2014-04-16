@@ -4,6 +4,16 @@
  * @requires GeoExt/slider/Tip.js
  */
 
+Ext.define('gxp.data.PointGraphicsModel', {
+    extend: 'Ext.data.Model',
+    fields: [
+        "value",
+        "display",
+        "preview",
+        {name: "mark", type: "boolean"}
+    ]
+});
+
 Ext.define('gxp.panel.PointSymbolizer', {
     extend: 'Ext.panel.Panel',
     requires: ['GeoExt.slider.Tip', 'gxp.form.FillSymbolizer', 'gxp.form.StrokeSymbolizer'],
@@ -48,6 +58,7 @@ Ext.define('gxp.panel.PointSymbolizer', {
         this.markPanel = Ext.create('Ext.Panel', {
             border: false,
             collapsed: this.external,
+            header: false,
             layout: "form",
             items: [{
                 xtype: "gxp_fillsymbolizer",
@@ -92,6 +103,7 @@ Ext.define('gxp.panel.PointSymbolizer', {
 
         this.graphicPanel = Ext.create('Ext.Panel', {
             border: false,
+            header: false,
             collapsed: !this.external,
             layout: "form",
             items: [this.urlField, {
@@ -123,27 +135,34 @@ Ext.define('gxp.panel.PointSymbolizer', {
             fieldLabel: this.symbolText,
             store: Ext.create('Ext.data.JsonStore', {
                 data: {root: this.pointGraphics},
-                root: "root",
-                fields: ["value", "display", "preview", {name: "mark", type: "boolean"}]
+                proxy: {
+                    type: 'memory',
+                    reader: {
+                        type: 'json',
+                        root: "root"
+                    }
+                },
+                model: 'gxp.data.PointGraphicsModel'
             }),
             value: this.external ? 0 : this.symbolizer["graphicName"],
             displayField: "display",
             valueField: "value",
             tpl: Ext.create('Ext.XTemplate', 
                 '<tpl for=".">' +
-                    '<div class="x-combo-list-item gx-pointsymbolizer-mark-item">' +
+                    '<div class="x-boundlist-item gx-pointsymbolizer-mark-item">' +
                     '<tpl if="preview">' +
                         '<img src="{preview}" alt="{display}"/>' +
                     '</tpl>' +
                     '<span>{display}</span>' +
                 '</div></tpl>'
             ),
-            mode: "local",
+            queryMode: "local",
             allowBlank: false,
             triggerAction: "all",
             editable: false,
             listeners: {
-                select: function(combo, record) {
+                select: function(combo, records) {
+                    var record = records[0];
                     var mark = record.get("mark");
                     var value = record.get("value");
                     if(!mark) {

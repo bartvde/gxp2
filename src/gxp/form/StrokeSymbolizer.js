@@ -88,9 +88,12 @@ Ext.define('gxp.form.StrokeSymbolizer', {
                 }
             }, {
                 xtype: "numberfield",
+                hideTrigger: true,
+                keyNavEnabled: false,
+                mouseWheelEnabled: false,
                 name: "width",
                 fieldLabel: this.widthText,
-                allowNegative: false,
+                minValue: 0,
                 emptyText: OpenLayers.Renderer.defaultSymbolizer.strokeWidth,
                 value: this.symbolizer.strokeWidth,
                 listeners: {

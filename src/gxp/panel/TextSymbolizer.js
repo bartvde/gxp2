@@ -77,7 +77,7 @@ Ext.define('gxp.panel.TextSymbolizer', {
             xtype: "combo",
             fieldLabel: this.labelValuesText,
             store: this.attributes,
-            mode: 'local',
+            queryMode: 'local',
             lastQuery: '',
             editable: false,
             triggerAction: "all",
@@ -92,12 +92,10 @@ Ext.define('gxp.panel.TextSymbolizer', {
                     this.fireEvent("change", this.symbolizer);
                 },
                 scope: this
-            },
-            width: 120
+            }
         };
         this.attributesComboConfig = this.attributesComboConfig || {};
         Ext.applyIf(this.attributesComboConfig, defAttributesComboConfig);
-        this.labelWidth = 80;
 
         this.items = [this.attributesComboConfig, {
             cls: "x-html-editor-tb",
@@ -106,7 +104,6 @@ Ext.define('gxp.panel.TextSymbolizer', {
             items: [{
                 xtype: "gxp_fontcombo",
                 fonts: this.fonts || undefined,
-                width: 110,
                 value: this.symbolizer.fontFamily,
                 listeners: {
                     select: function(combo, records) {
@@ -124,10 +121,9 @@ Ext.define('gxp.panel.TextSymbolizer', {
                 hideTrigger: true,
                 keyNavEnabled: false,
                 mouseWheelEnabled: false,
-                allowNegative: false,
+                minValue: 0,
                 emptyText: OpenLayers.Renderer.defaultSymbolizer.fontSize,
                 value: this.symbolizer.fontSize,
-                width: 30,
                 listeners: {
                     change: function(field, value) {
                         value = parseFloat(value);
@@ -172,9 +168,6 @@ Ext.define('gxp.panel.TextSymbolizer', {
             colorProperty: "fontColor",
             opacityProperty: "fontOpacity",
             checkboxToggle: false,
-            autoHeight: true,
-            width: 213,
-            labelWidth: 70,
             plugins: this.colorManager && [new this.colorManager()],
             listeners: {
                 change: function(symbolizer) {
@@ -188,7 +181,6 @@ Ext.define('gxp.panel.TextSymbolizer', {
             checkboxToggle: true,
             hideMode: 'offsets',
             collapsed: !(this.symbolizer.fillColor || this.symbolizer.fillOpacity || this.symbolizer.vendorOptions["graphic-resize"] || this.symbolizer.vendorOptions["graphic-margin"]),
-            labelWidth: 70,
             items: [{
                 xtype: "gxp_pointsymbolizer",
                 symbolizer: this.symbolizer,
@@ -200,12 +192,11 @@ Ext.define('gxp.panel.TextSymbolizer', {
                     scope: this
                 },
                 border: false,
-                labelWidth: 70
             }, this.createVendorSpecificField({
                 name: "graphic-resize",
                 xtype: "combo",
                 store: ["none", "stretch", "proportional"],
-                mode: 'local',
+                queryMode: 'local',
                 listeners: {
                     "select": function(combo, records) {
                         var record = records[0];
@@ -221,14 +212,12 @@ Ext.define('gxp.panel.TextSymbolizer', {
                     },
                     scope: this
                 },
-                width: 100,
                 triggerAction: 'all',
                 fieldLabel: this.graphicResizeText
             }), this.createVendorSpecificField({
                 name: "graphic-margin",
                 ref: "../graphicMargin",
                 hidden: (this.symbolizer.vendorOptions["graphic-resize"] !== "stretch" && this.symbolizer.vendorOptions["graphic-resize"] !== "proportional"),
-                width: 100,
                 fieldLabel: this.graphicMarginText,
                 xtype: "textfield"
             })],
@@ -276,13 +265,14 @@ Ext.define('gxp.panel.TextSymbolizer', {
             title: this.haloText,
             checkboxToggle: true,
             collapsed: !(this.symbolizer.haloRadius || this.symbolizer.haloColor || this.symbolizer.haloOpacity),
-            autoHeight: true,
-            labelWidth: 50,
             items: [{
                 xtype: "numberfield",
+                hideTrigger: true,
+                keyNavEnabled: false,
+                mouseWheelEnabled: false,
                 fieldLabel: this.sizeText,
                 anchor: "89%",
-                allowNegative: false,
+                minValue: 0,
                 emptyText: OpenLayers.Renderer.defaultSymbolizer.haloRadius,
                 value: this.symbolizer.haloRadius,
                 listeners: {
@@ -305,8 +295,6 @@ Ext.define('gxp.panel.TextSymbolizer', {
                 },
                 defaultColor: OpenLayers.Renderer.defaultSymbolizer.haloColor,
                 checkboxToggle: false,
-                width: 190,
-                labelWidth: 60,
                 plugins: this.colorManager && [new this.colorManager()],
                 listeners: {
                     change: function(symbolizer) {
@@ -349,11 +337,6 @@ Ext.define('gxp.panel.TextSymbolizer', {
             collapsed: !(this.symbolizer.labelAlign || this.symbolizer.vendorOptions['polygonAlign'] || this.symbolizer.labelXOffset || this.symbolizer.labelYOffset || this.symbolizer.labelPerpendicularOffset),
             title: this.positioningText,
             checkboxToggle: true,
-            autoHeight: true,
-            labelWidth: 75,
-            defaults: {
-                width: 100
-            },
             items: [this.createField(Ext.applyIf({
                 fieldLabel: this.anchorPointText,
                 geometryTypes: ["POINT"],
@@ -381,6 +364,9 @@ Ext.define('gxp.panel.TextSymbolizer', {
                 }
             }, this.attributesComboConfig)), this.createField({
                 xtype: "numberfield",
+                hideTrigger: true,
+                keyNavEnabled: false,
+                mouseWheelEnabled: false,
                 geometryTypes: ["POINT"],
                 fieldLabel: this.displacementXText,
                 value: this.symbolizer.labelXOffset,
@@ -393,6 +379,9 @@ Ext.define('gxp.panel.TextSymbolizer', {
                 }
             }), this.createField({
                 xtype: "numberfield",
+                hideTrigger: true,
+                keyNavEnabled: false,
+                mouseWheelEnabled: false,
                 geometryTypes: ["POINT"],
                 fieldLabel: this.displacementYText,
                 value: this.symbolizer.labelYOffset,
@@ -405,6 +394,9 @@ Ext.define('gxp.panel.TextSymbolizer', {
                 }
             }), this.createField({
                 xtype: "numberfield",
+                hideTrigger: true,
+                keyNavEnabled: false,
+                mouseWheelEnabled: false,
                 geometryTypes: ["LINE"],
                 fieldLabel: this.perpendicularOffsetText,
                 value: this.symbolizer.labelPerpendicularOffset,
@@ -424,7 +416,7 @@ Ext.define('gxp.panel.TextSymbolizer', {
                 name: 'polygonAlign',
                 geometryTypes: ['POLYGON'],
                 xtype: "combo",
-                mode: 'local',
+                queryMode: 'local',
                 value: this.symbolizer.vendorOptions['polygonAlign'] || 'manual',
                 triggerAction: 'all',
                 store: ["manual", "ortho", "mbr"],
@@ -435,8 +427,6 @@ Ext.define('gxp.panel.TextSymbolizer', {
             title: this.priorityText,
             checkboxToggle: true,
             collapsed: !(this.symbolizer.priority),
-            autoHeight: true,
-            labelWidth: 50,
             items: [Ext.applyIf({
                 fieldLabel: this.priorityText,
                 value: this.symbolizer.priority && this.symbolizer.priority.replace(/^\${(.*)}$/, "$1"),
@@ -461,11 +451,6 @@ Ext.define('gxp.panel.TextSymbolizer', {
             title: this.labelOptionsText,
             checkboxToggle: true,
             collapsed: !(this.symbolizer.vendorOptions['autoWrap'] || this.symbolizer.vendorOptions['followLine'] || this.symbolizer.vendorOptions['maxAngleDelta'] || this.symbolizer.vendorOptions['maxDisplacement'] || this.symbolizer.vendorOptions['repeat'] || this.symbolizer.vendorOptions['forceLeftToRight'] || this.symbolizer.vendorOptions['group'] || this.symbolizer.vendorOptions['spaceAround'] || this.symbolizer.vendorOptions['labelAllGroup'] || this.symbolizer.vendorOptions['conflictResolution'] || this.symbolizer.vendorOptions['goodnessOfFit'] || this.symbolizer.vendorOptions['polygonAlign']),
-            autoHeight: true,
-            labelWidth: 80,
-            defaults: {
-                width: 100
-            },
             items: [
                 this.createVendorSpecificField({
                     name: 'autoWrap',
@@ -554,7 +539,7 @@ Ext.define('gxp.panel.TextSymbolizer', {
                 this.createVendorSpecificField({
                     name: 'spaceAround',
                     hidden: (this.symbolizer.vendorOptions['conflictResolution'] !== true),
-                    allowNegative: true,
+                    minValue: 0,
                     ref: "../spaceAround",
                     fieldLabel: this.spaceAroundText
                 }),
@@ -597,7 +582,10 @@ Ext.define('gxp.panel.TextSymbolizer', {
         };
         var field = Ext.ComponentMgr.create(Ext.applyIf(config, {
             xtype: "numberfield",
-            allowNegative: false,
+            hideTrigger: true,
+            keyNavEnabled: false,
+            mouseWheelEnabled: false,
+            minValue: 0,
             value: config.value || this.symbolizer.vendorOptions[config.name],
             checked: (config.yesno === true) ? (this.symbolizer.vendorOptions[config.name] === 'yes') : this.symbolizer.vendorOptions[config.name],
             plugins: [{
