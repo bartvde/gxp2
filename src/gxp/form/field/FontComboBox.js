@@ -29,7 +29,7 @@ Ext.define('gxp.form.field.FontComboBox', {
             value: defaultFont,
             tpl: Ext.create('Ext.XTemplate',
                 '<tpl for=".">' +
-                    '<div class="x-combo-list-item">' +
+                    '<div class="x-boundlist-item">' +
                     '<span style="font-family: {field1};">{field1}</span>' +
                 '</div></tpl>'
             )

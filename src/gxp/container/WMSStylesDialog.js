@@ -374,7 +374,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
     removeRule: function() {
         var selectedRule = this.selectedRule;
         this.items.get(2).items.get(0).unselect();
-        this.selectedStyle.get("userStyle").rules.remove(selectedRule);
+        Ext.Array.remove(this.selectedStyle.get("userStyle").rules, selectedRule);
         // mark the style as modified
         this.afterRuleChange();
     },
@@ -728,6 +728,7 @@ Ext.define('gxp.container.WMSStylesDialog', {
                 this.layerRecord.getLayer().params.STYLES || "default",
             disabled: !store.getCount(),
             queryMode: "local",
+            maxWidth: 275,
             typeAhead: true,
             triggerAction: "all",
             forceSelection: true,

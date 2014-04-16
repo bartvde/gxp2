@@ -84,7 +84,7 @@ Ext.define('gxp.panel.TextSymbolizer', {
             allowBlank: false,
             displayField: "name",
             valueField: "name",
-            value: this.symbolizer.label && this.symbolizer.label.replace(/^\${(.*)}$/, "$1"),
+            value: this.symbolizer.label && Ext.String.trim(this.symbolizer.label).replace(/^\${(.*)}$/, "$1"),
             listeners: {
                 select: function(combo, records) {
                     var record = records[0];
