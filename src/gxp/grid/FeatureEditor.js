@@ -120,6 +120,7 @@ Ext.define('gxp.grid.FeatureEditor', {
                 }
                 fieldCfg.listeners = listeners;
                 this.sourceConfig[name].editor = fieldCfg;
+                attributes[name] = value !== undefined ? value : null;
             }, this);
             feature.attributes = attributes;
         }
