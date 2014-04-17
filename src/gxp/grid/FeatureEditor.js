@@ -53,6 +53,13 @@ Ext.define('gxp.grid.FeatureEditor', {
                 }
                 var value = feature.attributes[name];
                 var fieldCfg = GeoExt.Form.recordToField(r);
+                if (fieldCfg.xtype === "numberfield") {
+                    Ext.apply(fieldCfg, {
+                        hideTrigger: true,
+                        keyNavEnabled: false,
+                        mouseWheelEnabled: false
+                    });
+                }
                 var annotations = this.getAnnotationsFromSchema(r);
                 if (annotations && annotations.label) {
                     this.propertyNames = this.propertyNames || {};

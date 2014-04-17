@@ -53,15 +53,12 @@ Ext.define('gxp.data.proxy.WFSProtocol', {
     doRequest: function(operation, callback, scope) {
         if (operation.action === 'read') {
             this.callParent(arguments);
-        } else if (operation.action !== 'destroy') {
-            // TODO bartvde fix up commits
-            if(!(records instanceof Array)) {
-                records = [records];
-            }
+        } else {
+            var records = operation.records;
             // get features from records
             var features = new Array(records.length), feature;
             Ext.each(records, function(r, i) {
-                features[i] = r.getFeature();
+                features[i] = r.raw;
                 feature = features[i];
                 feature.modified = Ext.apply(feature.modified || {}, {
                     attributes: Ext.apply(
@@ -73,7 +70,7 @@ Ext.define('gxp.data.proxy.WFSProtocol', {
 
 
             var o = {
-                action: action,
+                action: operation.action,
                 records: records,
                 callback: callback,
                 scope: scope
@@ -85,8 +82,8 @@ Ext.define('gxp.data.proxy.WFSProtocol', {
                 },
                 scope: this
             };
-
-            Ext.applyIf(options, params);
+             // TODO is this still needed? There is no params anymore
+            //Ext.applyIf(options, params);
 
             this.protocol.commit(features, options);
         }

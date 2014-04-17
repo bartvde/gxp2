@@ -374,7 +374,7 @@ Ext.define('gxp.plugins.FeatureEditor', {
                                  * feature from the layer.
                                  */
                                 featureStore._removing = true; // TODO: remove after http://trac.geoext.org/ticket/141
-                                featureStore.remove(featureStore.getRecordFromFeature(feature));
+                                featureStore.remove(featureStore.getByFeature(feature));
                                 delete featureStore._removing; // TODO: remove after http://trac.geoext.org/ticket/141
                             }
                             featureStore.save();
