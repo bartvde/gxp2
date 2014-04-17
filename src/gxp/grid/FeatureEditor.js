@@ -1,11 +1,12 @@
 /**
  * @requires GeoExt/Form.js
+ * @requires plugins/SchemaAnnotations.js
  */
 
 Ext.define('gxp.grid.FeatureEditor', {
     extend: 'Ext.grid.PropertyGrid',
     requires: ['Ext.data.Store', 'GeoExt.Form', 'Ext.form.DateField', 'Ext.form.TimeField'],
-    alias: 'widget.gxp_editorgrid',
+    alias: ['plugin.gxp_editorgrid', 'widget.gxp_editorgrid'],
     feature: null,
     schema: null,
     fields: null,
@@ -34,6 +35,7 @@ Ext.define('gxp.grid.FeatureEditor', {
         if (!this.excludeFields) {
             this.excludeFields = [];
         }
+        this.sourceConfig = this.sourceConfig || {};
         if(this.schema) {
             var ucFields = this.fields ?
                 this.fields.join(",").toUpperCase().split(",") : [];
@@ -110,7 +112,7 @@ Ext.define('gxp.grid.FeatureEditor', {
                     }
                 }
                 fieldCfg.listeners = listeners;
-                this.sourceConfig[name].editor = Ext.create(fieldCfg);
+                this.sourceConfig[name].editor = fieldCfg;
             }, this);
             feature.attributes = attributes;
         }
@@ -170,3 +172,6 @@ Ext.define('gxp.grid.FeatureEditor', {
         }
     }
 });
+
+// use the schema annotations module
+Ext.override(gxp.grid.FeatureEditor, gxp.plugins.SchemaAnnotations);

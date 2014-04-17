@@ -91,7 +91,7 @@ Ext.define('gxp.plugins.ClickableFeatures', {
             listeners: {
                 "load": function(store, records) {
                     if (records.length > 0) {
-                        var fid = records[0].get("fid");
+                        var fid = records[0].raw.fid;
                         var filter = new OpenLayers.Filter.FeatureId({
                             fids: [fid]
                         });
