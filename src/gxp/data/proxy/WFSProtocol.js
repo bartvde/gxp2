@@ -67,29 +67,17 @@ Ext.define('gxp.data.proxy.WFSProtocol', {
                     )
                 });
             }, this);
-
-
-            var o = {
-                action: operation.action,
-                records: records,
-                callback: callback,
-                scope: scope
-            };
-
             var options = {
                 callback: function(response) {
-                    this.onProtocolCommit(response, o);
+                    this.onProtocolCommit(response, operation, callback, scope);
                 },
                 scope: this
             };
-             // TODO is this still needed? There is no params anymore
-            //Ext.applyIf(options, params);
-
             this.protocol.commit(features, options);
         }
 
     },
-    onProtocolCommit: function(response, o) {
+    onProtocolCommit: function(response, operation, callback, scope) {
         if(response.success()) {
             var features = response.reqFeatures;
             // deal with inserts, updates, and deletes
@@ -117,39 +105,6 @@ Ext.define('gxp.data.proxy.WFSProtocol', {
                 feature = destroys[i];
                 feature.layer && feature.layer.destroyFeatures([feature]);
             }
-            /**
-             * TODO: Update the FeatureStore and FeatureReader to work with
-             * callbacks from 3.0.
-             *
-             * The callback here is the result of store.createCallback.  The
-             * signature should be what is expected by the anonymous function
-             * created in store.createCallback: (data, response, success).  The
-             * callback is a wrapped version of store.onCreateRecords etc.
-             *
-             * The onCreateRecords method calls reader.realize, which expects a
-             * primary key in the data.  Though it *feels* like the job of the
-             * reader, we need to create valid record data here (eventually to
-             * be passed to reader.realize).  The reader.realize method calls
-             * reader.extractValues - which seems like a nice place to grab the
-             * fids from the features.  However, we need the fid in the data
-             * object *before* extractValues is called.  So, we create a basic
-             * data object with just the id (mapping determined by
-             * reader.meta.idProperty or, for Ext > 3.0, reader.getId) and the
-             * state property, which is always reset to null after a commit.
-             *
-             * After the reader.realize method determines that the data is valid
-             * (determined by reader.isValid(data)), then extractValues gets
-             * called - where it will create values objects (to be set as
-             * record.data) from data.features.
-             *
-             * An important thing to note here is that though we may have "batch"
-             * set to true, the store.save sequence issues one request per action.
-             * So, we should *never* be here with a mix of features (deleted,
-             * updated, created).
-             *
-             * Bottom line (based on my current understanding): we need to
-             * implement extractValues for the FeatureReader.
-             */
             len = features.length;
             var data = new Array(len);
             var f;
@@ -159,28 +114,25 @@ Ext.define('gxp.data.proxy.WFSProtocol', {
                 // or if feature state handling should rather be done in
                 // GeoExt.data.FeatureStore
                 data[i] = {id: f.id, feature: f, state: null};
-                var fields = o.records[i].fields;
+                var fields = operation.records[i].fields;
                 for (var a in f.attributes) {
                     if (fields.containsKey(a)) {
                         data[i][a] = f.attributes[a];
                     }
                 }
             }
-
-            o.callback.call(o.scope, data, response.priv, true);
+            callback.call(scope, operation);
         } else {
             // TODO: determine from response if exception was "response" or "remote"
             var request = response.priv;
             if (request.status >= 200 && request.status < 300) {
                 // service exception with 200
-                this.fireEvent("exception", this, "remote", o.action, o, response.error, o.records);
+                this.fireEvent("exception", this, "remote", operation.action, operation, response.error, operation.records);
             } else {
                 // non 200 status
-                this.fireEvent("exception", this, "response", o.action, o, request);
+                this.fireEvent("exception", this, "response", operation.action, operation, request);
             }
-            o.callback.call(o.scope, [], request, false);
+            callback.call(scope, operation);
         }
-
     }
-
 });
