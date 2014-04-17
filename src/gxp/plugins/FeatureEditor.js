@@ -272,6 +272,7 @@ Ext.define('gxp.plugins.FeatureEditor', {
                             }
                         },
                         "featuremodified": function(popup, feature) {
+                            featureStore.getByFeature(feature).setDirty();
                             featureStore.on({
                                 beforewrite: {
                                     fn: function(store, action, rs, options) {
