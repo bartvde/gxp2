@@ -79,6 +79,7 @@ Ext.define('gxp.data.proxy.WFSProtocol', {
     },
     onProtocolCommit: function(response, operation, callback, scope) {
         if(response.success()) {
+            operation.setSuccessful();
             var features = response.reqFeatures;
             // deal with inserts, updates, and deletes
             var state, feature;
